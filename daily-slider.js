@@ -52,7 +52,8 @@
         ? [d * spacing + drag, Math.abs(d) * 10, d * 4]
         : [d * 2, Math.abs(d) * 1.5, d * .7];
       card.style.zIndex = String(20 - Math.abs(d));
-      card.style.opacity = String(d === 0 ? 1 : Math.max(.35, .7 - (Math.abs(d) - 1) * .15));
+      card.style.opacity = '1';
+      card.style.filter = `brightness(${d === 0 ? 1 : Math.max(.35, .7 - (Math.abs(d) - 1) * .15)})`;
       card.setAttribute('aria-pressed', String(i === selected));
       if (instant || reduced.matches) {
         motion[i].p = [...motion[i].target]; motion[i].v = [0,0,0]; paint(i);

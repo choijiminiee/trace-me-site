@@ -51,19 +51,17 @@
 
 .title-word-mask { display:inline-block; overflow:hidden; vertical-align:bottom; padding-bottom:.08em; margin-bottom:-.08em; }
 .title-word-mask > span { display:inline-block; }
-.features-tabs button .nav-roll-label { position:relative; display:inline-block; overflow:hidden; vertical-align:bottom; }
-.features-tabs button .nav-label-text { display:block; margin:0; font:inherit; transition:transform 200ms var(--editorial-ease-out); }
-.features-tabs button .nav-roll-label::after { content:attr(data-roll-label); position:absolute; inset:0; transform:translateY(110%); transition:transform 200ms var(--editorial-ease-out); font:inherit; }
+/* Keep labels still; a small press is enough feedback for feature navigation. */
+.features-tabs button { transition:transform 160ms var(--editorial-ease-out); -webkit-tap-highlight-color:transparent; }
+.features-tabs button:active { transform:scale(.97); }
+.features-tabs button:focus-visible { transform:none; transition:none; }
 @media(hover:hover) and (pointer:fine) {
- .features-tabs button:hover .nav-label-text { transform:translateY(-110%); }
- .features-tabs button:hover .nav-roll-label::after { transform:translateY(0); }
  #me .me-moments figure img { transition:transform 250ms var(--editorial-ease-out); }
  #me .me-moments figure:hover img { transform:scale(1.035); }
 }
 @media(prefers-reduced-motion:reduce) {
- .features-tabs button .nav-label-text,.features-tabs button .nav-roll-label::after,#me .me-moments figure img { transition:none; }
- .features-tabs button:hover .nav-label-text,#me .me-moments figure:hover img { transform:none; }
- .features-tabs button .nav-roll-label::after { display:none; }
+ .features-tabs button,#me .me-moments figure img { transition:none; }
+ .features-tabs button:active,#me .me-moments figure:hover img { transform:none; }
 }
 
 .original-insight-gallery { margin:32px auto 40px; }
@@ -144,7 +142,8 @@ body #ending { display:block; position:relative; max-width:none; width:100%; hei
 
 /* Oversized, staggered wordmark. Movement leaves the typography intact. */
 #ending .ending-content { width:100%; height:100%; box-sizing:border-box; padding:clamp(24px,4vw,64px); display:flex; flex-direction:column; justify-content:space-between; text-align:left; }
-.ending-meta { display:flex; justify-content:space-between; gap:20px; color:#92918d; font:11px/1.5 var(--font-secondary); letter-spacing:.07em; }
+/* Retain the title's placement after removing the small top captions. */
+#ending .ending-content::before { content:""; flex:0 0 16.5px; }
 #ending .ending-content h2 { display:flex; flex-direction:column; width:100%; margin:24px 0; font-family:"Helvetica Neue",Arial,sans-serif; font-size:min(22vw,31svh); font-weight:800; line-height:.86; letter-spacing:-.075em; }
 .ending-word { display:block; width:max-content; max-width:100%; transition:transform 700ms var(--editorial-ease-out); }
 .ending-word-trace { align-self:flex-start; margin-left:3%; }
@@ -155,10 +154,11 @@ body #ending { display:block; position:relative; max-width:none; width:100%; hei
 .ending-foot a { display:flex; align-items:center; gap:28px; border:1px solid #ffffff30; border-radius:100px; padding:18px 24px; color:#ddd9d1; text-decoration:none; font:11px/1.5 var(--font-secondary); letter-spacing:.04em; }
 .ending-foot a span { color:var(--accent); font-size:18px; }
 .ending-foot a:focus-visible { outline:2px solid #eee; outline-offset:5px; }
-@media(max-width:650px) { .ending-meta { font-size:9px; } .ending-meta span:last-child { max-width:150px; text-align:right; } .ending-foot { align-items:flex-start; flex-direction:column; gap:24px; } .ending-foot a { padding:12px 18px; } }
+@media(max-width:650px) { #ending .ending-content::before { flex-basis:13.5px; } .ending-foot { align-items:flex-start; flex-direction:column; gap:24px; } .ending-foot a { padding:12px 18px; } }
 @media(prefers-reduced-motion:reduce) { .ending-word { transition:none; transform:none!important; } }
 
-body.ending-in-view .navigation { opacity:0; pointer-events:none; visibility:hidden; }
+/* The ending keeps the site menu; immersive booth pages have their own controls. */
+body.booth-invitation-in-view .navigation { opacity:0; pointer-events:none; visibility:hidden; }
 /* Click-to-focus gallery: slight optical enlargement without enlarging the source raster. */
 #monthly-insight .insight-lead { display:block; padding-bottom:28px; }
 #monthly-insight .insight-lead h2 { max-width:none; font-size:clamp(32px,4.4vw,64px); }
@@ -397,6 +397,7 @@ body.ending-in-view .navigation { opacity:0; pointer-events:none; visibility:hid
 #monthly-overview .month-axis { font-size:20px; fill:#c5c5c5; }
 #monthly-overview .month-chart-note { font-size:clamp(16px,1.4vw,20px); line-height:1.7; }
 #site-fullscreen { position:fixed; right:18px; bottom:18px; z-index:999; width:40px; height:40px; border:1px solid #ffffff40; border-radius:50%; background:#101010dd; color:white; font-size:25px; cursor:pointer; display:grid; place-items:center; }
+#site-fullscreen[hidden], :fullscreen #site-fullscreen { display:none; }
 #site-fullscreen:focus-visible { outline:2px solid white; outline-offset:4px; }
 /* Inset the main navigation on wide and fullscreen displays. */
 body .navigation { left:clamp(28px,7.5vw,160px); right:clamp(28px,7.5vw,160px); }

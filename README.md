@@ -1,5 +1,5 @@
 # TRACE ME
 
-TRACE ME exhibition website, prepared for GitHub Pages.
+Current TRACE ME exhibition website, published with GitHub Pages.
 
-After publishing from the `main` branch and repository root, the site is served from the repository's GitHub Pages URL.
+Live site: https://choijiminiee.github.io/trace-me-site/

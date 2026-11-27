@@ -21,10 +21,10 @@
  let pending=false, rows=0, blocks=[];
  function update(){
   pending=false;
-  document.body.classList.toggle('ending-in-view',section.getBoundingClientRect().top<=0);
-  const distance=section.offsetHeight-innerHeight;
-  const progress=Math.max(0,Math.min(1,(innerHeight*.55-section.getBoundingClientRect().top)/Math.max(1,distance)));
-  const spread=Math.max(0,Math.min(1,progress/.46));
+  const top=section.getBoundingClientRect().top;
+  document.body.classList.toggle('ending-in-view',top<=1);
+  // Complete the blocks as this final screen enters, not after scrolling past it.
+  const spread=Math.max(0,Math.min(1,(innerHeight*.8-top)/Math.max(1,innerHeight*.68)));
   const count=Math.max(4,Math.round(stage.clientHeight/(stage.clientWidth/16)));
   if(rows!==count){
    rows=count;clip.replaceChildren();
@@ -45,31 +45,6 @@
  }
  window.addEventListener('scroll',()=>{if(!pending){pending=true;requestAnimationFrame(update);}},{passive:true});
  window.addEventListener('resize',update);reduced.addEventListener('change',update);
- const boothCursor=document.createElement('button');
- boothCursor.type='button';boothCursor.className='ending-booth-cursor';
- boothCursor.innerHTML='PHOTO<br>BOOTH';boothCursor.setAttribute('aria-label','포토 부스로 이동');
- stage.append(boothCursor);
- function openBooth(){
-  const invitation=document.querySelector('#live-trace-intro');
-  if(!invitation)return;
-  invitation.scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'start'});
- }
- section.addEventListener('click',event=>{
-  if(event.target.closest('.ending-visitor-link')){
-   event.preventDefault();document.querySelector('#photo-booth .visitor-trace-open')?.click();return;
-  }
-  if(event.target.closest('a,button')&&!event.target.closest('.ending-booth-cursor'))return;
-  openBooth();
- });
- stage.addEventListener('pointermove',event=>{
-  if(event.pointerType==='touch'||!finePointer.matches||reduced.matches)return;
-  const overLink=!!event.target.closest('a');
-  stage.classList.toggle('booth-cursor-active',!overLink);
-  const rect=stage.getBoundingClientRect();
-  boothCursor.style.left=`${Math.max(40,Math.min(rect.width-40,event.clientX-rect.left))}px`;
-  boothCursor.style.top=`${Math.max(40,Math.min(rect.height-40,event.clientY-rect.top))}px`;
- });
- stage.addEventListener('pointerleave',()=>{stage.classList.remove('booth-cursor-active');boothCursor.style.left='';boothCursor.style.top='';});
  const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
  const words=[...section.querySelectorAll('.ending-word')];
  function resetWords(){words.forEach(word=>word.style.transform='translateX(0px)');}
@@ -84,5 +59,6 @@
  reduced.addEventListener('change',resetWords);
  finePointer.addEventListener('change',resetWords);
  section.addEventListener('focusin',resetWords);
+ window.addEventListener('trace:idle-reset',()=>{resetWords();update();});
  update();
 })();

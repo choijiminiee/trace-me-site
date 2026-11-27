@@ -8,13 +8,16 @@
  --type-label:clamp(11px,.85vw,14px);
  --type-hint:clamp(12px,.95vw,15px);
  --content-width:1200px;
+ --title-period-color:#B38AFF;
  font-family:var(--font-body);
 }
+/* Keep sentence-ending dots inline, including titles revealed word by word. */
+body :is(h1,h2,h3,p) .title-period { display:inline; color:var(--title-period-color); }
 body { font-family:var(--font-body); }
 button,input,select,textarea { font-family:inherit; }
 body .navigation { align-items:center; gap:32px; }
 body .navigation nav { display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-end; gap:clamp(20px,3.2vw,56px); width:auto; }
-body .navigation nav button { white-space:nowrap; font:400 var(--type-label)/1.4 var(--font-secondary); letter-spacing:.025em; }
+body .navigation nav :is(button,a[data-scroll-target]) { white-space:nowrap; font:400 var(--type-label)/1.4 var(--font-secondary); letter-spacing:.025em; }
 :is(#live-trace, #photo-booth) .live-intro,:is(#live-trace, #photo-booth) .live-expression-guide,:is(#live-trace, #photo-booth) .live-experience,
 #monthly-overview .monthly-inner,#monthly-insight > .insight-section-heading,
 #monthly-insight > .insight-lead,#monthly-insight > .original-insight-gallery,
@@ -55,7 +58,7 @@ body .navigation nav button { white-space:nowrap; font:400 var(--type-label)/1.4
 @media(max-width:700px) {
  body .navigation { gap:16px; }
  body .navigation nav { gap:12px; overflow-x:auto; justify-content:flex-start; min-width:0; }
- body .navigation nav button { font-size:10px; flex-shrink:0; }
+ body .navigation nav :is(button,a[data-scroll-target]) { font-size:10px; flex-shrink:0; }
  :is(#live-trace, #photo-booth) .live-expression-guide h3 { font-size:var(--type-subtitle); }
  #bloom-calendar > header { align-items:flex-start; gap:16px; }
  #bloom-calendar > header h2 { font-size:28px; }
@@ -142,6 +145,8 @@ body .month-story-copy > p,
 body .month-chart-note,
 body .month-emotion-row > span,
 body .insight-intro-copy,
+body #monthly-insight .insight-growth-summary,
+body #monthly-insight .original-insight-toolbar,
 body .insight-next-heading > p,
 body .insight-next-heading h3,
 body #monthly-overview .month-recommendations .insight-practices summary h4,
@@ -348,6 +353,11 @@ body #ending .ending-foot p {
 #live-trace .live-flower-area { grid-column:2; grid-row:1; max-width:none; }
 #live-trace .live-camera-heading { position:absolute; top:22px; left:24px; right:24px; z-index:2; margin:0; pointer-events:none; }
 #live-trace .live-camera-heading p { font-size:11px; }
+#live-trace .live-camera-area:has(.live-camera-video:not([hidden])) .live-face-status { color:#ff5b57; }
+#live-trace .live-camera-area:has(.live-camera-video:not([hidden])) .live-face-status::before {
+ content:""; display:inline-block; width:.65em; height:.65em; margin-right:.6em;
+ border-radius:50%; background:currentColor; vertical-align:.04em;
+}
 #live-trace .live-camera-placeholder { height:var(--experience-height); aspect-ratio:auto; width:100%; box-sizing:border-box; outline:none; border:1px solid #403b49; border-radius:18px; background:#0c0b10; }
 #live-trace .live-bloom-card { height:var(--experience-height); border:1px solid #403b49; border-radius:18px; background:linear-gradient(145deg,#16121e,#0b0b10 70%); box-shadow:none; padding:24px; display:flex; flex-direction:column; }
 #live-trace .live-flower-stage { flex:1; min-height:0; width:100%; aspect-ratio:auto; margin:12px 0; display:flex; align-items:center; justify-content:center; }
@@ -356,14 +366,414 @@ body #ending .ending-foot p {
 #live-trace .live-expression-scale { margin:0 auto 6px; }
 #live-trace .live-preview-controls { display:flex; justify-content:center; margin:24px 0 0; padding:0; }
 #live-trace .live-camera-start,#live-trace .live-camera-stop,#live-trace .flower-card-create { margin:0; padding:14px 28px; border:1px solid #746c80; border-radius:100px; background:transparent; font:400 15px/1.4 var(--font-body); }
+#live-trace .live-camera-preview-link { display:inline-flex; align-items:center; justify-content:center; padding:14px 28px; border:1px solid #746c80; border-radius:100px; color:#f4f1f7; text-decoration:none; font:400 15px/1.4 var(--font-body); }
+#live-trace .live-camera-preview-link:focus-visible { outline:2px solid #b38aff; outline-offset:4px; }
 #live-trace .flower-card-create { margin-top:24px; }
-#live-trace .flower-card-create:disabled { visibility:hidden; }
+#live-trace .flower-card-create:disabled { display:none; }
 #live-trace .live-camera-stop:disabled { display:none; }
 #live-trace .live-camera-start[hidden] { display:none; }
-#live-trace .flower-card-hint { font-size:13px; color:#96909e; margin-top:16px; }
+#live-trace .flower-card-hint { display:flex; align-items:center; justify-content:center; min-height:51px; margin:24px 0 0; font-size:13px; line-height:1.5; color:#96909e; text-align:center; }
 @media(max-width:700px) {
  #live-trace .live-experience { grid-template-columns:1fr; --experience-height:420px; gap:32px; }
  #live-trace .live-camera-area,#live-trace .live-flower-area { grid-column:1; width:100%; max-width:460px; }
  #live-trace .live-camera-area { grid-row:1; }
  #live-trace .live-flower-area { grid-row:2; }
 }
+
+/* Keep the visitor link above the moving photo-booth cursor. */
+#ending .ending-foot a.ending-visitor-link { position:relative; z-index:6; color:#f4f2f7; border-color:#f4f2f7; background:#000; }
+#ending .ending-foot a.ending-visitor-link span { color:#f4f2f7; }
+
+/* Center the capped live experience and align its heading to the same edges. */
+#live-trace .live-intro,
+#live-trace .live-experience { max-width:1100px; margin-inline:auto; }
+
+#ending .ending-foot p { font-size:clamp(16px,1.4vw,21px); }
+
+/* Chapter text shares the same 5vw gutter, even on wide screens. */
+#bloom-calendar > header,
+#bloom-calendar > .bloom-calendar-view,
+#monthly-insight > .insight-section-heading,
+#monthly-insight > .insight-growth-lead,
+#monthly-insight > .original-insight-gallery,
+#monthly-insight .original-insight-toolbar,
+#live-trace .live-intro {
+ width:100%; max-width:none; margin-inline:0; box-sizing:border-box;
+}
+
+
+/* Keep the expanded process descriptions within each timeline step. */
+#system .process-step-copy { width:min(85%,440px); }
+@media (max-height:850px) {
+ #system .process-stem { height:40px; }
+ #system .process-step-copy { bottom:calc(50% + 54px); }
+ #system .process-world > li:nth-child(even) .process-step-copy { top:calc(50% + 54px); bottom:auto; }
+ #system .process-step-copy h3 { margin-bottom:12px; }
+ #system .process-description { margin-top:14px; font-size:13px; line-height:1.7; }
+}
+
+/* Balance the description lines across all six process steps. */
+#system .process-description {
+  max-width: 100%;
+  text-align: left;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-wrap: wrap;
+}
+
+#system .process-description-detail {
+  display: block;
+  margin-top: 0;
+}
+
+/* Keep both feature introductions on the same heading and copy grid. */
+#bloom-calendar > header {
+  display: block;
+  margin-bottom: 28px;
+  padding-bottom: 0;
+  border-bottom: 0;
+  text-align: left;
+}
+#bloom-calendar > header > .features-index {
+  margin: 0;
+  color: #999;
+  font: 400 11px/1.5 var(--font-secondary);
+  letter-spacing: .12em;
+}
+#bloom-calendar #bloom-calendar-title {
+  margin: 0;
+  font: 500 var(--type-section)/1.12 var(--font-body);
+  letter-spacing: -.045em;
+  color: #f3efe5;
+}
+#bloom-calendar .bloom-calendar-view { padding-top: 0; }
+#bloom-calendar .bloom-calendar-caption {
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  column-gap: 8%;
+  row-gap: 0;
+  align-items: center;
+}
+#bloom-calendar .bloom-calendar-copy { min-width: 0; }
+#features .feature-copy .feature-concept,
+#bloom-calendar .bloom-calendar-english {
+  font: 400 clamp(15px,1.35vw,18px)/1.6 "Helvetica Neue",Helvetica,Arial,sans-serif;
+  letter-spacing: -.015em;
+  color: #ccc;
+  margin: 20px 0 0;
+  max-width: 400px;
+}
+#bloom-calendar .bloom-calendar-subtitle {
+  display: block;
+  margin: 0;
+  max-width: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+#features .feature-copy .daily-korean-description,
+body #bloom-calendar .bloom-calendar-caption > p[lang] {
+  font: 400 clamp(14px,1.15vw,16px)/1.85 "Helvetica Neue",Helvetica,Arial,sans-serif;
+  letter-spacing: -.015em;
+  color: #b8b8b8;
+  max-width: 480px;
+}
+#bloom-calendar .bloom-calendar-caption > p[lang] { grid-row: auto; margin: 0; }
+@media(max-width:700px) {
+  #bloom-calendar .bloom-calendar-caption { display: block; }
+  #bloom-calendar .bloom-calendar-caption > p[lang] { margin-top: 20px; }
+}
+#monthly-overview .monthly-eyebrow {
+  color: #999;
+  font: 400 11px/1.5 var(--font-secondary);
+  letter-spacing: .12em;
+}
+
+/* Vector card artwork can fill the columns without enlarging raster text. */
+#monthly-insight .original-insight-track { gap: clamp(10px,1.2vw,18px); }
+#monthly-insight .original-insight-slide .original-card-art {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+}
+
+/* Interaction guidance is quieter and distinct from the section description. */
+body #monthly-insight .original-insight-toolbar {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #96909f;
+  margin-bottom: 16px;
+}
+#monthly-insight .insight-interaction-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+#monthly-insight .insight-interaction-hint svg { flex-shrink: 0; color: #b69ad5; }
+
+/* Enlarge the original artwork proportionally, using more of the section width. */
+#monthly-insight > .original-insight-gallery { max-width: 1440px; }
+#monthly-insight .original-insight-track { gap: 8px; }
+#monthly-insight .original-insight-slide .original-card-art {
+  width: 100%;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  image-rendering: auto;
+}
+
+/* Give the high-resolution cards more room while retaining their aspect ratios. */
+#monthly-insight > .original-insight-gallery {
+  width: min(1680px, calc(100vw - 40px));
+  max-width: none;
+  position: relative;
+  left: 50%;
+  margin-left: 0;
+  margin-right: 0;
+  transform: translateX(-50%);
+  margin-bottom: 24px;
+}
+#monthly-insight { padding-bottom: 36px; }
+@media (max-width: 700px) {
+  #monthly-insight > .original-insight-gallery { width: 100%; }
+}
+
+/* Use the artwork's transparent margins to bring the visible cards closer. */
+#monthly-insight .original-insight-track { gap: 0; overflow: visible; }
+#monthly-insight .original-insight-slide .original-card-art { width: 110%; }
+@media (max-width: 700px) {
+  #monthly-insight .original-insight-slide .original-card-art { width: 100%; }
+}
+
+/* The third source is wider: scale proportionally to match the other cards' height. */
+#monthly-insight .original-insight-slide:nth-child(3) .original-card-art {
+  width: 118%;
+}
+@media (max-width: 700px) {
+  #monthly-insight .original-insight-slide:nth-child(3) .original-card-art { width: 107.3%; }
+}
+
+#monthly-insight > .insight-section-heading > span:first-child {
+  color: #999;
+  font: 400 11px/1.5 var(--font-secondary);
+  letter-spacing: .12em;
+}
+
+#me > .insight-section-heading > span:first-child {
+  color: #999;
+  font: 400 11px/1.5 var(--font-secondary);
+  letter-spacing: .12em;
+}
+
+#me > .insight-section-heading { border-top: 0; }
+
+/* Reduce excess space above the ME composition on desktop. */
+@media (min-width: 801px) {
+  #me { padding-top: 60px; }
+  #me > .insight-section-heading { padding-top: 0; }
+}
+
+/* Align the visible card borders, excluding the PNG shadow margins. */
+#monthly-insight .insight-art-frame {
+  display:block; position:relative; width:88%; aspect-ratio:1062 / 998;
+  margin-top:9%; margin-bottom:10%; flex:none;
+}
+#monthly-insight .original-insight-slide .insight-art-frame .original-card-art {
+  position:absolute; height:127.35%; width:auto; max-width:none; max-height:none;
+  top:-10.42%; left:50%; transform:translateX(-50%);
+}
+#monthly-insight .original-insight-slide:nth-child(1) .insight-art-frame .original-card-art {
+  height:127.3%; top:-10.6%;
+}
+#monthly-insight .original-insight-slide:nth-child(3) .insight-art-frame .original-card-art {
+  height:125.9%; top:-9.8%;
+}
+
+/* Keep guidance aligned with the section text despite the wider card gallery. */
+body #monthly-insight .original-insight-toolbar {
+  width: calc(100vw - 2 * var(--page-inset));
+  max-width: none;
+  margin-left: calc((100% - (100vw - 2 * var(--page-inset))) / 2);
+  margin-right: 0;
+  box-sizing: border-box;
+}
+@media (max-width: 700px) {
+  body #monthly-insight .original-insight-toolbar { width:100%; margin-left:0; }
+}
+
+/* Use intrinsic image proportions, not the legacy common raster ratio. */
+#monthly-insight .original-insight-slide .insight-art-frame .original-card-art {
+  aspect-ratio: auto;
+}
+/* Shared spacing for reading sections; pinned artwork retains its own stage. */
+:root {
+  --chapter-space: clamp(60px, 7vw, 96px);
+  --heading-space: 28px;
+}
+#bloom-calendar, #monthly-overview, #monthly-insight {
+  padding-top: var(--chapter-space);
+  padding-bottom: 48px;
+}
+#features .features-index,
+#bloom-calendar > header > .features-index,
+#monthly-overview .monthly-eyebrow,
+#monthly-insight > .insight-section-heading,
+#me > .insight-section-heading { margin-top:0; }
+#monthly-insight > .insight-section-heading,
+#me > .insight-section-heading { padding-top:0; }
+#monthly-insight .insight-growth-lead,
+#me .insight-lead { margin-top:var(--heading-space); margin-bottom:28px; }
+#live-trace .live-intro,
+#live-trace .live-experience { width:100%; max-width:none; margin-inline:0; }
+@media (max-width:700px) {
+  :root { --chapter-space:56px; --heading-space:24px; }
+}
+
+/* Photo booth surfaces match the live bloom preview; capture controls stay intact. */
+#photo-booth .live-experience {
+  --booth-card-height: clamp(380px,52vw,580px);
+  grid-template-columns: minmax(0,1.08fr) minmax(0,1fr);
+  gap: clamp(24px,4vw,64px);
+  align-items:start;
+}
+#photo-booth .live-relationship { display:none; }
+#photo-booth .live-camera-area { grid-column:1; grid-row:1; position:relative; width:100%; max-width:none; }
+#photo-booth .live-camera-heading {
+  position:absolute; top:22px; left:24px; right:24px; z-index:2;
+  margin:0; pointer-events:none;
+}
+#photo-booth .live-camera-heading p { font-size:11px; }
+#photo-booth .live-camera-placeholder {
+  width:100%; height:var(--booth-card-height); aspect-ratio:auto;
+  box-sizing:border-box; outline:none; border:1px solid #403b49;
+  border-radius:18px; background:#0c0b10;
+}
+#photo-booth .live-flower-area { grid-column:2; grid-row:1; width:100%; max-width:none; padding-top:0; }
+#photo-booth .booth-bloom-card {
+  box-sizing:border-box; height:var(--booth-card-height); padding:24px;
+  border:1px solid #403b49; border-radius:18px;
+  background:radial-gradient(ellipse at top left,#342940 0%,transparent 65%),
+    radial-gradient(ellipse at bottom right,#1c2a30 0%,transparent 60%),#0c0b10;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+#photo-booth .booth-card-label { margin:0; color:#d4cbdc; font:11px/1.5 var(--font-secondary); letter-spacing:.06em; }
+#photo-booth .booth-bloom-card .live-analysis { display:none; }
+#photo-booth .booth-bloom-card .live-flower-stage {
+  flex:1; min-height:0; width:100%; aspect-ratio:auto; margin:12px 0;
+}
+#photo-booth .booth-bloom-card .live-flower-stage img { width:100%; height:100%; object-fit:contain; mix-blend-mode:screen; }
+#photo-booth .booth-bloom-card .live-expression-scale { margin:0 auto 6px; width:100%; }
+@media(max-width:700px) {
+  #photo-booth .live-experience { grid-template-columns:1fr; }
+  #photo-booth .live-flower-area { grid-column:1; grid-row:2; }
+}
+
+/* Blend the flower into its gradient surface and soften the camera action. */
+#photo-booth .booth-bloom-card { isolation:isolate; }
+#photo-booth .booth-bloom-card .live-flower-stage { background:transparent; }
+#photo-booth .live-camera-start {
+  padding:12px 26px;
+  border:1px solid #746c80;
+  border-radius:100px;
+  background:transparent;
+  color:#f4f1f7;
+  font:400 14px/1.4 var(--font-body);
+  letter-spacing:.01em;
+}
+#photo-booth .live-camera-start:hover { background:rgba(179,138,255,.08); border-color:#b38aff; }
+
+/* Let the wordmark close the story; credits sit quietly along the bottom edge. */
+#ending .ending-content { gap:clamp(16px,3vh,32px); }
+#ending .ending-content h2 {
+ flex:1;min-height:0;justify-content:center;margin:0;
+ font-size:min(22vw,25svh);
+}
+#ending .ending-foot {
+ display:flex;flex-direction:column;align-items:stretch;gap:clamp(28px,4vh,44px);
+}
+#ending .ending-foot a.ending-visitor-link {
+ flex:none;align-self:flex-end;margin:0 max(0px,calc(72px - var(--page-inset))) 4px 0;
+ min-height:50px;padding:14px 24px;font-size:13px;letter-spacing:.04em;gap:28px;
+}
+#ending .ending-credits {
+ margin:0;min-width:0;
+ font:400 clamp(12px,.85vw,14px)/1.5 var(--font-body);letter-spacing:-.01em;
+}
+#ending .ending-credit-name {
+ display:block;margin-bottom:12px;
+ font:400 clamp(18px,1.45vw,22px)/1.2 var(--font-body);letter-spacing:-.025em;
+}
+#ending .ending-credit-details {
+ display:flex;justify-content:space-between;align-items:flex-start;gap:24px;
+ padding-right:max(0px,calc(72px - var(--page-inset)));
+}
+#ending .ending-contact {margin:0;font:inherit;font-style:normal;}
+#ending .ending-affiliation {
+ display:flex;flex-direction:column;gap:3px;text-align:right;opacity:.58;
+}
+#ending .ending-contact a {
+ display:inline;margin:0;padding:0;border:0;border-radius:0;
+ font:inherit;letter-spacing:inherit;text-decoration:none;opacity:.8;overflow-wrap:anywhere;
+}
+#ending .ending-contact a:hover {text-decoration:underline;text-underline-offset:4px;}
+@media(max-width:650px) {
+ #ending .ending-content {gap:16px;}
+ #ending .ending-content h2 {font-size:min(24vw,23svh);}
+ #ending .ending-foot {gap:28px;}
+ #ending .ending-foot a.ending-visitor-link {margin:0 max(0px,calc(72px - var(--page-inset))) 0 0;font-size:12px;padding:12px 20px;gap:22px;}
+ #ending .ending-credits {font-size:11px;}
+ #ending .ending-credit-name {font-size:17px;}
+ #ending .ending-credit-details {flex-direction:column;gap:12px;}
+ #ending .ending-affiliation {text-align:left;gap:2px;}
+}
+
+.page-scroll-cue {
+ position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));
+ display:grid;place-items:center;width:60px;height:60px;padding:0;
+ transform:translateX(-50%);z-index:30;color:#fff;
+ border:0;border-radius:0;background:transparent;
+ cursor:pointer;touch-action:manipulation;
+ -webkit-tap-highlight-color:transparent;
+ transition:transform 160ms var(--editorial-ease-out);
+}
+.page-scroll-cue svg {display:block;width:24px;height:30px;filter:drop-shadow(0 0 5px #b38aff80);}
+.page-scroll-cue:active {transform:translateX(-50%) scale(.95);}
+.page-scroll-cue:focus-visible {outline:2px solid #fff;outline-offset:5px;}
+@media(hover:hover) and (pointer:fine) {.page-scroll-cue:hover {color:#d5b8f0;}}
+@media(prefers-reduced-motion:reduce) {
+ .page-scroll-cue {transition:none;}
+ .page-scroll-cue:active {transform:translateX(-50%);}
+}
+.page-scroll-cue[hidden],body:has(dialog[open]) .page-scroll-cue {display:none;}
+@media(max-width:650px) {.page-scroll-cue {bottom:max(12px,env(safe-area-inset-bottom));}}
+
+/* Keep the main chapter menu visible above the four feature tabs. */
+:root {--feature-menu-top:calc(5.6vh + 36px);}
+body.feature-navigation-active .navigation {visibility:visible;pointer-events:auto;transform:none;opacity:1;}
+body.feature-navigation-active .navigation::before,
+body.live-navigation-active .navigation::before {
+ content:"";position:absolute;z-index:-1;top:-5.6vh;bottom:-20px;
+ left:calc(-1 * var(--page-inset));right:calc(-1 * var(--page-inset));
+ background:#000;pointer-events:none;
+}
+.features-tabs.is-pinned {top:var(--feature-menu-top);}
+#bloom-calendar,#monthly-overview,#monthly-insight,#me {padding-top:calc(var(--feature-menu-top) + 96px);scroll-margin-top:0;}
+
+/* Reserve the fixed menu's space and fit the live comparison in one reading frame. */
+#live-trace { padding-top:max(110px,calc(5.6svh + 64px)); }
+@media(min-width:701px) and (min-height:700px) {
+ #live-trace { height:100svh; min-height:100svh; padding-bottom:32px; display:flex; flex-direction:column; }
+ #live-trace .live-intro { flex:none; }
+ #live-trace .live-experience { flex:1; min-height:0; grid-template-rows:minmax(0,1fr); }
+ #live-trace .live-camera-area { height:100%; min-height:0; display:flex; flex-direction:column; }
+ #live-trace .live-camera-placeholder { flex:1; min-height:0; height:auto; }
+ #live-trace .live-preview-controls { flex:none; min-height:51px; }
+ #live-trace .live-flower-area { height:calc(100% - 75px); min-height:0; }
+ #live-trace .live-bloom-card { height:100%; min-height:0; }
+}
+
+
+
+/* Predecoded flower frames keep the same playback cost in fullscreen. */
+#live-trace .tablet-flower-canvas { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; pointer-events:none; mix-blend-mode:screen; }

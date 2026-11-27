@@ -29,9 +29,9 @@
   if(index>=0&&event.key in moves){event.preventDefault();buttons[(index+moves[event.key]+12)%12].focus();}
  });
  const autumnAlbums=[[0,1,2],[3],[4,5],[6,7],[8],[],[9],[10,11],[12],[13,14,15],[16],[17],[],[18,19],[20],[21],[22,23],[24,25,26],[27],[],[28],[29],[],[],[],[],[],[],[],[]];
- const autumnPhoto=i=>({src:`public/bloom-calendar/individual/autumn-${i}.png`,alt:['은행나무 아래 코트 셀카','단풍 공원','밤 라테','니트 차림의 카페','낙엽 속 강아지','강아지와 가을 산책','친구들과 가을 거리','군고구마','서점에서','비 내리는 창','집에서 독서','따뜻한 수프','가을 코디 거울 셀카','가을 산','친구들과 전골','목도리 셀카','가을 감','은행나무길','비 오는 거리','젖은 낙엽','책과 조명','집에서 휴식','강가의 갈대','차와 일기','시장 산책','밤 페이스트리','가을 피크닉','해질녘 산책','늦가을 나뭇가지','창가에서 쉬는 오후'][i]});
+ const autumnPhoto=i=>({src:`public/bloom-calendar/individual/autumn-${i}.jpg`,alt:['은행나무 아래 코트 셀카','단풍 공원','밤 라테','니트 차림의 카페','낙엽 속 강아지','강아지와 가을 산책','친구들과 가을 거리','군고구마','서점에서','비 내리는 창','집에서 독서','따뜻한 수프','가을 코디 거울 셀카','가을 산','친구들과 전골','목도리 셀카','가을 감','은행나무길','비 오는 거리','젖은 낙엽','책과 조명','집에서 휴식','강가의 갈대','차와 일기','시장 산책','밤 페이스트리','가을 피크닉','해질녘 산책','늦가을 나뭇가지','창가에서 쉬는 오후'][i]});
  const dialog=document.createElement('dialog');dialog.className='calendar-memory';dialog.setAttribute('aria-label','Daily moments');
- dialog.innerHTML='<button class="memory-close" aria-label="Close">×</button><p class="memory-date"></p><div class="memory-carousel"></div><div class="memory-controls"><button data-prev aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><span role="status"></span><button data-next aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div><button class="memory-add">ADD PHOTO</button><input type="file" accept="image/png,image/jpeg,image/webp" hidden>';
+ dialog.innerHTML='<button class="memory-close" aria-label="Close">×</button><p class="memory-date"></p><div class="memory-carousel"></div><div class="memory-controls"><button data-prev aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg></button><span role="status"></span><button data-next aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg></button></div><button class="memory-add" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg><span>ADD PHOTO</span></button><input type="file" accept="image/png,image/jpeg,image/webp" hidden>';
  document.body.append(dialog);
  const photoLibrary={
   "a0": {
@@ -115,103 +115,103 @@
     "alt": "친구들과 밤거리"
   },
   "selfie": {
-    "src": "public/bloom-calendar/selfie.png",
+    "src": "public/bloom-calendar/selfie.jpg",
     "alt": "스트라이프 티셔츠를 입고 강변에서 찍은 셀카"
   },
   "mirror": {
-    "src": "public/bloom-calendar/mirror.png",
+    "src": "public/bloom-calendar/mirror.jpg",
     "alt": "검정 카디건과 데님 코디의 거울 셀카"
   },
   "dog": {
-    "src": "public/bloom-calendar/dog.png",
+    "src": "public/bloom-calendar/dog.jpg",
     "alt": "올리브 재킷을 입고 강아지와 산책"
   },
   "friends": {
-    "src": "public/bloom-calendar/friends.png",
+    "src": "public/bloom-calendar/friends.jpg",
     "alt": "파란 셔츠를 입고 친구들과 저녁 식사"
   },
   "gallery": {
-    "src": "public/bloom-calendar/gallery.png",
+    "src": "public/bloom-calendar/gallery.jpg",
     "alt": "분홍 셔츠와 아이보리 팬츠로 전시 관람"
   },
   "reading": {
-    "src": "public/bloom-calendar/reading.png",
+    "src": "public/bloom-calendar/reading.jpg",
     "alt": "집에서 책을 읽는 오후"
   },
   "tea": {
-    "src": "public/bloom-calendar/tea.png",
+    "src": "public/bloom-calendar/tea.jpg",
     "alt": "Overhead close photo of chamomile tea and open journal at quiet wooden desk, morning solitude"
   },
   "rain": {
-    "src": "public/bloom-calendar/rain.png",
+    "src": "public/bloom-calendar/rain.jpg",
     "alt": "Rain droplets on apartment window, soft gray city out of focus, quiet reflective afternoon"
   },
   "bed": {
-    "src": "public/bloom-calendar/bed.png",
+    "src": "public/bloom-calendar/bed.jpg",
     "alt": "Unmade linen bed and paperback book, muted blue morning light, peaceful restful day"
   },
   "soup": {
-    "src": "public/bloom-calendar/soup.png",
+    "src": "public/bloom-calendar/soup.jpg",
     "alt": "Single bowl of homemade vegetable soup on small kitchen table, gentle low evening light"
   },
   "sea": {
-    "src": "public/bloom-calendar/sea.png",
+    "src": "public/bloom-calendar/sea.jpg",
     "alt": "Empty blue gray coast at dusk, distant horizon and ripples, contemplative atmosphere"
   },
   "lamp": {
-    "src": "public/bloom-calendar/lamp.png",
+    "src": "public/bloom-calendar/lamp.jpg",
     "alt": "Warm bedside lamp and book in otherwise dark bedroom, quiet nighttime rest"
   },
   "shoes": {
-    "src": "public/bloom-calendar/shoes.png",
+    "src": "public/bloom-calendar/shoes.jpg",
     "alt": "Top-down personal snapshot of white sneakers and fallen leaves after solitary walk"
   },
   "breakfast": {
-    "src": "public/bloom-calendar/breakfast.png",
+    "src": "public/bloom-calendar/breakfast.jpg",
     "alt": "Top-down sunny breakfast toast strawberries and latte on small round table, joyful morning"
   },
   "flowers": {
-    "src": "public/bloom-calendar/flowers.png",
+    "src": "public/bloom-calendar/flowers.jpg",
     "alt": "Fresh yellow daisies in neighborhood flower shop, spontaneous bright street snapshot"
   },
   "picnic": {
-    "src": "public/bloom-calendar/picnic.png",
+    "src": "public/bloom-calendar/picnic.jpg",
     "alt": "Top-down picnic blanket with sandwiches fruit sparkling drinks and friends hands, happy afternoon"
   },
   "dogdetail": {
-    "src": "public/bloom-calendar/dogdetail.png",
+    "src": "public/bloom-calendar/dogdetail.jpg",
     "alt": "Small curly beige dog sniffing grass, low ground-level candid park photograph"
   },
   "bakery": {
-    "src": "public/bloom-calendar/bakery.png",
+    "src": "public/bloom-calendar/bakery.jpg",
     "alt": "Close handheld photograph of fresh croissant in paper bag near bakery window, cheerful morning"
   },
   "sunset": {
-    "src": "public/bloom-calendar/sunset.png",
+    "src": "public/bloom-calendar/sunset.jpg",
     "alt": "Peach pink sunset above river, unposed travel smartphone landscape"
   },
   "plants": {
-    "src": "public/bloom-calendar/plants.png",
+    "src": "public/bloom-calendar/plants.jpg",
     "alt": "Window herbs and a half full glass of water, pale early daylight, tranquil home detail"
   },
   "rest": {
-    "src": "public/bloom-calendar/rest.png",
+    "src": "public/bloom-calendar/rest.jpg",
     "alt": "Same woman identity reference, oversized gray sweatshirt and comfortable pants sitting sideways on sofa looking outside, relaxed unsmiling restful expression, wide candid photograph"
   },
   "balcony": {
-    "src": "public/bloom-calendar/balcony.png",
+    "src": "public/bloom-calendar/balcony.jpg",
     "alt": "Same woman identity reference, sage linen shirt and beige trousers watering balcony plants, profile side view, quiet morning"
   },
   "home": {
-    "src": "public/bloom-calendar/home.png",
+    "src": "public/bloom-calendar/home.jpg",
     "alt": "Same woman identity reference, soft navy pajamas reading in bed, nighttime warm bedside light, distant candid photograph, restful neutral expression"
   },
   "rainwalk": {
-    "src": "public/bloom-calendar/rainwalk.png",
+    "src": "public/bloom-calendar/rainwalk.jpg",
     "alt": "Same woman identity reference, tan trench coat and black trousers under clear umbrella, rear view crossing quiet rainy street, subdued atmosphere"
   },
   "walk": {
-    "src": "public/bloom-calendar/walk.png",
+    "src": "public/bloom-calendar/walk.jpg",
     "alt": "강아지와 조용한 산책"
   }
 };
@@ -246,7 +246,7 @@
  }
  // Curated November diaries: a coherent outing per album, quiet days remain brief.
  const diaryScenes=['은행나무길 산책','카페와 베이킹','강아지와 가을 외출','친구들과의 만남','전시를 본 하루','집에서 보내는 휴일'];
- const diaryPhoto=i=>({src:`public/bloom-calendar/individual/diary-${i}.png`,alt:`${diaryScenes[Math.floor(i/6)]} — 일상 사진 ${i%6+1}`});
+ const diaryPhoto=i=>({src:`public/bloom-calendar/individual/diary-${i}.jpg`,alt:`${diaryScenes[Math.floor(i/6)]} — 일상 사진 ${i%6+1}`});
  const outing=(row)=>Array.from({length:6},(_,i)=>diaryPhoto(row*6+i));
  const autumn=(...indices)=>indices.map(autumnPhoto);
  const novemberDiaries={
@@ -308,6 +308,12 @@
  const showCalendar=()=>{calendarArt.classList.remove('calendar-awaiting-scroll');calendarEntrance?.cancel();calendarReveal.disconnect();};
  calendarReduce.addEventListener('change',()=>{if(calendarReduce.matches)showCalendar();});
  calendarArt.addEventListener('focusin',showCalendar);
+ window.addEventListener('trace:idle-reset',()=>{
+  calendarEntrance?.cancel();
+  calendarArt.classList.toggle('calendar-awaiting-scroll',!calendarReduce.matches);
+  calendarReveal.observe(calendarArt);
+  closeMonths();
+ });
  function renderCalendar(){
 
   wrap.replaceChildren();

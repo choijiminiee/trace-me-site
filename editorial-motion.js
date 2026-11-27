@@ -24,6 +24,10 @@
     });
   },{threshold:.12});
   elements.forEach(element=>observer.observe(element));
+  window.addEventListener('trace:idle-reset', () => {
+    animations.forEach(animation=>animation.cancel());
+    elements.forEach(element=>observer.observe(element));
+  });
   reduce.addEventListener('change',()=>{if(reduce.matches)animations.forEach(animation=>animation.cancel());});
   document.addEventListener('keydown',()=>animations.forEach(animation=>animation.finish()));
 })();
@@ -36,7 +40,12 @@
     title.setAttribute('aria-label',text);
     title.replaceChildren(...text.split(' ').flatMap((word,i)=>{
       const mask=document.createElement('span'); mask.className='title-word-mask'; mask.setAttribute('aria-hidden','true');
-      const inner=document.createElement('span'); inner.textContent=word; mask.append(inner);
+      const inner=document.createElement('span');
+      if (word.endsWith('.')) {
+        const period=document.createElement('span'); period.className='title-period'; period.textContent='.';
+        inner.append(document.createTextNode(word.slice(0,-1)),period);
+      } else inner.textContent=word;
+      mask.append(inner);
       return i ? [document.createTextNode(' '),mask] : [mask];
     }));
     const active=[];
@@ -50,14 +59,13 @@
       });
     },{threshold:.01,rootMargin:"0px 0px -10% 0px"});
     observer.observe(title);
+    window.addEventListener('trace:idle-reset', () => {
+      active.splice(0).forEach(animation=>animation.cancel());
+      observer.observe(title);
+    });
     reduce.addEventListener('change',()=>{if(reduce.matches)active.forEach(a=>a.cancel());});
     document.addEventListener('keydown',()=>active.forEach(a=>{if(a.playState==='running')a.finish();}));
   }
-  document.querySelectorAll('.features-tabs button > span').forEach(label=>{
-    label.dataset.rollLabel=label.textContent;
-    const inner=document.createElement('span'); inner.className='nav-label-text'; inner.textContent=label.textContent;
-    label.replaceChildren(inner); label.classList.add('nav-roll-label');
-  });
 })();
 
 // Bolder first-view choreography for the exhibition, without pinning scroll.
@@ -82,6 +90,10 @@
  }),{threshold:.15});
  groups.forEach(([selector,type])=>{const e=document.querySelector(selector);if(e){e.dataset.exhibitionMotion=type;observer.observe(e);}});
  const stop=()=>running.forEach(a=>a.cancel());
+ window.addEventListener('trace:idle-reset',()=>{
+  stop();
+  groups.forEach(([selector])=>{const e=document.querySelector(selector);if(e)observer.observe(e);});
+ });
  reduce.addEventListener('change',()=>{if(reduce.matches)stop();});
  document.addEventListener('keydown',stop);
  document.addEventListener('pointerdown',e=>{if(e.target.closest('[data-exhibition-motion]'))stop();},{passive:true});

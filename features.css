@@ -113,7 +113,25 @@
 .memory-carousel img { width:100%; height:100%; object-fit:cover; }
 .memory-controls { display:flex; align-items:center; justify-content:center; gap:32px; font:12px var(--font-secondary); }
 .memory-controls button { border:0; background:none; color:white; padding:12px; font-size:24px; cursor:pointer; }
-.memory-add { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); border:0; background:none; color:white; font:300 clamp(26px,4vw,48px)/1.2 "Helvetica Neue",Arial,sans-serif; white-space:nowrap; cursor:pointer; }
+.memory-add {
+ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+ display:inline-flex; align-items:center; justify-content:center; gap:10px;
+ min-height:48px; padding:12px 24px; box-sizing:border-box;
+ border:1px solid #b38aff55; border-radius:100px; background:#b38aff08;
+ color:#ded8e5; font:400 12px/1.5 var(--font-secondary); letter-spacing:.08em;
+ white-space:nowrap; cursor:pointer;
+ transition:transform 140ms cubic-bezier(.23,1,.32,1);
+}
+.memory-add svg { width:18px; height:18px; flex:none; fill:none; stroke:#bda2e8; stroke-width:1.3; stroke-linecap:round; }
+.memory-add:active { transform:translate(-50%,-50%) scale(.97); }
+.memory-add:focus-visible { outline:2px solid #b38aff; outline-offset:5px; transition:none; transform:translate(-50%,-50%); }
+@media(hover:hover) and (pointer:fine) {
+ .memory-add:hover { border-color:#b38aff99; color:#fff; background:#b38aff10; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .memory-add { transition:none; }
+ .memory-add:active { transform:translate(-50%,-50%); }
+}
 .calendar-memory [hidden] { display:none; }
 .memory-carousel button { transition:transform 450ms ease,opacity 450ms ease,filter 450ms ease; }
 @media(prefers-reduced-motion:reduce) { .memory-carousel button { transition:none; } }

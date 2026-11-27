@@ -1,17 +1,19 @@
 /* Shape change only: no emotion inference or persistent face data. */
 (() => {
   const CONFIG = Object.freeze({
-    weights: { mouth: 0.45, eyes: 0.30, eyebrows: 0.25 },
-    debug: true, debugIntervalMs: 1000,
-    response: { regionGain: { mouth: 1.10, eyes: 1.30, eyebrows: 1.45 },
+    weights: { mouth: 0.70, eyes: 0.10, eyebrows: 0.20 },
+    debug: false, debugIntervalMs: 1000,
+    response: { regionGain: { mouth: 1.10, eyes: 0.65, eyebrows: 0.65 },
       gamma: 1.25, fullScale: 1.0, emphasisStart: 0.15, emphasisEnd: 0.60 },
+    // Additional lip aperture, normalized by inter-eye distance and baseline noise.
+    mouthOpening: { start: 0.10, full: 0.32, gamma: 1.40 },
     // Feature units, before division by response ranges. Never adapt the base after calibration.
     deadZone: { mouth: [0.025, 0.020, 0.025, 0.025, 0.025, 0.018, 0.018],
       eyes: [0.045, 0.045], eyebrows: [0.030, 0.030, 0.030, 0.030] },
     noiseMultiplier: 3, calibrationTrim: 0.10,
     calibrationMs: 1500, minimumSamples: 20, resetAfterMs: 2000,
     riseSmoothingMs: 120, fallSmoothingMs: 110,
-    ranges: { mouth: [0.18, 0.22, 0.12, 0.12, 0.15, 0.10, 0.10],
+    ranges: { mouth: [0.24, 0.30, 0.16, 0.16, 0.22, 0.14, 0.14],
       eyes: [0.16, 0.16], eyebrows: [0.14, 0.14, 0.14, 0.14] }
   });
   const sub = (a, b) => a.map((v, i) => v - b[i]);
@@ -24,7 +26,10 @@
     // Retain the weighted mean for tiny residuals; emphasize a strong individual region progressively.
     let average = 0, energy = 0, peak = 0;
     for (const region of Object.keys(CONFIG.weights)) {
-      const value = Math.max(0, regions[region]) * CONFIG.response.regionGain[region];
+      // Wide eyes often lift the brows too. Bound both so this single gesture
+      // cannot drive the whole flower lifecycle, even with an extreme eye ratio.
+      const measured = Math.max(0, regions[region]);
+      const value = (region === 'mouth' ? measured : Math.min(1, measured)) * CONFIG.response.regionGain[region];
       average += CONFIG.weights[region] * value;
       energy += CONFIG.weights[region] * value * value;
       peak = Math.max(peak, value);
@@ -115,7 +120,14 @@
         this.regionChanges[region] = rms;
         change += CONFIG.weights[region] * rms;
       }
-      this.rawExpressionChange = mapChange(this.regionChanges);
+      // A wide jaw can leave lip width/thickness, eyes and brows unchanged.
+      // Do not dilute that opening across all seven mouth measurements. Keep
+      // smaller gestures on the existing curve and use the same motion easing.
+      const aperture = Math.max(0, f.mouth[1]-this.base.mouth[1]-this.thresholds.mouth[1]);
+      const opening = Math.max(0, Math.min(1, (aperture-CONFIG.mouthOpening.start) /
+        (CONFIG.mouthOpening.full-CONFIG.mouthOpening.start)));
+      const openingChange = 100 * Math.pow(opening, CONFIG.mouthOpening.gamma);
+      this.rawExpressionChange = Math.max(mapChange(this.regionChanges), openingChange);
       const dt = Math.min(250, Math.max(0, now-this.lastUpdate));
       this.lastUpdate = now;
       const smoothingMs = this.rawExpressionChange < this.displayExpressionChange

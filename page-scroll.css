@@ -1,7 +1,14 @@
 html, body { scroll-behavior: auto; }
 .navigation { position: fixed; top: 5.6vh; z-index: 50; transition: transform 240ms ease, opacity 240ms ease; }
-.navigation button { font: inherit; font-weight: 500; letter-spacing: inherit; color: inherit; padding: 0; border: 0; background: none; cursor: pointer; }
-.navigation button:focus-visible { outline: 1px solid #9d94aa; outline-offset: 7px; }
+.navigation :is(button,a[data-scroll-target]) { font: inherit; font-weight: 500; letter-spacing: inherit; color: inherit; padding: 0; border: 0; background: none; cursor: pointer; text-decoration:none; }
+.navigation :is(button,a[data-scroll-target]):focus-visible { outline: 1px solid #9d94aa; outline-offset: 7px; }
+.navigation nav [data-scroll-target] { position:relative; touch-action:manipulation; }
+.navigation nav [data-scroll-target]::after { content:""; position:absolute; inset:-14px -10px; }
+/* A real hit box keeps the booth link clickable around its label as well. */
+.navigation nav a[data-scroll-target="photo-booth-entry"] { display:inline-flex; align-items:center; min-height:44px; padding:14px 10px; margin:-14px -10px; }
+.navigation nav a[data-scroll-target="photo-booth-entry"]::after { content:none; }
+@media(hover:hover) { .navigation nav [data-scroll-target]:hover { color:#f4f2f7; } }
+.navigation nav [data-scroll-target]:active { color:var(--accent); }
 .navigation nav { flex-wrap: wrap; }
 .chapter-placeholder { min-height: 100svh; padding: clamp(120px,17vh,180px) var(--page-inset) 40px; background: #050505; }
 .chapter-placeholder h2 { margin: 0; color: #99929f; font-size: 11px; font-weight: 400; letter-spacing: .18em; }
@@ -10,9 +17,9 @@ html, body { scroll-behavior: auto; }
 .navigation.is-scroll-hidden:has(:focus-visible) { transform: translateY(0); opacity: 1; pointer-events: auto; }
 @media (prefers-reduced-motion: reduce) { .navigation { transition: none; } }
 
-/* Keep a small glimpse of neighboring chapters in the vertical document flow. */
-:root { --chapter-peek: 6svh; }
-#hero { height:calc(100svh - var(--chapter-peek)); }
+/* Fill the viewport so neighboring chapters do not peek into a settled frame. */
+:root { --chapter-peek: 0px; }
+#hero { height:100dvh; min-height:100dvh; }
 :is(#live-trace, #photo-booth), #features .features-content, #ending {
   min-height:calc(100svh - var(--chapter-peek));
 }
@@ -24,6 +31,9 @@ html, body { scroll-behavior: auto; }
   scroll-margin-top:var(--chapter-peek);
 }
 @media(max-width:700px) {
-  :root { --chapter-peek:4svh; }
+  :root { --chapter-peek:0px; }
   #approach, #system, #features .features-content, #ending { padding-top:64px; }
 }
+
+/* The ABOUT introduction is a complete reading frame. */
+#approach { min-height:100dvh; }

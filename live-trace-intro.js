@@ -1,59 +1,111 @@
+/* Scroll-linked counterpart to the ending: purple blocks leave to both sides. */
 (() => {
  const section=document.querySelector('#live-trace-intro');
- const button=section?.querySelector('.booth-enter');
- const target=document.querySelector('#photo-booth');
- if(!button||!target)return;
- const fine=matchMedia('(hover:hover) and (pointer:fine)');
+ const cover=section?.querySelector('.booth-gradient-cover');
+ if(!cover)return;
+ const marquee=section.querySelector('.booth-marquee-track');
  const reduce=matchMedia('(prefers-reduced-motion:reduce)');
- let x=0,y=0,tx=0,ty=0,raf=0,last=0,active=false,busy=false;
- const clamp=(v,max)=>Math.max(0,Math.min(max,v));
- function tick(time){
-  raf=0;const dt=Math.min(last?time-last:16,40);last=time;
-  const k=reduce.matches?1:1-Math.exp(-dt/75);
-  x+=(tx-x)*k;y+=(ty-y)*k;
-  button.style.transform=`translate3d(${x}px,${y}px,0)`;
-  if(active&&(Math.abs(tx-x)>.1||Math.abs(ty-y)>.1))raf=requestAnimationFrame(tick);
+ const ns='http://www.w3.org/2000/svg';
+ const svg=document.createElementNS(ns,'svg');
+ svg.setAttribute('width','0');svg.setAttribute('height','0');svg.setAttribute('aria-hidden','true');
+ svg.style.position='absolute';
+ const mask=document.createElementNS(ns,'clipPath');
+ mask.id='booth-invitation-mask';mask.setAttribute('clipPathUnits','objectBoundingBox');
+ svg.append(mask);section.append(svg);
+ let rows=0,blocks=[],pending=false,lastProgress=-1;
+ const clamp=value=>Math.max(0,Math.min(1,value));
+ function update(){
+  pending=false;
+  const bounds=section.getBoundingClientRect();
+  if(section.hidden || !bounds.width){
+   marquee.style.animationPlayState='paused';
+   document.body.classList.remove('booth-invitation-in-view');
+   return;
+  }
+  const progress=clamp((innerHeight*.85-bounds.top)/Math.max(1,innerHeight*.75));
+  const count=Math.max(4,Math.round(bounds.height/(bounds.width/16)));
+  if(rows!==count){
+   rows=count;lastProgress=-1;mask.replaceChildren();
+   blocks=Array.from({length:rows*2},(_,i)=>{
+    const rect=document.createElementNS(ns,'rect');
+    rect.setAttribute('width','.5');rect.setAttribute('y',Math.floor(i/2)/rows);
+    rect.setAttribute('height',1/rows+.001);mask.append(rect);return rect;
+   });
+  }
+  if(progress!==lastProgress)blocks.forEach((rect,i)=>{
+   const row=Math.floor(i/2),side=i%2;
+   const offset=((row*7+side*3)%5)*.045;
+   const opened=clamp((progress-offset)/.8);
+   const width=progress===1?0:.5-Math.floor(opened*8)/16;
+   rect.setAttribute('transform',`translate(${side?1-width:0} 0) scale(${width*2} 1)`);
+  });
+  lastProgress=progress;
+  cover.style.clipPath=reduce.matches?'none':'url(#booth-invitation-mask)';
+  cover.style.opacity=reduce.matches?String(1-progress):'1';
+  // Tab focus must always uncover its destination, including reverse scrolling.
+  if(section.querySelector(':focus-visible'))cover.style.opacity='0';
+  const visible=bounds.top<innerHeight && bounds.bottom>0;
+  marquee.style.animationPlayState=visible && !document.hidden?'running':'paused';
+  document.body.classList.toggle('booth-invitation-in-view',bounds.top<=innerHeight*.5 && bounds.bottom>innerHeight*.5);
  }
- function reset(){if(busy)return;active=false;cancelAnimationFrame(raf);raf=0;last=0;section.classList.remove('booth-following');button.style.transform='';}
- section.addEventListener('pointermove',e=>{
-  if(!fine.matches||e.pointerType==='touch'||busy)return;
-  tx=clamp(e.clientX-28,innerWidth-56);ty=clamp(e.clientY-28,innerHeight-56);
-  if(!active){active=true;x=tx;y=ty;section.classList.add('booth-following');}
-  if(!raf)raf=requestAnimationFrame(tick);
+ function schedule(){if(!pending){pending=true;requestAnimationFrame(update);}}
+ window.addEventListener('scroll',schedule,{passive:true});
+ window.addEventListener('resize',schedule);
+ window.addEventListener('load',schedule,{once:true});
+ window.addEventListener('trace:booth-page',schedule);
+ document.addEventListener('visibilitychange',schedule);
+ section.addEventListener('focusin',schedule);section.addEventListener('focusout',schedule);
+ reduce.addEventListener('change',schedule);
+
+ const enter=section.querySelector('.booth-enter');
+ const copy=section.querySelector('.booth-invitation-copy');
+ const mouse=matchMedia('(hover:hover) and (pointer:fine)');
+ let cursorFrame=0,pointer=null;
+ function resetCursor(){
+  cancelAnimationFrame(cursorFrame);cursorFrame=0;pointer=null;
+  section.classList.remove('is-cursor-following');
+  enter.style.removeProperty('transform');
+ }
+ function moveCursor(){
+  cursorFrame=0;
+  if(!pointer)return;
+  const bounds=section.getBoundingClientRect();
+  const origin=copy.getBoundingClientRect();
+  const radius=enter.offsetWidth/2;
+  const x=Math.max(bounds.left+radius+8,Math.min(bounds.right-radius-8,pointer.x));
+  const y=Math.max(bounds.top+radius+8,Math.min(bounds.bottom-radius-8,pointer.y));
+  const dx=x-origin.left-enter.offsetLeft-radius;
+  const dy=y-origin.top-enter.offsetTop-radius;
+  section.classList.add('is-cursor-following');
+  enter.style.transform=`translate3d(${dx}px,${dy}px,0)`;
+ }
+ section.addEventListener('pointermove',event=>{
+  if(event.pointerType!=='mouse'||!mouse.matches||reduce.matches||lastProgress<1||enter.matches(':focus-visible'))return;
+  pointer={x:event.clientX,y:event.clientY};
+  if(!cursorFrame)cursorFrame=requestAnimationFrame(moveCursor);
+ },{passive:true});
+ section.addEventListener('pointerleave',resetCursor);
+ section.addEventListener('pointercancel',resetCursor);
+ section.addEventListener('focusin',resetCursor);
+ section.addEventListener('click',event=>{
+  if(!section.classList.contains('is-cursor-following')||!event.detail||event.target.closest('button,a,input,select,textarea'))return;
+  // Preserve the actual pointer origin for the entrance reveal.
+  enter.dispatchEvent(new MouseEvent('click', {
+   bubbles:true,cancelable:true,detail:event.detail,clientX:event.clientX,clientY:event.clientY
+  }));
+  resetCursor();
  });
- section.addEventListener('pointerleave',reset);
- section.addEventListener('focusin',reset);
- window.addEventListener('scroll',reset,{passive:true});
- window.addEventListener('resize',reset);
- async function enter(){
-  if(busy)return;
-  const rect=button.getBoundingClientRect();reset();busy=true;button.disabled=true;
-  const wipe=document.createElement('div');wipe.className='booth-wipe';wipe.setAttribute('aria-hidden','true');
-  const message=document.createElement('div');
-  message.className='booth-transition-message';
-  message.setAttribute('role','dialog');
-  message.setAttribute('aria-modal','true');
-  message.setAttribute('aria-label','ENTER PHOTO BOOTH');
-  message.innerHTML='<button type="button" class="booth-confirm">ENTER PHOTO BOOTH</button><p>THIS BOOTH USES A BUILT-IN CAMERA.<br>PHOTOS ARE SAVED TO VISITOR TRACE ON THIS DEVICE ONLY WITH YOUR PERMISSION.</p>';
-  const cx=rect.left+rect.width/2,cy=rect.top+rect.height/2;
-  wipe.style.left=`${cx-28}px`;wipe.style.top=`${cy-28}px`;document.body.append(wipe);
-  const scale=Math.hypot(Math.max(cx,innerWidth-cx),Math.max(cy,innerHeight-cy))/28+1;
-  try {
-   await wipe.animate([{transform:'scale(1)'},{transform:`scale(${scale})`}],{duration:reduce.matches?0:450,easing:'cubic-bezier(.23,1,.32,1)',fill:'forwards'}).finished;
-   document.body.append(message);
-   await message.animate([{opacity:0},{opacity:1}],{duration:reduce.matches?0:200,fill:'forwards'}).finished;
-   const confirm=message.querySelector('.booth-confirm');
-   confirm.focus({preventScroll:true});
-   await new Promise(resolve=>confirm.addEventListener('click',resolve,{once:true}));
-   await message.animate([{opacity:1},{opacity:0}],{duration:reduce.matches?0:200,fill:'forwards'}).finished;
-   target.hidden=false;
-   target.dispatchEvent(new Event('camera-request-start'));
-   window.ScrollTrigger?.refresh();
-   target.classList.add('is-visible');window.scrollTo({top:target.getBoundingClientRect().top+scrollY,behavior:'instant'});
-   target.setAttribute('tabindex','-1');target.focus({preventScroll:true});
-   await wipe.animate([{opacity:1},{opacity:0}],{duration:reduce.matches?0:200,fill:'forwards'}).finished;
-  } finally {message.remove();wipe.remove();busy=false;button.disabled=false;}
- }
- button.addEventListener('click',e=>{e.stopPropagation();enter();});
- section.addEventListener('click',e=>{if(active&&!e.target.closest('a,button'))enter();});
+ document.addEventListener('keydown',event=>{if(event.key==='Tab')resetCursor();});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)resetCursor();});
+ window.addEventListener('scroll',resetCursor,{passive:true});
+ window.addEventListener('resize',resetCursor,{passive:true});
+ window.addEventListener('trace:booth-page',resetCursor);
+ mouse.addEventListener('change',resetCursor);
+ reduce.addEventListener('change',resetCursor);
+ window.addEventListener('trace:idle-reset',()=>{
+  resetCursor();
+  marquee.getAnimations().forEach(animation=>{animation.currentTime=0;});
+  update();
+ });
+ update();
 })();

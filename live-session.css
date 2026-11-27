@@ -1,0 +1,303 @@
+/* One preview system for the website and the embedded/standalone photo booth. */
+:is(#live-trace, #photo-booth) {
+  --preview-gap: clamp(20px, 4vw, 56px);
+  --preview-inset: clamp(16px, 2vw, 24px);
+  --preview-controls: 76px;
+  --preview-card-background:radial-gradient(ellipse at top left,#342940 0%,transparent 65%),
+    radial-gradient(ellipse at bottom right,#1c2a30 0%,transparent 60%),#0c0b10;
+  --preview-card-overlay:radial-gradient(ellipse at 12% 10%,#bc95ea30,transparent 55%),
+    radial-gradient(ellipse at 95% 75%,#83d4e027,transparent 50%),
+    linear-gradient(125deg,transparent 30%,#f2d4f012 46%,transparent 62%);
+}
+:is(#live-trace, #photo-booth) .live-intro {
+  width:100%; max-width:none; margin:0; padding:0; transform:none;
+}
+:is(#live-trace, #photo-booth) .live-intro h2 {
+  margin:0 0 10px; font-size:clamp(28px,3.2vw,46px); line-height:1.12;
+}
+:is(#live-trace, #photo-booth) .live-description {
+  margin:0; font-size:clamp(13px,1.1vw,16px); line-height:1.65;
+}
+:is(#live-trace, #photo-booth) .live-experience {
+  width:100%; max-width:none; margin:24px 0 0;
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--preview-gap); align-items:start;
+}
+:is(#live-trace, #photo-booth) :is(.live-camera-area,.live-flower-area) {
+  min-width:0; min-height:0; max-width:none; height:auto; padding:0;
+  display:flex; flex-direction:column;
+}
+:is(#live-trace, #photo-booth) .live-camera-area {grid-column:1;grid-row:1;}
+:is(#live-trace, #photo-booth) .live-flower-area {grid-column:2;grid-row:1;}
+:is(#live-trace, #photo-booth) :is(.live-camera-placeholder,.live-bloom-card,.booth-bloom-card) {
+  flex:none; width:100%; height:auto; min-height:0; aspect-ratio:4 / 5;
+  box-sizing:border-box; border:1px solid #403b49; border-radius:18px;
+  overflow:hidden; outline:0; box-shadow:none;
+}
+:is(#live-trace, #photo-booth) .live-camera-placeholder {background:#0c0b10;}
+:is(#live-trace, #photo-booth) :is(.live-bloom-card,.booth-bloom-card) {
+  position:relative; isolation:isolate;
+  padding:var(--preview-inset); display:flex; flex-direction:column;
+  background:var(--preview-card-background);
+}
+:is(#live-trace, #photo-booth) :is(.live-bloom-card,.booth-bloom-card)::before {
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:var(--preview-card-overlay);
+}
+:is(#live-trace, #photo-booth) .live-camera-heading {
+  top:var(--preview-inset); left:var(--preview-inset); right:var(--preview-inset);
+}
+:is(#live-trace, #photo-booth) :is(.bloom-card-label,.booth-card-label) {
+  margin:0; color:#d4cbdc; font:11px/1.5 var(--font-secondary); letter-spacing:.06em;
+}
+:is(#live-trace, #photo-booth) .live-flower-stage {
+  flex:1; min-height:0; width:100%; aspect-ratio:auto; margin:12px 0;
+}
+:is(#live-trace, #photo-booth) .live-expression-scale {width:100%;margin:0 0 6px;}
+:is(#live-trace, #photo-booth) :is(.portrait-footer,.visitor-trace) {
+  flex:none; min-height:60px; margin:16px 0 0; padding:0; transform:none;
+}
+:is(#live-trace, #photo-booth) .portrait-controls {margin:0;}
+body.tablet-booth {padding-inline:max(20px,5vw);}
+body.tablet-booth > .tablet-header {
+  width:100%;max-width:none;left:auto;margin:0;transform:none;
+}
+body.tablet-booth.is-document-fullscreen #photo-booth .live-intro {
+  width:100%;left:auto;margin:0;transform:none;
+}
+body.tablet-booth.is-document-fullscreen #photo-booth .visitor-trace {transform:none;justify-content:center;}
+
+/* Fill the same gutters as the heading. Height uses the remaining viewport
+   space independently of width, keeping both previews and controls in view. */
+@media(min-width:601px) and (min-height:660px) {
+  #live-trace {
+    height:100svh;min-height:100svh;display:flex;flex-direction:column;
+    padding-top:max(110px,calc(5.6svh + 64px));padding-bottom:24px;
+  }
+  body.tablet-booth {height:100svh;min-height:100svh;box-sizing:border-box;display:flex;flex-direction:column;padding-block:20px;}
+  body.tablet-booth > .tablet-header {flex:none;}
+  body.tablet-booth > main {flex:1;min-height:0;}
+  #photo-booth {height:100%;min-height:0;display:flex;flex-direction:column;padding:20px 0 0;}
+  :is(#live-trace, #photo-booth) .live-intro {flex:none;}
+  :is(#live-trace, #photo-booth) .live-experience {
+    flex:1;min-height:0;grid-template-rows:minmax(0,1fr);container-type:size;
+  }
+  :is(#live-trace, #photo-booth) :is(.live-camera-area,.live-flower-area) {
+    width:100%; height:100%;
+  }
+  :is(#live-trace, #photo-booth) :is(.live-camera-placeholder,.live-bloom-card,.booth-bloom-card) {
+    height:calc(100cqh - var(--preview-controls)); aspect-ratio:auto;
+  }
+}
+/* Small phones and very short windows retain document scrolling, never clipping. */
+@media(max-width:600px) {
+  :is(#live-trace, #photo-booth) .live-experience {grid-template-columns:1fr;gap:24px;}
+  :is(#live-trace, #photo-booth) .live-flower-area {grid-column:1;grid-row:2;}
+}
+
+/* The empty mount retains its geometry while the single preview is elsewhere. */
+:is(#live-trace,#photo-booth) .live-preview-mount {width:100%;margin-top:24px;min-width:0;}
+:is(#live-trace,#photo-booth) .live-preview-mount > .live-experience {margin:0;}
+#photo-booth {padding-inline:5vw;background:#050505;}
+#shared-live-preview[data-mode="live"] .booth-only {display:none !important;}
+#shared-live-preview .portrait-controls {display:flex;align-items:center;justify-content:center;gap:12px;padding:0;}
+#shared-live-preview .portrait-timers {position:static;transform:none;display:flex;gap:6px;}
+#shared-live-preview .live-camera-start {position:static;transform:none;}
+#shared-live-preview .live-camera-stop {margin:0;}
+#shared-live-preview .visitor-trace {display:flex;justify-content:flex-end;align-items:center;width:100%;}
+#shared-live-preview .visitor-trace-open {color:#f4f2f7;text-decoration:underline;text-underline-offset:5px;min-height:44px;}
+#shared-live-preview .portrait-capture {flex:none;}
+#shared-live-preview button {touch-action:manipulation;}
+@media(min-width:601px) and (min-height:660px) {
+ #photo-booth {height:100svh;min-height:100svh;display:flex;flex-direction:column;padding-top:max(110px,calc(5.6svh + 64px));padding-bottom:24px;box-sizing:border-box;}
+ :is(#live-trace,#photo-booth) .live-preview-mount {flex:1;min-height:0;display:flex;}
+ :is(#live-trace,#photo-booth) .live-preview-mount > .live-experience {flex:1;}
+}
+@media(max-width:600px), (max-height:659px) {
+ #tablet-photo-booth {height:auto;min-height:100svh;}
+ #photo-booth {padding-top:110px;padding-bottom:32px;}
+ :is(#live-trace,#photo-booth) .live-preview-mount:empty {min-height:calc((90vw - var(--preview-gap)) * .625 + var(--preview-controls));}
+}
+@media(max-width:600px) {
+ :is(#live-trace,#photo-booth) .live-preview-mount:empty {min-height:calc(225vw + 176px);}
+ #shared-live-preview .portrait-controls {gap:8px;}
+ #shared-live-preview .portrait-timers button {min-width:36px;padding:8px;}
+}
+
+/* All visual rules travel with the component, regardless of its host chapter. */
+#shared-live-preview .tablet-flower-canvas {position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;mix-blend-mode:screen;}
+#shared-live-preview .live-flower-stage {position:relative;display:flex;align-items:center;justify-content:center;}
+#shared-live-preview .live-flower-stage img {width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;}
+#shared-live-preview .live-relationship {display:none;}
+#shared-live-preview .live-camera-area {position:relative;}
+#shared-live-preview .live-camera-heading {position:absolute;z-index:2;margin:0;pointer-events:none;}
+#shared-live-preview .live-camera-area:has(.live-camera-video:not([hidden])) .live-face-status {color:#ff5b57;}
+#shared-live-preview .live-camera-area:has(.live-camera-video:not([hidden])) .live-face-status::before {content:"";display:inline-block;width:.65em;height:.65em;margin-right:.6em;border-radius:50%;background:currentColor;vertical-align:.04em;}
+#shared-live-preview :is(.live-camera-start,.live-camera-stop) {margin:0;padding:14px 24px;border:1px solid #746c80;border-radius:100px;background:transparent;color:#f4f2f7;font:400 15px/1.4 var(--font-body);white-space:nowrap;}
+#shared-live-preview .live-camera-stop:disabled {display:none;}
+#shared-live-preview[data-mode="booth"] .live-camera-stop {display:none;}
+#shared-live-preview .portrait-footer {min-height:60px;height:60px;}
+#shared-live-preview[data-mode="booth"] .portrait-controls {flex-wrap:nowrap;}
+#shared-live-preview[data-mode="booth"] :is(.live-camera-start,.live-camera-stop) {padding:12px 16px;font-size:12px;}
+#shared-live-preview [hidden] {display:none !important;}
+
+/* Camera controls belong to the camera card, above the live video. */
+#shared-live-preview .live-camera-placeholder {position:relative;}
+#shared-live-preview .portrait-footer {
+ position:absolute;z-index:3;inset:auto 0 0;min-height:0;height:auto;
+ margin:0;padding:28px var(--preview-inset) var(--preview-inset);
+ background:linear-gradient(transparent,rgba(8,7,12,.78));
+}
+#shared-live-preview .portrait-controls {min-height:56px;}
+#shared-live-preview[data-mode="booth"] .portrait-controls {
+ --shutter-purple:#9747ff;
+ display:grid;grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);gap:12px;
+}
+#shared-live-preview[data-mode="booth"] .portrait-timers {
+ grid-column:1;grid-row:1;justify-self:start;align-items:center;gap:2px;
+ padding:2px;border:1px solid #ffffff24;border-radius:999px;
+ background:rgba(12,11,16,.45);color:#f4f2f7;
+ backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+#shared-live-preview .portrait-timer-icon {flex:none;width:14px;height:14px;margin:0 4px 0 6px;opacity:.75;}
+#shared-live-preview[data-mode="booth"] .portrait-capture {
+ grid-column:2;grid-row:1;justify-self:center;border-color:transparent;
+}
+#shared-live-preview[data-mode="booth"] .portrait-capture::after {
+ content:"";position:absolute;inset:-1px;box-sizing:border-box;
+ padding:1px;border-radius:inherit;pointer-events:none;
+ background:linear-gradient(135deg,#c0a4e8,#8e6da9 42%,#608c96 75%,#b7d8db);
+ -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+ mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+ -webkit-mask-composite:xor;mask-composite:exclude;
+}
+#shared-live-preview[data-mode="booth"] .portrait-capture::before {
+ background:linear-gradient(135deg,#a77bdc33,#8d60be24 48%,#99ccdd0d),
+   var(--preview-card-overlay),var(--preview-card-background);
+ filter:brightness(1.45);
+ box-shadow:inset 0 0 0 1px #d4cbdc38;
+}
+#shared-live-preview[data-mode="booth"] :is(.live-camera-start,.live-camera-stop) {
+ grid-column:3;grid-row:1;justify-self:start;padding:10px;font-size:10px;
+}
+#shared-live-preview .portrait-timers button {
+ min-width:32px;min-height:32px;padding:6px;border:0;border-radius:999px;
+ background:transparent;color:#f4f2f7;
+}
+#shared-live-preview .portrait-timers button[aria-pressed="true"] {background:var(--shutter-purple,var(--accent));color:#fff;}
+@media(min-width:601px) and (max-width:800px) {
+ #shared-live-preview[data-mode="booth"] .portrait-timer-icon {display:none;}
+}
+
+/* Fullscreen hides browser chrome while preserving the shared card design. */
+body.is-document-fullscreen #tablet-photo-booth {
+  height:100dvh !important; max-height:100dvh; overflow:hidden !important;
+}
+body.is-document-fullscreen [data-booth-page] :is(.booth-flow-back,.booth-entry-back) {display:none;}
+body.is-document-fullscreen #tablet-photo-booth .booth-brand {
+  top:max(24px,env(safe-area-inset-top));left:max(5vw,env(safe-area-inset-left));font-size:16px;
+}
+body.is-document-fullscreen #tablet-photo-booth #photo-booth {
+  --preview-controls:52px;
+  height:100dvh;min-height:0;max-height:100dvh;
+  padding:0 max(5vw,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(5vw,env(safe-area-inset-left));
+  display:flex;flex-direction:column;box-sizing:border-box;
+}
+body.is-document-fullscreen #photo-booth .live-intro {
+  flex:none;padding:max(64px,calc(env(safe-area-inset-top) + 40px)) 0 0;box-sizing:border-box;
+}
+body.is-document-fullscreen #photo-booth .live-intro h2 {font-size:clamp(24px,3.2vw,46px);margin-bottom:8px;}
+body.is-document-fullscreen #photo-booth .live-description {font-size:clamp(12px,1.1vw,16px);}
+body.is-document-fullscreen #photo-booth .live-preview-mount {
+  display:flex;flex:1;min-height:0;margin:24px 0 0;
+}
+body.is-document-fullscreen #photo-booth .live-experience {
+  flex:1;min-height:0;margin:0;gap:var(--preview-gap);
+  grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:minmax(0,1fr);
+}
+body.is-document-fullscreen #photo-booth :is(.live-camera-area,.live-flower-area) {
+  position:relative;width:100%;height:100%;min-height:0;
+}
+body.is-document-fullscreen #photo-booth .live-camera-area {grid-column:1;grid-row:1;}
+body.is-document-fullscreen #photo-booth .live-flower-area {grid-column:2;grid-row:1;}
+body.is-document-fullscreen #photo-booth :is(.live-camera-placeholder,.live-bloom-card) {
+  height:calc(100% - var(--preview-controls));min-height:0;aspect-ratio:auto;
+}
+body.is-document-fullscreen #photo-booth .visitor-trace {
+  position:static;width:100%;height:44px;min-height:44px;margin:8px 0 0;
+}
+body.is-document-fullscreen #photo-booth .portrait-footer {
+  padding-bottom:max(var(--preview-inset),env(safe-area-inset-bottom));
+}
+@media(max-width:600px) and (orientation:portrait) {
+ body.is-document-fullscreen #photo-booth .live-experience {
+  grid-template-columns:1fr;grid-template-rows:repeat(2,minmax(0,1fr));
+ }
+ body.is-document-fullscreen #photo-booth .live-flower-area {grid-column:1;grid-row:2;}
+ body.is-document-fullscreen #photo-booth .live-intro {padding-top:60px;}
+ body.is-document-fullscreen #photo-booth .live-intro h2 {font-size:22px;}
+}
+@media(max-height:500px) and (orientation:landscape) {
+ body.is-document-fullscreen #tablet-photo-booth .booth-brand {top:12px;font-size:12px;}
+ body.is-document-fullscreen #photo-booth .live-intro {padding-top:36px;}
+ body.is-document-fullscreen #photo-booth .live-preview-mount {margin-top:16px;}
+ body.is-document-fullscreen #photo-booth .live-intro h2 {font-size:24px;}
+ body.is-document-fullscreen #photo-booth .live-description {font-size:12px;line-height:1.4;}
+ body.is-document-fullscreen #photo-booth .live-description br {display:none;}
+}
+
+/* Extend booth cards through the available height, reserving the visitor link
+   and the bottom page gutter. Width and column spacing remain unchanged. */
+@media(min-width:601px) {
+  #tablet-photo-booth #photo-booth {
+    --preview-controls:52px;
+    display:flex;flex-direction:column;
+    height:100dvh;min-height:0;max-height:100dvh;
+    padding:0 max(5vw,env(safe-area-inset-right)) max(20px,env(safe-area-inset-bottom)) max(5vw,env(safe-area-inset-left));
+    box-sizing:border-box;
+  }
+  #tablet-photo-booth .booth-brand {
+    top:max(24px,env(safe-area-inset-top));
+  }
+  #tablet-photo-booth .booth-flow-back {top:12px;}
+  #tablet-photo-booth #photo-booth .live-intro {
+    flex:none;padding:max(64px,calc(env(safe-area-inset-top) + 40px)) 0 0;
+    width:100%;
+  }
+  #tablet-photo-booth #photo-booth .live-intro h2 {font-size:clamp(24px,3.2vw,46px);margin-bottom:8px;}
+  #tablet-photo-booth #photo-booth .live-description {font-size:clamp(12px,1.1vw,16px);}
+  #tablet-photo-booth #photo-booth .live-preview-mount {
+    flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-start;
+    margin:16px 0 0;container-type:size;
+  }
+  #tablet-photo-booth #photo-booth .live-experience {
+    flex:none;container-type:normal;min-height:0;width:100%;height:100%;margin:0;
+    grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:minmax(0,1fr);
+    gap:var(--preview-gap);align-items:start;
+  }
+  #tablet-photo-booth #photo-booth :is(.live-camera-area,.live-flower-area) {
+    width:100%;height:100%;min-height:0;
+  }
+  #tablet-photo-booth #photo-booth :is(.live-camera-placeholder,.live-bloom-card) {
+    width:100%;height:calc(100% - var(--preview-controls));min-height:0;aspect-ratio:auto;
+  }
+  #tablet-photo-booth #photo-booth .live-camera-placeholder {container-type:inline-size;}
+  #tablet-photo-booth #photo-booth .visitor-trace {
+    position:static;width:100%;height:44px;min-height:44px;margin:8px 0 0;
+  }
+}
+@media(min-width:601px) and (max-height:500px) {
+  #tablet-photo-booth .booth-brand {top:12px;font-size:12px;}
+  #tablet-photo-booth .booth-flow-back {top:4px;}
+  #tablet-photo-booth #photo-booth .live-intro {padding-top:36px;}
+  #tablet-photo-booth #photo-booth .live-intro h2 {font-size:24px;}
+  #tablet-photo-booth #photo-booth .live-description {font-size:12px;line-height:1.4;}
+  #tablet-photo-booth #photo-booth .live-description br {display:none;}
+}
+@container(max-width:260px) {
+  #tablet-photo-booth #shared-live-preview .portrait-controls {
+    grid-template-columns:minmax(0,1fr) 44px;gap:8px;min-height:44px;
+  }
+  #tablet-photo-booth #shared-live-preview .portrait-timer-icon {display:none;}
+  #tablet-photo-booth #shared-live-preview .portrait-capture {width:44px;height:44px;}
+}

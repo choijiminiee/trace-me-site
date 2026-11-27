@@ -45,7 +45,7 @@
   }).catch(()=>{});
  }
  const clamp=n=>Math.max(0,Math.min(1,n));
- function update(){
+ function update(instant=false){
   pending=false;
   const simple=reduced.matches||innerWidth<700;
   section.classList.toggle('recommendation-story',!simple);
@@ -61,7 +61,7 @@
    const enabled=simple||spread>.98;
    card.inert=!enabled;
    card.style.pointerEvents=enabled?'auto':'none';
-   setOpen(card,simple||progress>=[.73,.81,.89][i],simple);
+   setOpen(card,simple||progress>=[.73,.81,.89][i],simple||instant===true);
   });
  }
  cards.forEach(card=>{
@@ -71,6 +71,14 @@
  });
  window.addEventListener('scroll',()=>{if(!pending){pending=true;requestAnimationFrame(update);}},{passive:true});
  window.addEventListener('resize',()=>{matchCardSizes();update();});reduced.addEventListener('change',update);
+ window.addEventListener('trace:idle-reset',()=>{
+  cards.forEach(card=>{
+   transitions.get(card)?.animation.cancel();
+   transitions.delete(card);
+   card.style.height='';card.style.overflow='';card.open=false;
+  });
+  update(true);
+ });
  matchCardSizes();
  document.fonts.ready.then(()=>{matchCardSizes();update();});
  update();

@@ -1,0 +1,10 @@
+/* Photo booth now hosts the website's single live preview. */
+#tablet-photo-booth {position:relative;width:100%;min-height:100svh;margin:0;padding:0;background:#050505;}
+#tablet-photo-booth .booth-brand {position:absolute;top:5.6svh;left:5vw;color:#f4f2f7;font:600 16px/1.5 var(--font-body);letter-spacing:.15em;}
+#tablet-photo-booth .booth-brand .title-period {color:var(--title-period-color,var(--accent));}
+body.photo-booth-in-view .navigation {visibility:hidden;}
+body.photo-booth-in-view #site-fullscreen {display:none;}
+.page-scroll-cue.has-label {width:140px;height:76px;gap:8px;align-content:center;}
+.page-scroll-cue-label {font:400 11px/1.4 var(--font-secondary);letter-spacing:.1em;white-space:nowrap;}
+.page-scroll-cue-label[hidden] {display:none;}
+body.booth-invitation-in-view #site-fullscreen {background:#f4f2f7;color:#111;border-color:#1114;}

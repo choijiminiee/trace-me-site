@@ -11,18 +11,23 @@
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const length=line.getTotalLength();
  const animations=[];
+ const speed=1.5;
+ const lineDuration=2400/speed;
+ const markerDuration=320/speed;
+ const barDuration=1250/speed;
  let finished=false;
  let running=false;
+ function unlock(){group.removeAttribute('data-motion-locked');}
  line.style.strokeDasharray=String(length);
  function show(){
-  finished=true;cancelAnimationFrame(frame);animations.forEach(a=>a.cancel());
+  unlock();running=false;finished=true;cancelAnimationFrame(frame);animations.forEach(a=>a.cancel());
   line.style.strokeDashoffset='0';
   dots.forEach(e=>e.style.opacity='1');
   bars.forEach(e=>e.style.transform='scaleX(1)');
   values.forEach((e,i)=>{e.style.opacity='1';digits[i].textContent=String(targets[i]);});
  }
  function reset(){
- finished=false;running=false;cancelAnimationFrame(frame);
+ unlock();finished=false;running=false;cancelAnimationFrame(frame);
  animations.splice(0).forEach(a=>a.cancel());
  line.style.strokeDashoffset=String(length);
  dots.forEach(e=>e.style.opacity='0');
@@ -36,7 +41,7 @@
   const animate=(e,frames,duration,delay=0)=>{
    const a=e.animate(frames,{duration,delay,easing:'ease-in-out',fill:'forwards'});animations.push(a);return a;
   };
-  animate(line,[{strokeDashoffset:length},{strokeDashoffset:0}],2400);
+  animate(line,[{strokeDashoffset:length},{strokeDashoffset:0}],lineDuration);
    // Reveal markers when the drawn line reaches their position.
   const points=[...line.points];
   let travelled=0;
@@ -48,9 +53,10 @@
    let low=0,high=1;
    for(let n=0;n<20;n++){const mid=(low+high)/2;if(bezier(mid,0,1)<fraction)low=mid;else high=mid;}
    const time=bezier((low+high)/2,.42,.58);
-   animate(e,[{opacity:0},{opacity:1}],320,time*2400);
+   animate(e,[{opacity:0},{opacity:1}],markerDuration,time*lineDuration);
   });
-  const fills=bars.map((e,i)=>animate(e,[{transform:'scaleX(0)'},{transform:'scaleX(1)'}],1250,2650+i*1320));
+  // Both charts start together; all balance bars share the same start time.
+  const fills=bars.map(e=>animate(e,[{transform:'scaleX(0)'},{transform:'scaleX(1)'}],barDuration));
   function count(){
    if(finished)return;
    fills.forEach((animation,i)=>{
@@ -60,7 +66,7 @@
    frame=requestAnimationFrame(count);
   }
   frame=requestAnimationFrame(count);
-  fills.at(-1).finished.then(show).catch(()=>{});
+  Promise.all(animations.map(a=>a.finished)).then(show).catch(()=>{unlock();});
  }
  function visibility(){
   if(reduced.matches){show();return;}
@@ -75,5 +81,6 @@
  window.addEventListener('scroll',schedule,{passive:true});
  window.addEventListener('resize',schedule);
  reduced.addEventListener('change',()=>{reset();visibility();});
+ window.addEventListener('trace:idle-reset',()=>{reset();visibility();});
  visibility();
 })();

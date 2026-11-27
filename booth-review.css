@@ -1,0 +1,102 @@
+/* Tablet visitor contact sheet; intentionally isolated from the website. */
+body.shared-booth #visitor-trace-screen {
+ background:#050505;color:#fff;padding:28px 28px 40px;
+}
+body.shared-booth #visitor-trace-screen::backdrop {background:#050505;}
+body.shared-booth .visitor-wall-header {display:flex;align-items:flex-start;justify-content:space-between;gap:24px;}
+body.shared-booth .visitor-wall-header h2 {
+ color:var(--ivory);font:800 clamp(64px,10vw,130px)/.95 var(--font-body);
+ letter-spacing:-.075em;max-width:100%;margin:0;
+}
+body.shared-booth .visitor-wall-header h2::after {display:none;}
+body.shared-booth .visitor-trace-back {
+ border:0;border-bottom:1px solid #777;border-radius:0;background:transparent;
+ color:#fff;font:11px/1.4 var(--font-secondary);padding:10px 0;white-space:nowrap;
+}
+body.shared-booth #visitor-trace-screen .visitor-trace-status {
+ color:#bcbcbc;font:12px/1.6 var(--font-body);margin:24px 0 4px;
+}
+body.shared-booth #visitor-trace-screen .visitor-gallery-hint {
+ color:#fff;font:11px/1.6 var(--font-secondary);margin:0 0 28px;letter-spacing:.025em;
+}
+body.shared-booth #visitor-trace-screen .visitor-gallery-hint::before {
+ content:"";display:inline-block;width:6px;height:6px;background:#9863cf;margin-right:9px;vertical-align:middle;
+}
+body.shared-booth #visitor-trace-screen .visitor-trace-gallery {
+ display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:26px 16px;margin-top:0;
+}
+body.shared-booth #visitor-trace-screen .visitor-card-front {
+ padding:7px 7px 0;background:#fff;border:0;border-radius:0;box-shadow:none;
+}
+body.shared-booth #visitor-trace-screen .visitor-card-front img {border:0;outline:0;}
+body.shared-booth #visitor-trace-screen .visitor-card-foot {min-height:29px;color:#191919;}
+body.shared-booth #visitor-trace-screen .visitor-card-brand {font-size:7px;letter-spacing:.1em;}
+body.shared-booth #visitor-trace-screen .visitor-frame-delete {color:#ddd;font-size:11px;min-height:32px;}
+body.shared-booth #visitor-trace-screen .visitor-trace-empty {display:none;}
+body.shared-booth #visitor-trace-screen .visitor-flip:focus-visible {outline:2px solid #8753b4;}
+@media(max-width:800px) {body.shared-booth #visitor-trace-screen .visitor-trace-gallery {grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 12px;}}
+@media(max-width:540px) {body.shared-booth #visitor-trace-screen .visitor-trace-gallery {grid-template-columns:repeat(2,minmax(0,1fr));}body.shared-booth .visitor-wall-header h2 {font-size:56px;}}
+.tablet-photo-viewer {width:min(920px,94vw);max-width:none;max-height:94dvh;padding:58px 24px 24px;border:0;background:transparent;color:#f4f2f7;overflow:auto;}
+.tablet-photo-viewer::backdrop {background:rgba(0,0,0,.84);}
+.tablet-viewer-close {position:absolute;right:20px;top:10px;min-width:80px;padding:10px;border:0;background:none;color:#e6dfed;font:12px var(--font-secondary);}
+.tablet-viewer-pair {display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.tablet-viewer-pair figure {margin:0;min-width:0;}
+.tablet-viewer-pair img {display:block;width:100%;height:min(65dvh,540px);object-fit:contain;}
+.tablet-viewer-photo {background:#242127;}
+.tablet-viewer-pair figcaption {margin-top:14px;color:#b6a7c4;font:10px/1.5 var(--font-secondary);letter-spacing:.1em;}
+@media(max-width:540px) {.tablet-viewer-pair {gap:12px;}.tablet-photo-viewer {padding-inline:14px;}.tablet-viewer-pair img {height:48dvh;}}
+/* Portrait provides context; the resulting flower is the focal point. */
+.tablet-viewer-pair {grid-template-columns:minmax(0,.72fr) minmax(0,1fr);align-items:center;gap:36px;}
+.tablet-viewer-pair figure:first-child {width:88%;justify-self:center;}
+.tablet-viewer-pair .tablet-viewer-photo {height:min(44dvh,360px);}
+.tablet-viewer-pair .tablet-viewer-flower {height:min(60dvh,480px); }
+@media(max-width:540px) {
+ .tablet-viewer-pair {gap:14px;}
+ .tablet-viewer-pair figure:first-child {width:100%;}
+ .tablet-viewer-pair .tablet-viewer-photo {height:30dvh;}
+ .tablet-viewer-pair .tablet-viewer-flower {height:42dvh;}
+}
+/* Size the figure to the artwork itself, so its caption shares the left edge. */
+.tablet-viewer-pair figure:last-child {
+ width:min(100%,calc(min(60dvh,480px) * 558 / 766));
+ justify-self:center;
+}
+.tablet-viewer-pair .tablet-viewer-flower {
+ width:100%;height:auto;aspect-ratio:558 / 766;
+ object-fit:contain;background:transparent;border-radius:7%;filter:brightness(1.12);
+}
+.tablet-viewer-pair figure:last-child figcaption {width:100%;text-align:left;margin-top:14px;}
+@media(max-width:540px) {
+ .tablet-viewer-pair figure:last-child {width:min(100%,calc(42dvh * 558 / 766));}
+ .tablet-viewer-pair .tablet-viewer-flower {height:auto;}
+}
+/* Typography is real text, sized relative to the original 558 × 766 card. */
+.tablet-viewer-pair .crisp-card {position:relative;container-type:inline-size;aspect-ratio:558/766;height:auto;width:100%;border:1px solid #aaa6ae;border-radius:7%;background:transparent;filter:none;overflow:hidden;color:#f4f2f7;font-family:Arial,sans-serif;}
+.crisp-card p {margin:0;font-size:3.3cqw;line-height:1.2;font-weight:400;}
+.crisp-heading {position:absolute;top:4.4%;left:5.4%;}
+.crisp-flower-crop {position:absolute;top:10%;left:0;width:100%;height:40%;overflow:hidden;}
+.tablet-viewer-pair .crisp-flower-crop img {position:absolute;top:-25%;left:0;width:100%;height:auto;max-height:none;border:0;border-radius:0;}
+.crisp-score {position:absolute;top:52%;left:5.4%;}
+.crisp-score strong {font-size:14cqw;line-height:1.2;letter-spacing:-.06em;}
+.crisp-score > span {font-size:5cqw;color:#bdbbc0;}
+.crisp-score strong,.crisp-spectrum strong {background:linear-gradient(#a674e5,#e4a0bb);background-clip:text;-webkit-background-clip:text;color:transparent;}
+.crisp-mood {position:absolute;left:59%;top:54%;width:35%;}
+.crisp-mood > div {text-align:center;border-radius:20px;background:#1a1822;color:#c1a1df;font-size:2.5cqw;padding:1cqw 0;}
+.crisp-mood p {font-size:1.65cqw;line-height:1.5;margin:1.6cqw 0;}
+.crisp-mood > i {display:block;height:1cqw;background:#48434f;border-radius:10px;overflow:hidden;}
+.crisp-mood b {display:block;height:100%;background:linear-gradient(90deg,#b481e8,#e9b1c9);}
+.crisp-spectrum {position:absolute;top:70%;left:5.4%;right:5.4%;}
+.crisp-spectrum > div {display:flex;gap:3cqw;align-items:center;margin-top:2cqw;}
+.crisp-spectrum strong {font-size:8cqw;font-weight:400;white-space:nowrap;}
+.crisp-spectrum span {font-size:1.9cqw;line-height:1.5;max-width:42%;}
+.crisp-stages {position:absolute;left:6%;right:6%;bottom:4%;display:flex;justify-content:space-between;}
+.crisp-stages::before {content:"";position:absolute;left:3%;right:3%;top:2.4cqw;height:1px;background:#8962a7;}
+.crisp-stages > span {position:relative;text-align:center;color:#b8a4cc;}
+.crisp-stages i {display:block;height:5cqw;font:4cqw/1 Arial,sans-serif;font-style:normal;}
+.crisp-stages b {display:block;margin-top:2cqw;font-size:2cqw;font-weight:400;color:#dfdce2;}
+.crisp-stages .selected i {color:#c59aef;}
+.crisp-stages .selected b {color:#d8b2ff;font-weight:600;}
+/* Original card geometry and artwork, with only white heading replacements. */
+.tablet-viewer-pair .crisp-card {border:0;border-radius:0;overflow:visible;background:transparent;filter:none;}
+.crisp-card > svg {display:block;width:100%;height:auto;}
+

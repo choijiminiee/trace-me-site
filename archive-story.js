@@ -33,6 +33,7 @@
   ];
   const tabs = [...document.querySelectorAll('[data-archive-feature]')];
   const featureBar = document.querySelector('.features-tabs');
+  const ending = document.getElementById('ending');
   const barSlot = document.createElement('div');
   barSlot.className = 'feature-bar-slot';
   featureBar.before(barSlot);
@@ -57,8 +58,12 @@
     const sections = [...destinations, 'me'].map(id => document.getElementById(id)).filter(Boolean);
     const current = sections.filter(section => section.getBoundingClientRect().top <= innerHeight * .3).pop();
     highlightFeature(current ? Math.min(sections.indexOf(current), 3) : 0);
-    const calendarEntered = document.getElementById('bloom-calendar').getBoundingClientRect().top <= innerHeight * .3;
-    const pinned = (calendarEntered || barSlot.getBoundingClientRect().top <= 0) &&
+    // Use the main menu's reading line so settling near a section boundary
+    // cannot detach the feature tabs for a few fractional pixels.
+    const featuresEntered = sections[0].getBoundingClientRect().top <= innerHeight * .35;
+    // The TRACE ME closing screen and the booth are outside the feature tour.
+    const endingEntered = ending && ending.getBoundingClientRect().top <= innerHeight * .35;
+    const pinned = featuresEntered && !endingEntered &&
       sections[sections.length - 1].getBoundingClientRect().bottom > 100;
     // Keep the fixed menu outside section clipping and transformed ancestors.
     if (pinned && featureBar.parentElement !== document.body) {
@@ -79,6 +84,7 @@
   window.addEventListener('hashchange', syncFeature);
   const featureVisibility = new IntersectionObserver(syncFeature, {threshold:[0, .1, .3, .6, 1]});
   destinations.forEach(id => featureVisibility.observe(document.getElementById(id)));
+  if (ending) featureVisibility.observe(ending);
   syncFeature();
   tabs.forEach((tab, index) => {
     tab.addEventListener('click', () => select(index));

@@ -5,20 +5,35 @@
   let previousY = Math.max(0, window.scrollY);
   let directionDistance = 0;
   const aboutGroup = new Set(['about', 'about-transition', 'approach']);
+  const featureGroup = new Set(['features', 'bloom-calendar', 'monthly-overview', 'monthly-insight', 'me', 'ending']);
   function highlight(id) {
-    const active = (id === 'live-trace-intro' || id === 'photo-booth') ? 'ending' : id === 'emotion-states' ? 'system' : aboutGroup.has(id) ? 'about' : id;
+    const active = (['live-trace-intro','photo-booth-entry','tablet-photo-booth','photo-booth'].includes(id)) ? 'photo-booth-entry' : id === 'emotion-states' ? 'system' : aboutGroup.has(id) ? 'about' : featureGroup.has(id) ? 'features' : id;
     document.querySelectorAll('.navigation [data-scroll-target]').forEach(button => {
       if (button.dataset.scrollTarget === active) button.setAttribute('aria-current', 'page');
       else button.removeAttribute('aria-current');
     });
   }
-  buttons.forEach(button => button.addEventListener('click', () => {
-    const destinations = {system:'emotion-states', ending:'live-trace-intro'};
+  buttons.forEach(button => button.addEventListener('click', event => {
+    const destinations = {system:'emotion-states'};
     const targetId = destinations[button.dataset.scrollTarget] || button.dataset.scrollTarget;
     const target = document.getElementById(targetId);
     if (!target) return;
+    event.preventDefault();
+    if (window.traceBoothFlow?.navigate(targetId, {
+      pointer: event.detail > 0,
+      origin: {x: event.clientX, y: event.clientY}
+    })) return;
+    window.traceBoothFlow?.close();
+    window.traceRestoringPreview=false;
+    window.dispatchEvent(new Event('trace:navigate'));
     target.classList.add('is-visible');
-    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY, behavior: 'instant' });
+    const trigger=window.ScrollTrigger?.getAll().find(item=>item.trigger===target);
+    const top=targetId==='about'&&trigger
+      ? trigger.start+(trigger.end-trigger.start)*1.12/3.66
+      : trigger?.pin ? trigger.start+2 : target.getBoundingClientRect().top+window.scrollY;
+    window.scrollTo({top:Math.max(0,top),behavior:'instant'});
+    history.replaceState(null,'',`#${targetId}`);
+    window.ScrollTrigger?.update();
     previousY = Math.max(0, window.scrollY);
     directionDistance = 0;
     navigation.classList.remove('is-scroll-hidden');
@@ -28,9 +43,20 @@
     if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
   }), { threshold: .12 });
   document.querySelectorAll('.features-scene').forEach(section => observer.observe(section));
-  let pending = false, aboutInView = false, systemInView = false;
+  window.addEventListener('trace:idle-reset', () => {
+    document.querySelectorAll('.features-scene').forEach(section => {
+      section.classList.remove('is-visible');
+      observer.observe(section);
+    });
+  });
+  let pending = false;
   function update() {
     pending = false;
+    if (window.traceBoothFlow?.activeId) {
+      highlight(window.traceBoothFlow.activeId);
+      document.body.classList.remove('live-navigation-active');
+      return;
+    }
     const y = Math.max(0, window.scrollY);
     const delta = y - previousY;
     if (delta !== 0) {
@@ -40,78 +66,26 @@
     }
     previousY = y;
     const readingLine = innerHeight * .35;
-    const inAbout = [...aboutGroup].some(id => {
-      const section = document.getElementById(id);
-      if (!section || !section.getClientRects().length) return false;
+    const current = chapters.filter(section => {
+      if (section.hidden || !section.getClientRects().length) return false;
       const bounds = section.getBoundingClientRect();
-      return bounds.height > 0 && bounds.top <= readingLine && bounds.bottom > readingLine;
-    });
-    const inSystem = ['emotion-states', 'system'].some(id => {
-      const section = document.getElementById(id);
-      if (!section || !section.getClientRects().length) return false;
-      const bounds = section.getBoundingClientRect();
-      return bounds.height > 0 && bounds.top <= readingLine && bounds.bottom > readingLine;
-    });
-    if (inSystem) highlight('system');
-    else if (inAbout) highlight('about');
-    else {
-      if (aboutInView) navigation.querySelector('[data-scroll-target="about"]')?.removeAttribute('aria-current');
-      if (systemInView) navigation.querySelector('[data-scroll-target="system"]')?.removeAttribute('aria-current');
+      return bounds.height > 0 && bounds.top <= readingLine;
+    }).pop();
+    highlight(current?.id || 'hero');
+    document.body.classList.toggle('live-navigation-active',current?.id === 'live-trace');
+    if (current?.id === 'live-trace' || featureGroup.has(current?.id)) {
+      navigation.classList.remove('is-scroll-hidden');
     }
-    aboutInView = inAbout;
-    systemInView = inSystem;
   }
   window.addEventListener('scroll', () => { if (!pending) { pending = true; requestAnimationFrame(update); } }, { passive: true });
   window.addEventListener('load', () => requestAnimationFrame(update), {once:true});
   window.addEventListener('resize', update, {passive:true});
   requestAnimationFrame(update);
-  // Background clicks advance the same scroll-driven story, without stealing controls.
-  const interactive = 'a,button,input,textarea,select,label,video,details,summary,[role="button"],[role="slider"],[role="dialog"],[contenteditable="true"],.daily-slider,.emotion-detail,.original-insight-gallery';
-  let press = null, lastAdvance = 0;
-  document.addEventListener('pointerdown', event => {
-    press = {x:event.clientX, y:event.clientY, scroll:scrollY,
-      selected:!!event.target.closest('#emotion-states.has-selection')};
-  }, {passive:true});
-  document.addEventListener('click', event => {
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (document.body.classList.contains('intro-loading') || document.querySelector('dialog[open], [aria-modal="true"]')) return;
-    if (event.target.closest(interactive) || window.getSelection()?.toString()) return;
-    if (press && (Math.hypot(event.clientX-press.x,event.clientY-press.y)>8 || Math.abs(scrollY-press.scroll)>8 || press.selected)) return;
-    const section = event.target.closest('body > section[id]');
-    if (!section || section.id === 'ending' || section.id === 'live-trace-intro') return;
-    if (performance.now()-lastAdvance < 350) return;
-    lastAdvance = performance.now();
-    if (section.id === 'about' && section.classList.contains('is-discovering')) {
-      section.querySelector('.about-photo:not([inert])')?.click();
-      return;
-    }
-    const top = section.getBoundingClientRect().top + scrollY;
-    const next = chapters[chapters.indexOf(section)+1];
-    if (!next) return;
-    let destination = next.getBoundingClientRect().top + scrollY;
-    const triggers = window.ScrollTrigger?.getAll() || [];
-    if (section.id === 'about') {
-      const timeline = triggers.find(item => item.trigger === section);
-      if (timeline) {
-        const stops = [.72/2.16, 1.12/2.16, 1.65/2.16, 1.95/2.16];
-        destination = stops.map(value => timeline.start + (timeline.end-timeline.start)*value)
-          .find(value => value > scrollY+8) ?? destination;
-      }
-    } else if (section.id === 'system') {
-      const timeline = triggers.find(item => item.trigger === section.querySelector('.process-runway'));
-      if (timeline) destination = Array.from({length:6},(_,i)=>timeline.start+(timeline.end-timeline.start)*i/5)
-        .find(value=>value>scrollY+8) ?? destination;
-    } else if (section.offsetHeight > innerHeight*1.35 && scrollY+innerHeight < top+section.offsetHeight-24) {
-      destination = Math.min(scrollY+innerHeight*.85, top+section.offsetHeight-innerHeight);
-    }
-    next.classList.add('is-visible');
-    window.scrollTo({top:destination, behavior:'instant'});
-  });
   const previewKey = 'trace-preview-position';
   const localPreview = ['localhost','127.0.0.1','::1'].includes(location.hostname);
   const visibleChapters = () => chapters.filter(section => !section.hidden && section.getClientRects().length && section.getBoundingClientRect().height > 0);
   function savePosition() {
-    if (!localPreview || window.traceRestoringPreview) return;
+    if (!localPreview || window.traceRestoringPreview || window.traceBoothFlow?.activeId) return;
     const current = visibleChapters().filter(section => section.getBoundingClientRect().top <= innerHeight*.3).pop();
     const triggers = window.ScrollTrigger?.getAll() || [];
     const pinned = triggers.findIndex(item => item.pin && window.scrollY >= item.start && window.scrollY < item.end);
@@ -119,19 +93,20 @@
     try {
       sessionStorage.setItem(previewKey, JSON.stringify({
         pin, id:current?.id, offset:current ? -current.getBoundingClientRect().top : 0, y:window.scrollY,
-        boothOpen:!document.querySelector('#photo-booth')?.hidden
+        boothOpen:document.querySelector('#photo-booth')?.hidden===false
       }));
     } catch {}
   }
   window.addEventListener('pagehide',savePosition);
   document.addEventListener('visibilitychange',()=>{if(document.hidden)savePosition();});
-  if (localPreview && performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+  if (localPreview && !window.traceBoothFlow?.isFlowTarget(location.hash.slice(1)) && performance.getEntriesByType('navigation')[0]?.type === 'reload') {
     let saved;
     try { saved=JSON.parse(sessionStorage.getItem(previewKey)); } catch {}
     if (saved) {
       window.traceRestoringPreview=true;
       history.scrollRestoration='manual';
-      if(saved.boothOpen) document.querySelector('#photo-booth').hidden=false;
+      const booth=document.querySelector('#photo-booth');
+      if(saved.boothOpen && booth) booth.hidden=false;
       window.addEventListener('load',async()=>{
         await document.fonts.ready;
         requestAnimationFrame(()=>{

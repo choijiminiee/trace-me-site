@@ -11,3 +11,8 @@ body.intro-loading { overflow:hidden; }
 .intro-loader.is-scroll-chapter { position:relative; height:100svh; z-index:1; overflow:hidden; }
 
 .intro-loader-period { color:#b38aff; }
+
+/* The unattended display shows only the opening animation, without navigation. */
+body.is-exhibition-idle .navigation,
+body.is-exhibition-idle .page-scroll-cue,
+body.is-exhibition-idle #site-fullscreen { visibility:hidden; }

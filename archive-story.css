@@ -70,7 +70,7 @@
 .process-camera-heading > p:last-child { color:var(--process-copy); font-size:16px; line-height:1.9; }
 .process-runway { position:relative; }
 .process-camera { position:sticky; top:0; height:100svh; overflow:hidden; background:#000; }
-.process-world { position:relative; top:-6svh; display:flex; width:max-content; height:100%; margin:0; padding:0; list-style:none; will-change:transform; }
+.process-world { position:relative; top:0; display:flex; width:max-content; height:100%; margin:0; padding:0; list-style:none; will-change:transform; }
 .process-world::before { content:''; position:absolute; left:calc(var(--step-width)/2); right:calc(var(--step-width)/2); top:50%; height:1px; background:#292929; }
 .process-world::after { content:''; position:absolute; left:calc(var(--step-width)/2); right:calc(var(--step-width)/2); top:50%; height:2px; background:var(--accent); transform:scaleX(var(--process-progress,0)); transform-origin:left center; pointer-events:none; }
 .process-world > li { position:relative; width:var(--step-width); flex:none; height:100%; opacity:.55; }
@@ -87,4 +87,4 @@
 
 #system.from-about-transition .process-camera-heading h2 { color:var(--ivory); }
 #system.from-about-transition .process-camera-heading > p:last-child { color:var(--process-copy); }
-@media(max-height:650px) { .process-world { top:-3svh; } }
+

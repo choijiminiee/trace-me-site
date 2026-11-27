@@ -12,6 +12,8 @@
 }
 
 * { box-sizing: border-box; }
+/* Keep decorative overflow from shifting the page; preserve vertical sticky sections. */
+html, body { overflow-x:clip; overscroll-behavior-x:none; }
 body { margin: 0; background: var(--background); }
 
 .hero {
@@ -150,13 +152,8 @@ nav {
 #bloom-hint .bloom-hint-direction > span { color:var(--accent); font-size:26px; font-weight:400; }
 #bloom-hint small { display:block; margin-top:8px; font-size:10px; font-weight:400; letter-spacing:.12em; color:#b5b5b2; }
 
-.hero-trace-cursor { position:fixed; z-index:60; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; background:var(--accent); color:#000; font-family:"SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size:11px; font-weight:400; letter-spacing:.02em; pointer-events:none; transform:translate(-50%, -50%); opacity:0; transition:opacity 120ms ease; }
-.hero-trace-cursor.is-visible { opacity:1; }
-@media (hover:hover) and (pointer:fine) {
-  #hero, #hero .hero-flower, #hero #bloom-hint { cursor:none; }
-  #hero .navigation button { cursor:pointer; }
-}
-@media (prefers-reduced-motion:reduce) { .hero-trace-cursor { transition:none; } }
+#hero, #hero .hero-flower, #hero #bloom-hint { cursor:default; }
+#hero .navigation button { cursor:pointer; }
 
 .hero-red-rectangle { position:absolute; left:0; top:0; height:100%; width:30%; background:var(--accent); pointer-events:none; z-index:0; clip-path:polygon(0 0, 100% 0, 100% 17%, var(--red-middle, 100%) 17%, var(--red-middle, 100%) 95%, 100% 95%, 100% 100%, 0 100%); }
 

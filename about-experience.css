@@ -12,9 +12,9 @@
 .about-photo { display:block; position:relative; width:100%; padding:0; border:0; border-radius:0; background:#18151d; color:#ddd; cursor:pointer; opacity:var(--about-photo-opacity,.95); transition:opacity 240ms ease,transform 240ms cubic-bezier(.23,1,.32,1); }
 .about-photo img { display:block; width:100%; height:100%; aspect-ratio:3/4; object-fit:cover; }
 .about-photo span { position:absolute; bottom:12px; left:12px; font-size:9px; letter-spacing:.13em; }
-.about-experience.is-discovering.has-selection .about-photo { opacity:.06; }
-.about-experience.is-discovering .about-photo[aria-pressed=true] { opacity:.55; }
-@media(hover:hover) and (pointer:fine) { .about-experience.is-discovering .about-photo:hover { opacity:.4; transform:scale(1.02); } .about-experience.is-discovering .about-photo[aria-pressed=true]:hover { opacity:.55; } }
+.about-experience.is-discovering.has-selection .about-photo { opacity:.09; }
+.about-experience.is-discovering .about-photo[aria-pressed=true] { opacity:.82; }
+@media(hover:hover) and (pointer:fine) { .about-experience.is-discovering .about-photo:hover { opacity:.4; transform:scale(1.02); } .about-experience.is-discovering .about-photo[aria-pressed=true]:hover { opacity:.82; } }
 .about-photo:focus-visible { opacity:.4; outline:1px solid #ab81f9; outline-offset:5px; }
 .about-foreground { position:absolute; z-index:2; pointer-events:none; }
 .about-intro { visibility:hidden; left:7%; right:7%; top:21%; }
@@ -25,12 +25,14 @@
 .about-korean { margin:36px 0 0; color:#a19da5; font-size:clamp(12px,1.05vw,16px); font-weight:300; line-height:1.9; word-break:keep-all; }
 .about-question { inset:16% 7% auto; visibility:hidden; }
 .about-question h3 { display:flex; justify-content:space-between; align-items:flex-start; gap:4vw; margin:0; font-size:clamp(42px,6.7vw,105px); letter-spacing:-.055em; line-height:1; font-weight:300; }
-.about-reveal { display:block; overflow:hidden; }
-.about-reveal > * { display:block; }
+.about-reveal { display:block; overflow:hidden; margin-inline-end:-.12em; }
+/* Negative tracking lets the final glyph extend beyond its advance width.
+   Include that ink inside both the reveal mask and the animated clip-path. */
+.about-reveal > * { display:block; padding-inline-end:.12em; }
 .about-question .about-reveal:last-child { margin-top:20vh; font-size:.84em; }
 .about-discovery { top:28%; left:7%; width:min(700px,65%); }
 .about-discovery[data-position="1"] { left:auto; right:7%; top:25%; text-align:right; }
-.about-discovery[data-position="2"] { top:38%; left:18%; width:70%; }
+.about-discovery[data-position="2"] { top:28%; left:7%; width:min(700px,65%); }
 .about-discovery .about-eyebrow { margin-bottom:20px; }
 .about-discovery h3 { margin:0; font-size:clamp(34px,4.7vw,76px); line-height:1.02; letter-spacing:-.04em; font-weight:800; }
 .about-discovery .about-korean { margin-top:28px; }
@@ -108,7 +110,7 @@
  color:color-mix(in srgb,var(--approach-ink,#191919) 72%,var(--approach-surface,#f3efe5));
  font-weight:400; word-break:keep-all;
 }
-#approach { --approach-surface:#f3efe5; --approach-ink:#191919; min-height:90svh; }
+#approach { --approach-surface:#f3efe5; --approach-ink:#191919; min-height:100dvh; }
 #approach.from-about-transition,
 #system.from-about-transition {
  background:var(--approach-surface,#f3efe5); color:var(--approach-ink,#191919);
@@ -149,4 +151,25 @@
 
 @media(min-width:701px) {
  #approach .approach-about-description { justify-self:end; width:fit-content; max-width:100%; }
+}
+
+/* Scroll chooses the highlighted photo, never hover or clicks. */
+#about.scroll-stories .about-guide { display:none; }
+#about.scroll-stories .about-column-drift { animation:none; }
+#about.scroll-stories.is-discovering .about-photo[aria-pressed="true"] { opacity:.82; }
+
+/* Only the active story is visible over the subdued archive. */
+#about.scroll-stories.is-discovering .about-intro,
+#about.scroll-stories.is-discovering .about-question { visibility:hidden !important; opacity:0 !important; }
+#about.scroll-stories .about-discovery { z-index:4; }
+
+/* Story photos travel with their copy, directly following the scroll position. */
+#about.scroll-stories .about-photo {transition:none;}
+
+/* Keep a clear gutter between problem headings and the highlighted photo. */
+@media(min-width:701px) {
+ #about.scroll-stories .about-discovery,
+ #about.scroll-stories .about-discovery[data-position="2"] {width:42%;left:5%;right:auto;}
+ #about.scroll-stories .about-discovery[data-position="1"] {width:38%;left:auto;right:5%;}
+ #about.scroll-stories .about-discovery h3 {font-size:clamp(26px,3.8vw,62px);line-height:1.06;}
 }

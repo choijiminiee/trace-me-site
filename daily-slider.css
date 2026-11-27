@@ -8,7 +8,7 @@
   transform:translate(-50%,-50%);
   transform-origin:50% 85%;
   will-change:transform;
-  transition:opacity 220ms ease;
+  transition:filter 220ms ease;
   -webkit-tap-highlight-color:transparent;
 }
 .daily-card:focus-visible { outline:1px solid #b399d5; outline-offset:5px; }
@@ -31,7 +31,7 @@
 @media(prefers-reduced-motion:reduce) { .daily-sparkles i { animation:none; opacity:.18; } }
 
 .daily-swipe-hint { margin:30px 0 0; color:#f3efe5; font-family:var(--font-secondary); font-size:13px; font-weight:500; line-height:1.6; letter-spacing:.025em; text-align:center; pointer-events:none; }
-.daily-swipe-hint small { display:block; margin-top:5px; color:#aaa; font-size:11px; font-weight:400; letter-spacing:0; }
+.daily-swipe-hint small { display:block; margin-top:5px; color:#aaa; font:inherit; letter-spacing:inherit; text-transform:uppercase; }
 
 .daily-swipe-hint span { display:inline-block; margin:0 12px; }
 

@@ -1,0 +1,17 @@
+/* Hidden steps take no space in the website's scroll. Only one is open at a time. */
+body > [data-booth-page][hidden] { display:none !important; }
+html.booth-flow-open, body.booth-flow-open { overflow:hidden !important; overscroll-behavior:none; }
+body > [data-booth-page]:not([hidden]) {
+  position:fixed !important; inset:0; z-index:120; margin:0;
+  width:100%; height:100dvh !important; min-height:0 !important; max-height:100dvh;
+  overflow-y:auto !important; overscroll-behavior:contain; outline:none;
+}
+body.booth-flow-open :is(.navigation,.features-tabs,.page-scroll-cue,#site-fullscreen) { visibility:hidden; }
+.booth-flow-back {
+  position:absolute; z-index:3; border:0; background:transparent;
+  padding:12px; color:#b8acc7; font:12px/1.5 var(--font-secondary); cursor:pointer;
+  touch-action:manipulation;
+}
+#live-trace-intro .booth-flow-back { bottom:20px; left:calc(var(--page-inset) - 12px); color:#625f65; }
+#tablet-photo-booth .booth-flow-back { top:5.6svh; right:calc(5vw - 12px); }
+.booth-flow-back:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }

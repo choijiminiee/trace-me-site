@@ -391,3 +391,93 @@
 .visitor-card-front .visitor-card-foot { padding-right:46px; box-sizing:border-box; }
 .visitor-trace-screen .visitor-trace-gallery .visitor-frame-delete { position:absolute; right:12px; top:auto; bottom:43px; z-index:1; padding:7px 0; color:#666; font:9px/1 monospace; }
 .visitor-trace-screen .visitor-trace-gallery .visitor-frame-delete[hidden] { display:none; }
+
+/* A quiet instant-film print, with management outside the keepsake. */
+.visitor-card-front {
+  padding:14px 14px 0;
+  background:linear-gradient(145deg,#faf7f0,#eee9df);
+  border:1px solid #ffffff38;
+  border-radius:2px;
+  box-shadow:0 8px 24px #0003;
+}
+.visitor-trace-screen .visitor-card-front img {
+  border:0;
+  outline:1px solid #29232e12;
+  outline-offset:-1px;
+}
+.visitor-card-front .visitor-card-foot {
+  min-height:56px;
+  margin-top:0;
+  padding:0;
+  gap:8px;
+}
+.visitor-card-front .visitor-card-brand {
+  display:flex;align-items:center;gap:6px;
+  font-size:9px;letter-spacing:.14em;font-weight:500;
+}
+.visitor-card-front .visitor-card-brand::after {
+  content:"";width:4px;height:4px;border-radius:50%;background:#a878db;
+}
+.visitor-card-front .visitor-card-date { font:400 10px/1.4 var(--font-korean);color:#817985; }
+.visitor-trace-screen .visitor-trace-gallery figcaption {
+  margin:14px 0 0;padding-right:38px;text-align:left;
+  color:#aaa2b3;font:400 11px/1.6 var(--font-korean);
+}
+.visitor-trace-screen .visitor-trace-gallery .visitor-frame-delete {
+  right:0;bottom:0;padding:3px 0;color:#77717d;font-size:8px;
+}
+
+/* Make the flip affordance an actual control, separate from deletion. */
+.visitor-trace-screen .visitor-trace-gallery figcaption { padding-right:48px; }
+.visitor-trace-screen .visitor-trace-gallery .visitor-flip-action {
+  display:inline-flex;align-items:center;gap:7px;padding:8px 12px;
+  border:1px solid #655771;border-radius:6px;background:#b38aff0a;
+  color:#d5c4e9;font:400 11px/1.4 var(--font-korean);cursor:pointer;
+}
+.visitor-trace-screen .visitor-trace-gallery .visitor-flip-action span { font:18px/1 sans-serif; }
+.visitor-trace-screen .visitor-trace-gallery .visitor-flip-action:hover { background:#b38aff20;border-color:#b38aff;color:#eee5fa; }
+.visitor-trace-screen .visitor-trace-gallery .visitor-flip-action:focus-visible { outline:2px solid #b38aff;outline-offset:3px; }
+.visitor-trace-screen .visitor-trace-gallery .visitor-frame-delete { bottom:10px; }
+
+/* Keep controls quiet and attached to the print rather than another UI row. */
+.visitor-trace-screen .visitor-trace-gallery figcaption {
+ position:absolute;right:10px;bottom:10px;margin:0;padding:0;z-index:2;
+}
+.visitor-trace-screen .visitor-trace-gallery .visitor-flip-action {
+ width:32px;height:32px;padding:7px;justify-content:center;
+ border:0;border-radius:0;background:transparent;color:#716977;
+}
+.visitor-trace-screen .visitor-trace-gallery .visitor-flip-action:hover {background:transparent;color:#9a6bc4;}
+.visitor-trace-screen .visitor-trace-gallery figure:has(.visitor-flip[aria-pressed="true"]) figcaption {
+ bottom:8px;right:8px;
+}
+.visitor-trace-screen .visitor-trace-gallery figure:has(.visitor-flip[aria-pressed="true"]) .visitor-flip-action {color:#c5afd9;}
+.visitor-trace-screen .visitor-trace-gallery .visitor-frame-delete {
+ top:-28px;bottom:auto;right:0;padding:5px;color:#827b87;cursor:pointer;
+}
+.visitor-trace-screen .visitor-trace-gallery {row-gap:48px;}
+
+/* One gallery instruction; clear text deletion for each print. */
+.visitor-gallery-hint { margin:18px 0 28px;color:#b7b1bd;font:400 13px/1.6 var(--font-secondary);letter-spacing:.04em; }
+.visitor-trace-screen .visitor-trace-gallery figure { padding-bottom:32px; }
+.visitor-trace-screen .visitor-trace-gallery .visitor-frame-delete {
+ top:auto;bottom:0;right:0;padding:7px 0 3px;
+ color:#b8b2bd;font:400 12px/1.5 var(--font-korean);
+ text-decoration:underline;text-underline-offset:3px;
+}
+.visitor-trace-screen .visitor-trace-gallery .visitor-frame-delete:hover {color:#eee9f3;}
+.visitor-trace-screen .visitor-trace-gallery .visitor-frame-delete:focus-visible {outline:1px solid #b38aff;outline-offset:4px;}
+
+/* Visitor heading hierarchy: title, readable description, then interaction hint. */
+.visitor-trace-screen .visitor-trace-status {
+  margin:20px 0 0;
+  color:#d0cbd4;
+  font:400 clamp(17px,1.6vw,22px)/1.6 var(--font-body);
+  max-width:48em;
+}
+.visitor-trace-screen .visitor-gallery-hint {
+  margin:24px 0 0;
+  color:#aaa2b5;
+  font:400 clamp(12px,1vw,14px)/1.6 var(--font-secondary);
+  letter-spacing:.04em;
+}

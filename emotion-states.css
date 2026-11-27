@@ -39,3 +39,6 @@
 #emotion-states .emotion-intro-lead {
  color:#f4f2f7; font-size:clamp(12px,1.4vw,18px); font-weight:600; line-height:1.7;
 }
+
+#emotion-states .emotion-center .emotion-hint { margin:clamp(12px,2vw,28px) 0 0; text-align:center; }
+#emotion-states .emotion-center .emotion-hint strong { color:#b38aff; font:500 clamp(12px,1.6vw,22px)/1.5 var(--font-secondary); letter-spacing:.08em; }

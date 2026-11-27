@@ -6,26 +6,9 @@
   const canvas = flower.querySelector('canvas');
   const ctx = canvas.getContext('2d', {alpha:false});
   const hint = hero.querySelector('#bloom-hint');
-  const traceCursor = document.createElement('span');
-  traceCursor.className = 'hero-trace-cursor';
-  traceCursor.textContent = 'TRACE';
-  traceCursor.setAttribute('aria-hidden', 'true');
-  document.body.append(traceCursor);
-  function hideTraceCursor() { traceCursor.classList.remove('is-visible'); }
-  hero.addEventListener('pointermove', event => {
-    const show = event.pointerType !== 'touch' &&
-      !document.body.classList.contains('intro-loading') &&
-      !event.target.closest('.navigation');
-    traceCursor.classList.toggle('is-visible', show);
-    traceCursor.style.left = `${event.clientX}px`;
-    traceCursor.style.top = `${event.clientY}px`;
-  }, {capture:true});
-  hero.addEventListener('pointerleave', hideTraceCursor);
-  window.addEventListener('scroll', hideTraceCursor, {passive:true});
-  window.addEventListener('blur', hideTraceCursor);
   // Original hero video and cursor-driven lifecycle.
   const video = document.createElement('video');
-  video.src = 'public/flower-videos/hero-contour-refined.mp4?v=1';
+  video.src = 'public/flower-videos/hero-joined-defringed.mp4?v=1';
   video.preload = 'auto'; video.muted = true; video.playsInline = true;
   video.setAttribute('playsinline','');
   video.setAttribute('aria-hidden','true');
@@ -110,4 +93,9 @@
     hint.textContent='Refresh to load flower';
   });
   video.load();
+  window.addEventListener('trace:idle-reset', () => {
+    cancelAnimationFrame(raf); raf = 0;
+    target = progress = backgroundProgress = 0;
+    draw();
+  });
 })();

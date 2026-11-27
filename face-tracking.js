@@ -1,6 +1,6 @@
 (() => {
   const showLandmarks = false; // 개발용 점 표시만 끄려면 false.
-  document.querySelectorAll('.live-trace').forEach(section => {
+  (window.tracePreviewRoots?.() || document.querySelectorAll('.live-trace')).forEach(section => {
   const video = section.querySelector('.live-camera-video');
   const status = section.querySelector('.live-face-status');
   const expression = new TraceExpression.Tracker();
@@ -15,16 +15,35 @@
   video.parentElement.append(canvas);
   const ctx = canvas.getContext('2d');
   let worker = null, callback = null, busy = false, ready = false, session = 0;
+  let startupTimeout = null;
   let lastTime = -1, lastSent = -Infinity, points = [];
   let stable = false, candidate = false, candidateSince = 0;
+  let pausedAt = null, pausedDuration = 0, resumedAt = -Infinity;
+
+  function syncVisibility() {
+    const now = performance.now();
+    const hidden = document.hidden || section.dataset?.previewVisible === 'false';
+    if (hidden && pausedAt === null) pausedAt = now;
+    else if (!hidden && pausedAt !== null) {
+      // Navigation pauses inference, not the person's neutral baseline. Keep
+      // the same active tracking clock when the shared preview enters the booth.
+      pausedDuration += now - pausedAt;
+      pausedAt = null;
+      resumedAt = now;
+      lastTime = -1; lastSent = -Infinity;
+    }
+  }
 
   function draw() {
+    // Hidden debug landmarks need neither layout reads nor a full-size canvas
+    // allocation on every inference result (especially costly in fullscreen).
+    if (!showLandmarks) return;
     const rect = video.getBoundingClientRect();
     const dpr = Math.min(devicePixelRatio || 1, 2);
     canvas.width = Math.round(rect.width * dpr);
     canvas.height = Math.round(rect.height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    if (!showLandmarks || !video.videoWidth || !video.videoHeight) return;
+    if (!video.videoWidth || !video.videoHeight) return;
     // object-fit: cover + 기본 중앙 정렬과 같은 배율/오프셋.
     const scale = Math.max(rect.width / video.videoWidth, rect.height / video.videoHeight);
     const offsetX = (rect.width - video.videoWidth * scale) / 2;
@@ -41,7 +60,9 @@
     if (candidate !== stable && now - candidateSince >= (candidate ? 180 : 400)) stable = candidate;
     const result = expression.update(points, video.videoHeight / video.videoWidth, now, stable);
     // Keep the existing short presence debounce, without collecting missing samples.
-    if (found || !stable) status.textContent = result.status;
+    if (found || !stable) status.textContent = (section.id === 'live-trace' || section.id === 'shared-live-preview')
+      ? result.status === 'CALIBRATING...' ? 'CAMERA LIVE' : result.status.replace(/^●\s*/, '')
+      : result.status;
     renderExpression(result);
   }
   function schedule() {
@@ -51,7 +72,8 @@
     callback = null;
     if (!worker) return;
     schedule();
-    if (!ready || busy || document.hidden || video.readyState < 2 || video.currentTime === lastTime || now - lastSent < 50) return;
+    syncVisibility();
+    if (!ready || busy || pausedAt !== null || video.readyState < 2 || video.currentTime === lastTime || now - lastSent < 50) return;
     busy = true;
     lastSent = now; lastTime = video.currentTime;
     const token = session, owner = worker;
@@ -66,12 +88,13 @@
   }
   function stop() {
     session++;
+    clearTimeout(startupTimeout); startupTimeout = null;
     if (callback !== null) {
       if (video.cancelVideoFrameCallback) video.cancelVideoFrameCallback(callback);
       else cancelAnimationFrame(callback);
     }
     callback = null;
-    if (worker) { worker.postMessage({ type: 'close' }); worker.terminate(); }
+    if (worker) worker.terminate();
     worker = null; ready = false; busy = false; points = [];
     section.faceLandmarks = null;
     expression.reset();
@@ -87,28 +110,45 @@
     stop();
     stable = candidate = false; candidateSince = performance.now();
     lastTime = -1; lastSent = -Infinity;
-    status.textContent = 'SEARCHING FOR FACE...';
-    const owner = worker = new Worker('face-worker.js');
-    owner.onmessage = ({ data }) => {
-      if (worker !== owner) return;
-      if (data.type === 'ready') ready = true;
-      else if (data.type === 'error') fail(data.message);
-      else if (data.type === 'result') {
-        busy = false;
-        points = data.points;
-        // 다음 단계용 normalized x/y/z. 현재 세션 메모리에만 유지합니다.
-        section.faceLandmarks = { timestamp: data.timestamp, points };
-        section.dispatchEvent(new CustomEvent('face-landmarks', { detail: section.faceLandmarks }));
-        updatePresence(points.length > 0, data.timestamp);
-        draw();
-      }
-    };
-    owner.onerror = event => { if (worker === owner) fail(event.message); };
-    owner.postMessage({ type: 'init' });
-    schedule();
+    pausedAt = null; pausedDuration = 0; resumedAt = -Infinity;
+    syncVisibility();
+    status.textContent = 'LOADING FACE TRACKER...';
+    try {
+      const owner = worker = new Worker('face-worker.js');
+      owner.onmessage = ({ data }) => {
+        if (worker !== owner) return;
+        if (data.type === 'ready') {
+          clearTimeout(startupTimeout); startupTimeout = null;
+          ready = true;
+          status.textContent = 'SEARCHING FOR FACE...';
+        }
+        else if (data.type === 'error') fail(data.message);
+        else if (data.type === 'result') {
+          busy = false;
+          syncVisibility();
+          if (pausedAt !== null || data.timestamp < resumedAt) return;
+          points = data.points;
+          // 다음 단계용 normalized x/y/z. 현재 세션 메모리에만 유지합니다.
+          section.faceLandmarks = { timestamp: data.timestamp, points };
+          section.dispatchEvent(new CustomEvent('face-landmarks', { detail: section.faceLandmarks }));
+          updatePresence(points.length > 0, data.timestamp - pausedDuration);
+          draw();
+        }
+      };
+      owner.onerror = event => { if (worker === owner) fail(event.message); };
+      startupTimeout = setTimeout(() => {
+        if (worker === owner && !ready) fail('Face tracker did not finish loading.');
+      }, 20000);
+      owner.postMessage({ type: 'init' });
+      schedule();
+    } catch (error) {
+      fail(error.message);
+    }
   }
   section.addEventListener('camera-live', start);
   section.addEventListener('camera-stop', stop);
+  section.addEventListener('preview-visibility', syncVisibility);
+  document.addEventListener('visibilitychange', syncVisibility);
   window.addEventListener('pagehide', stop);
   const resize = new ResizeObserver(draw);
   resize.observe(video.parentElement);
@@ -117,6 +157,8 @@
       stop(); resize.disconnect(); removal.disconnect();
       section.removeEventListener('camera-live', start);
       section.removeEventListener('camera-stop', stop);
+      section.removeEventListener('preview-visibility', syncVisibility);
+      document.removeEventListener('visibilitychange', syncVisibility);
       window.removeEventListener('pagehide', stop);
     }
   });

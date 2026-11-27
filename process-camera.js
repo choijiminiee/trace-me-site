@@ -15,6 +15,10 @@
     camera.style.setProperty('--step-width', `${stride}px`);
     runway.style.height = `${innerHeight * 1.55 + stride * (steps.length-1)}px`;
   };
+  window.traceProcessStops = () => {
+    const start = runway.getBoundingClientRect().top + scrollY;
+    return steps.map((_, i) => start + (i === 0 ? 0 : innerHeight * .35 + stride * i));
+  };
   function reveal(progress) {
     world.style.setProperty('--process-progress', progress);
     const position = progress * (steps.length-1);

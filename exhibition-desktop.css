@@ -1,0 +1,114 @@
+/* 27-inch exhibition display: 16:9 at 1920×1080 or 2560×1440 CSS pixels.
+   Scale layout and type, not the document or its animation coordinates. */
+@media (min-width:1600px) and (min-height:900px) and (min-aspect-ratio:8/5) and (max-aspect-ratio:2/1) {
+  :root {
+    --exhibit-unit: min(.052083333vw,.092592593dvh);
+    --type-section: calc(60 * var(--exhibit-unit));
+    --type-subtitle: calc(34 * var(--exhibit-unit));
+    --type-body: calc(20 * var(--exhibit-unit));
+    --type-label: calc(16 * var(--exhibit-unit));
+    --type-hint: calc(17 * var(--exhibit-unit));
+    --feature-menu-top: calc(5.6vh + 48 * var(--exhibit-unit));
+  }
+
+  /* The original five-percent gutters remain shared by every chapter. */
+  body .navigation nav {max-width:none;gap:calc(42 * var(--exhibit-unit));}
+  body .navigation .wordmark {font-size:calc(20 * var(--exhibit-unit));}
+  .intro-loader-wordmark {font-size:calc(132 * var(--exhibit-unit));}
+  .intro-loader-flower {width:calc(450 * var(--exhibit-unit));height:calc(450 * var(--exhibit-unit));}
+  #hero .copy-title {font-size:calc(110 * var(--exhibit-unit));}
+  #hero .copy-description {font-size:calc(24 * var(--exhibit-unit));}
+
+  /* A single remaining-height layout for both camera/flower pairs. */
+  :is(#live-trace,#photo-booth) {
+    --preview-gap: calc(64 * var(--exhibit-unit));
+    --preview-inset: calc(28 * var(--exhibit-unit));
+    --preview-controls: calc(56 * var(--exhibit-unit));
+  }
+  #live-trace {
+    height:100dvh;min-height:100dvh;
+    padding-top:calc(5.6dvh + 64 * var(--exhibit-unit));
+    padding-bottom:calc(24 * var(--exhibit-unit));
+  }
+  body :is(#live-trace,#photo-booth) .live-intro h2 {
+    font-size:var(--type-section);line-height:1.12;
+    margin-bottom:calc(14 * var(--exhibit-unit));
+  }
+  body :is(#live-trace,#photo-booth) .live-description {
+    font-size:var(--type-body);line-height:1.65;
+  }
+  body #tablet-photo-booth #photo-booth {
+    --preview-controls:calc(56 * var(--exhibit-unit));
+    padding-inline:var(--page-inset);padding-bottom:calc(24 * var(--exhibit-unit));
+  }
+  body #tablet-photo-booth .booth-brand {
+    top:calc(30 * var(--exhibit-unit));left:var(--page-inset);
+    font-size:calc(20 * var(--exhibit-unit));
+  }
+  body #tablet-photo-booth #photo-booth .live-intro {
+    padding-top:calc(82 * var(--exhibit-unit));
+  }
+  body #tablet-photo-booth #photo-booth .live-intro h2 {font-size:var(--type-section);}
+  body #tablet-photo-booth #photo-booth .live-description {font-size:var(--type-body);}
+  body #tablet-photo-booth #photo-booth .live-preview-mount,
+  body #live-trace .live-preview-mount {margin-top:calc(24 * var(--exhibit-unit));}
+  #shared-live-preview :is(.live-camera-placeholder,.live-bloom-card) {
+    border-radius:calc(22 * var(--exhibit-unit));
+  }
+  #shared-live-preview :is(.live-label,.live-face-status,.bloom-card-label,.live-scale-labels) {
+    font-size:var(--type-label);
+  }
+  #shared-live-preview :is(.live-camera-start,.live-camera-stop) {
+    font-size:calc(18 * var(--exhibit-unit));padding:calc(16 * var(--exhibit-unit)) calc(28 * var(--exhibit-unit));
+  }
+  #shared-live-preview .portrait-controls {min-height:calc(72 * var(--exhibit-unit));}
+  #shared-live-preview[data-mode="booth"] .portrait-controls {
+    grid-template-columns:minmax(0,1fr) calc(72 * var(--exhibit-unit)) minmax(0,1fr);
+  }
+  #shared-live-preview[data-mode="booth"] .portrait-capture {
+    width:calc(72 * var(--exhibit-unit));height:calc(72 * var(--exhibit-unit));
+    padding:calc(7 * var(--exhibit-unit));
+  }
+  #shared-live-preview .portrait-timers button {
+    font-size:calc(16 * var(--exhibit-unit));
+    min-width:calc(42 * var(--exhibit-unit));min-height:calc(42 * var(--exhibit-unit));
+  }
+  #shared-live-preview .portrait-timer-icon {width:calc(18 * var(--exhibit-unit));height:calc(18 * var(--exhibit-unit));}
+  body #photo-booth .visitor-trace-open {font-size:calc(18 * var(--exhibit-unit));}
+  #tablet-photo-booth .booth-flow-back {top:calc(20 * var(--exhibit-unit));font-size:var(--type-label);}
+
+  /* Keep explanatory cards large enough to read from the exhibition position. */
+  #features .features-content {padding-top:calc(var(--feature-menu-top) + 100 * var(--exhibit-unit));padding-bottom:calc(24 * var(--exhibit-unit));}
+  #features .feature-bar-slot {height:0;min-height:0 !important;}
+  .features-tabs button {font-size:var(--type-label);}
+  .features-tabs button span {font-size:calc(20 * var(--exhibit-unit));}
+  #features .features-index,#bloom-calendar > header > .features-index {font-size:var(--type-label);}
+  #features .feature-copy .daily-korean-description {font-size:var(--type-body);max-width:calc(660 * var(--exhibit-unit));}
+  #features .feature-copy .feature-concept,#bloom-calendar .bloom-calendar-english {font-size:var(--type-body);max-width:calc(560 * var(--exhibit-unit));}
+  #features .daily-track {height:min(44dvh,calc(475 * var(--exhibit-unit)));}
+  #bloom-calendar .bloom-calendar-art {max-width:calc(950 * var(--exhibit-unit));}
+  #monthly-insight > .original-insight-gallery {max-width:none;}
+  #monthly-insight .original-card-art {max-width:calc(490 * var(--exhibit-unit));max-height:calc(462 * var(--exhibit-unit));}
+  #monthly-insight .insight-art-caption {font-size:calc(23 * var(--exhibit-unit));}
+  #system .process-step-copy {width:min(85%,calc(480 * var(--exhibit-unit)));}
+  #system .process-description {font-size:var(--type-body);}
+
+  #photo-booth-entry .booth-entry-confirm {font-size:calc(120 * var(--exhibit-unit));}
+  #photo-booth-entry > p {font-size:var(--type-label);}
+  #photo-booth-entry .booth-entry-back {font-size:var(--type-label);top:calc(28 * var(--exhibit-unit));}
+  body.shared-booth .visitor-consent {
+    --consent-gap:calc(48 * var(--exhibit-unit));
+    --consent-card-height:min(52dvh,calc(580 * var(--exhibit-unit)));
+    width:min(calc(1320 * var(--exhibit-unit)),90vw);
+    padding:calc(44 * var(--exhibit-unit));max-height:92dvh;
+  }
+  body.shared-booth .visitor-consent.is-explaining {width:min(calc(1320 * var(--exhibit-unit)),90vw);}
+  body.shared-booth .visitor-consent h2 {font-size:calc(30 * var(--exhibit-unit));}
+  body.shared-booth .visitor-consent.is-explaining .visitor-consent-card {width:min(100%,calc(min(60dvh,760px) * 558 / 766));}
+  body.shared-booth .visitor-consent :is(.visitor-consent-note,.visitor-bloom-description) {font-size:var(--type-body);}
+  body.shared-booth .visitor-bloom-explanation h3 {font-size:calc(34 * var(--exhibit-unit));}
+  body.shared-booth .visitor-bloom-explanation h4 {font-size:calc(38 * var(--exhibit-unit));}
+  body.shared-booth .visitor-bloom-explanation .visitor-bloom-note {font-size:calc(18 * var(--exhibit-unit));}
+  body.shared-booth .visitor-consent :is(.visitor-bloom-eyebrow,figcaption) {font-size:var(--type-label);}
+  body.shared-booth .visitor-consent button {font-size:var(--type-label);}
+}

@@ -34,19 +34,20 @@
     const p = Math.min(1, video.currentTime / (video.duration || 4));
     const fade = Math.max(0, Math.min(1, (p - .5) / .48));
     video.style.opacity = String(1 - fade * fade * (3 - 2 * fade));
-    const t = Math.max(0, Math.min(1, (p - .12) / .78));
+    // Keep the wordmark visible a little longer; let its reveal finish with the clip.
+    const t = Math.max(0, Math.min(1, (p - .12) / .88));
     const eased = t * t * (3 - 2 * t);
     if (reduced.matches) {
-      wordmark.style.opacity = 1 - eased;
+      wordmark.style.opacity = String(1 - eased);
     } else {
       const radius = eased * traceWidth;
-      const mask = `radial-gradient(ellipse ${Math.max(.1, radius)}px ${Math.max(.1, radius * .65)}px at ${maskCenter}px 50%, transparent 92%, #000 100%)`;
+      const mask = `radial-gradient(circle ${Math.max(.1, radius)}px at ${maskCenter}px 50%, transparent 92%, #000 100%)`;
       wordmark.style.maskImage = mask;
       wordmark.style.webkitMaskImage = mask;
     }
     if (!video.paused && !video.ended) frame = requestAnimationFrame(consumeType);
   }
-  video.addEventListener('playing', () => { cancelAnimationFrame(frame); consumeType(); });
+  video.addEventListener('playing', () => { done=false; clearTimeout(safety); safety=setTimeout(finish,8000); cancelAnimationFrame(frame); consumeType(); });
   const finish = () => {
     if (done) return;
     done = true;
@@ -93,8 +94,8 @@
   video.loop = false;
   video.addEventListener('ended', finish);
   video.addEventListener('error', finish);
-  video.defaultPlaybackRate = 1.25;
-  video.playbackRate = 1.25;
+  video.defaultPlaybackRate = 1.1;
+  video.playbackRate = 1.1;
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) { done = true; clearTimeout(safety); cancelAnimationFrame(frame); video.pause(); }
     else {
@@ -104,22 +105,36 @@
       }
     }
   });
-  let restorePreview = false;
-  try {
-    restorePreview = performance.getEntriesByType('navigation')[0]?.type === 'reload' && !!sessionStorage.getItem('trace-preview-position');
-  } catch {}
-  if (restorePreview) {
-    done = true;
-    video.pause();
-    loader.classList.add('is-scroll-chapter');
-    document.body.classList.remove('intro-loading');
+  // Visibility, including restored scroll positions, owns playback.
+  // Do not leave the opening frame paused after a reload.
+  const visibility = new IntersectionObserver(entries => {
+    const entry = entries[0];
+    if (!entry.isIntersecting || entry.intersectionRatio < .2 || document.hidden) {
+      done = true;
+      clearTimeout(safety);
+      cancelAnimationFrame(frame);
+      video.pause();
+      return;
+    }
+    done = false;
     resetPreview();
-    return;
-  }
-  safety = setTimeout(finish, 8000);
-
-  video.addEventListener('error', finish);
-  video.defaultPlaybackRate = 1.25;
-  video.playbackRate = 1.25;
-  video.play().catch(finish);
+    alignFlower();
+    clearTimeout(safety);
+    video.play().catch(() => {
+      // A blocked autoplay is not a completed animation: retain visible content.
+      done = true;
+      resetPreview();
+    });
+  }, {threshold:.2});
+  visibility.observe(loader);
+  window.addEventListener('trace:idle-reset', () => {
+    clearTimeout(safety);
+    cancelAnimationFrame(frame);
+    done = false;
+    wasVisible = true;
+    resetPreview();
+    alignFlower();
+    safety = setTimeout(finish, 8000);
+    video.play().catch(() => { done = true; clearTimeout(safety); resetPreview(); });
+  });
 })();
