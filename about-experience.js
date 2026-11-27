@@ -94,8 +94,8 @@
   // Entries are distributed in five-photo groups across the four columns.
   const archiveImages = [
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_56_47-1.png",
-    "src": "public/무제 폴더/ChatGPT 이미지 2026년 10월 10일 오후 09_56_47-1.png",
+    "file": "archive-photo-01.png",
+    "src": "public/archive-photos/archive-photo-01.png",
     "alt": "카페 앞의 순간"
   },
   {
@@ -104,7 +104,7 @@
     "alt": "스트라이프 티셔츠를 입고 강변에서 찍은 셀카"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_40-2.png",
+    "file": "archive-photo-02.png",
     "alt": "해안 산책"
   },
   {
@@ -123,7 +123,7 @@
     "alt": "올리브 재킷을 입고 강아지와 산책"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_45-6.png",
+    "file": "archive-photo-03.png",
     "alt": "점심 식사"
   },
   {
@@ -132,7 +132,7 @@
     "alt": "친구 셋이 함께 찍은 인생네컷"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_56_59-8.png",
+    "file": "archive-photo-04.png",
     "alt": "강아지와 노을"
   },
   {
@@ -151,7 +151,7 @@
     "alt": "집에서 책을 읽는 오후"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_46-7.png",
+    "file": "archive-photo-05.png",
     "alt": "함께 나눈 음식"
   },
   {
@@ -160,7 +160,7 @@
     "alt": "Overhead close photo of chamomile tea and open journal at quiet wooden desk, morning solitude"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_41-3.png",
+    "file": "archive-photo-06.png",
     "alt": "나무 사이 산책길"
   },
   {
@@ -179,7 +179,7 @@
     "alt": "Unmade linen bed and paperback book, muted blue morning light, peaceful restful day"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_49-9.png",
+    "file": "archive-photo-07.png",
     "alt": "여행지 시장"
   },
   {
@@ -188,7 +188,7 @@
     "alt": "Single bowl of homemade vegetable soup on small kitchen table, gentle low evening light"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_56_49-3.png",
+    "file": "archive-photo-08.png",
     "alt": "강아지와 산책"
   },
   {
@@ -197,7 +197,7 @@
     "alt": "Empty blue gray coast at dusk, distant horizon and ripples, contemplative atmosphere"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_42-4.png",
+    "file": "archive-photo-09.png",
     "alt": "비 내린 밤거리"
   },
   {
@@ -206,7 +206,7 @@
     "alt": "Warm bedside lamp and book in otherwise dark bedroom, quiet nighttime rest"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_48-8.png",
+    "file": "archive-photo-10.png",
     "alt": "카페의 디저트"
   },
   {
@@ -225,7 +225,7 @@
     "alt": "Top-down sunny breakfast toast strawberries and latte on small round table, joyful morning"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_39-1.png",
+    "file": "archive-photo-11.png",
     "alt": "강 너머 도시"
   },
   {
@@ -234,7 +234,7 @@
     "alt": "Fresh yellow daisies in neighborhood flower shop, spontaneous bright street snapshot"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_56_56-6.png",
+    "file": "archive-photo-12.png",
     "alt": "함께한 저녁"
   },
   {
@@ -243,7 +243,7 @@
     "alt": "Top-down picnic blanket with sandwiches fruit sparkling drinks and friends hands, happy afternoon"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_44-5.png",
+    "file": "archive-photo-13.png",
     "alt": "산과 호수"
   },
   {
@@ -252,7 +252,7 @@
     "alt": "Small curly beige dog sniffing grass, low ground-level candid park photograph"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_56_57-7.png",
+    "file": "archive-photo-14.png",
     "alt": "시장에서의 여행"
   },
   {
@@ -261,7 +261,7 @@
     "alt": "Close handheld photograph of fresh croissant in paper bag near bakery window, cheerful morning"
   },
   {
-    "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_57_50-10.png",
+    "file": "archive-photo-15.png",
     "alt": "저녁 식사"
   },
   {
@@ -320,7 +320,7 @@
     photo.className = 'about-photo';
     photo.setAttribute('aria-pressed','false');
     const image = document.createElement('img');
-    image.src = item.src || 'public/'+['무제 폴더', item.file].map(encodeURIComponent).join('/');
+    image.src = item.src || 'public/'+['archive-photos', item.file].map(encodeURIComponent).join('/');
     image.alt = item.alt;
     image.loading = 'lazy';
     image.decoding = 'async';
