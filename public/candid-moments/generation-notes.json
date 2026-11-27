@@ -1,0 +1,26 @@
+{
+  "reference": "public/bloom-calendar/selfie.png",
+  "direction": "Preserve the original short-bob female protagonist; natural smartphone snapshots with distinct adult friends, ordinary lighting and imperfect framing. AI-generated, not documentary photos.",
+  "scenes": [
+    {
+      "name": "friends-dinner",
+      "path": "/Users/choijimin/.codex/generated_images/01a0cc80-9fa9-7593-8c57-ae4fa0ffad3b/exec-949061b7-a1b9-4e1e-9c1c-e50c630d8382.png",
+      "scene": "Four adult Korean friends at a crowded small restaurant table, one laughing with eyes closed, another mid-sentence looking sideways, foreground plate and cropped shoulder, ordinary mixed warm overhead lighting. Vertical phone snapshot."
+    },
+    {
+      "name": "friends-four-cut",
+      "path": "/Users/choijimin/.codex/generated_images/01a0cc80-9fa9-7593-8c57-ae4fa0ffad3b/exec-fde1218f-c0bc-4e3b-8e88-8737afee66ba.png",
+      "scene": "A physical Korean four-cut photo booth strip lying slightly diagonally on a scratched cafe table next to a half finished iced drink. Four vertically stacked frames of the SAME three adult friends with varied playful expressions, first serious, then laughing, then cheek-to-cheek, then waving. Plausible hands and consistent faces. White simple print margins, no branding or text. Vertical phone snapshot of the print."
+    },
+    {
+      "name": "friends-seaside",
+      "path": "/Users/choijimin/.codex/generated_images/01a0cc80-9fa9-7593-8c57-ae4fa0ffad3b/exec-138c75d7-2304-44a6-a5b0-b3e6a27abf7a.png",
+      "scene": "Three adult friends walking by the sea in casual mismatched jeans and jackets, photographed by a fourth friend slightly behind, one turns back laughing while two look ahead. Wind tousled hair, ordinary late afternoon sun, slightly tilted horizon. Vertical everyday travel snapshot."
+    },
+    {
+      "name": "friends-picnic",
+      "path": "/Users/choijimin/.codex/generated_images/01a0cc80-9fa9-7593-8c57-ae4fa0ffad3b/exec-82dae431-dddf-489c-8e65-d1c5ec4ccb19.png",
+      "scene": "Overhead wide angle phone selfie of four adult Korean friends sitting on a park picnic mat, one partially cropped at edge, one looking at snacks rather than lens, others smiling differently. Uneven dappled sunlight, normal clothing, picnic wrappers, no styled setup. Vertical phone photo."
+    }
+  ]
+}

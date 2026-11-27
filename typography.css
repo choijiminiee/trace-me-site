@@ -1,0 +1,369 @@
+/* Shared type scale and alignment for all content chapters. Display artwork
+   (hero, question interlude, booth invitation and ending) retains its identity. */
+:root {
+ --font-body:"Helvetica Neue",Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+ --type-section:clamp(32px,3.8vw,60px);
+ --type-subtitle:clamp(23px,2.25vw,34px);
+ --type-body:clamp(15px,1.2vw,19px);
+ --type-label:clamp(11px,.85vw,14px);
+ --type-hint:clamp(12px,.95vw,15px);
+ --content-width:1200px;
+ font-family:var(--font-body);
+}
+body { font-family:var(--font-body); }
+button,input,select,textarea { font-family:inherit; }
+body .navigation { align-items:center; gap:32px; }
+body .navigation nav { display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-end; gap:clamp(20px,3.2vw,56px); width:auto; }
+body .navigation nav button { white-space:nowrap; font:400 var(--type-label)/1.4 var(--font-secondary); letter-spacing:.025em; }
+:is(#live-trace, #photo-booth) .live-intro,:is(#live-trace, #photo-booth) .live-expression-guide,:is(#live-trace, #photo-booth) .live-experience,
+#monthly-overview .monthly-inner,#monthly-insight > .insight-section-heading,
+#monthly-insight > .insight-lead,#monthly-insight > .original-insight-gallery,
+#me > .insight-section-heading,#me > .insight-lead,#me > .me-moments {
+ max-width:var(--content-width); margin-inline:auto; width:100%;
+}
+#features-title,#bloom-calendar > header h2,#monthly-title,#insight-title,#me-title,#live-trace-title {
+ font-family:var(--font-body); font-size:var(--type-section); font-weight:500; line-height:1.12; letter-spacing:-.045em;
+}
+.feature-number,.monthly-eyebrow,.monthly-month,.insight-section-heading,
+#bloom-calendar > header > p,.insight-eyebrow,.live-guide-eyebrow {
+ font-family:var(--font-secondary); font-size:var(--type-label); line-height:1.5; letter-spacing:.06em;
+}
+.daily-korean-description,#bloom-calendar .bloom-calendar-caption > p[lang],
+#approach .approach-about-description,.insight-intro-copy,
+:is(#live-trace, #photo-booth) .live-description,:is(#live-trace, #photo-booth) .live-expression-guide > p,
+#monthly-overview .month-story-copy > p,.insight-next-heading > p,
+.insight-practices details > p,.insight-practices summary > p {
+ font-family:var(--font-body); font-size:var(--type-body); font-weight:400;
+ line-height:1.8; letter-spacing:-.015em; word-break:keep-all; overflow-wrap:break-word;
+}
+:is(#live-trace, #photo-booth) .live-expression-guide h3,#bloom-calendar .bloom-calendar-caption > p:first-child,
+.insight-next-heading h3,.insight-practices h4 {
+ font-family:var(--font-body); font-size:var(--type-subtitle); line-height:1.35; letter-spacing:-.035em; font-weight:500;
+}
+#bloom-calendar .bloom-calendar-subtitle,.feature-concept {
+ font-family:var(--font-body); font-size:var(--type-body); line-height:1.65; letter-spacing:-.02em;
+}
+#bloom-calendar .calendar-click-hint,.booth-click-hint,.original-insight-toolbar,
+.daily-swipe-hint,:is(#live-trace, #photo-booth) .portrait-caption,:is(#live-trace, #photo-booth) .portrait-shutter-label {
+ font-size:var(--type-hint); line-height:1.65;
+}
+#bloom-calendar .calendar-click-hint { font-family:var(--font-body); letter-spacing:0; }
+#bloom-calendar .calendar-month-control .calendar-month-picker { font-size:var(--type-subtitle); line-height:1.3; }
+#monthly-insight .original-insight-toolbar { max-width:var(--content-width); margin-inline:auto; width:100%; }
+:is(#live-trace, #photo-booth) .live-label,:is(#live-trace, #photo-booth) .live-face-status,:is(#live-trace, #photo-booth) .live-analysis-label { font-size:var(--type-label); line-height:1.5; }
+#monthly-overview .month-facts dd,:is(#live-trace, #photo-booth) .live-analysis-value { font-variant-numeric:tabular-nums; }
+@media(max-width:700px) {
+ body .navigation { gap:16px; }
+ body .navigation nav { gap:12px; overflow-x:auto; justify-content:flex-start; min-width:0; }
+ body .navigation nav button { font-size:10px; flex-shrink:0; }
+ :is(#live-trace, #photo-booth) .live-expression-guide h3 { font-size:var(--type-subtitle); }
+ #bloom-calendar > header { align-items:flex-start; gap:16px; }
+ #bloom-calendar > header h2 { font-size:28px; }
+ .insight-next-heading h3 { font-size:26px; }
+}
+/* Match the specificity of chapter-local legacy styles. */
+:is(#live-trace, #photo-booth) #live-trace-title,#features #features-title,
+#monthly-overview #monthly-title,#monthly-insight #insight-title,#me #me-title {
+ font:500 var(--type-section)/1.12 var(--font-body); letter-spacing:-.045em;
+}
+#monthly-insight .insight-intro-copy,#me .insight-intro-copy,
+#monthly-overview .insight-next-heading > p:not(.insight-eyebrow),
+#monthly-overview .insight-practices details > p,#monthly-overview .insight-practices summary > p {
+ font:400 var(--type-body)/1.8 var(--font-body); letter-spacing:-.015em; word-break:keep-all;
+}
+
+/* Photo booth: one headline, one instruction, quiet supporting labels. */
+:is(#live-trace, #photo-booth) .live-expression-guide {
+ display:flex; flex-direction:column; align-items:flex-start; gap:12px;
+ border:0; padding:0; margin:0 auto 36px;
+}
+:is(#live-trace, #photo-booth) .live-expression-guide h3 {
+ margin:0; font:500 clamp(28px,3vw,44px)/1.15 var(--font-body); letter-spacing:-.04em;
+}
+:is(#live-trace, #photo-booth) .live-expression-guide > p {
+ margin:0; text-align:left; color:#a7a4ad;
+ font:400 clamp(14px,1.1vw,17px)/1.6 var(--font-body); letter-spacing:-.015em;
+}
+:is(#live-trace, #photo-booth) .live-analysis { display:flex; align-items:baseline; justify-content:center; gap:14px; margin:0 0 20px; }
+:is(#live-trace, #photo-booth) .live-analysis p { margin:0; font-size:11px; color:#99959f; }
+:is(#live-trace, #photo-booth) .live-analysis-value { font-size:clamp(28px,2.8vw,40px); }
+:is(#live-trace, #photo-booth) .portrait-caption { color:#99959f; font-size:13px; }
+:is(#live-trace, #photo-booth) .visitor-trace-open { font-size:14px; letter-spacing:.02em; }
+
+/* One shared text gutter across every chapter, including fullscreen. */
+:root { --page-inset:max(20px,5vw); --content-width:100%; }
+#approach, #system, #emotion-states, #about-transition,
+:is(#live-trace, #photo-booth), #bloom-calendar, #monthly-overview, #monthly-insight, #me,
+#features .features-content {
+ box-sizing:border-box; width:100%; max-width:none;
+ margin-inline:0; padding-inline:var(--page-inset);
+}
+#hero .navigation { left:var(--page-inset); right:var(--page-inset); }
+#hero .hero-copy { left:var(--page-inset); }
+#about .about-intro, #about .about-question, #about .about-final {
+ left:var(--page-inset); right:var(--page-inset);
+}
+:is(#live-trace, #photo-booth) .live-intro, :is(#live-trace, #photo-booth) .live-expression-guide, :is(#live-trace, #photo-booth) .live-experience,
+#monthly-overview .monthly-inner, #monthly-overview .month-recommendations,
+#monthly-insight > .insight-section-heading, #monthly-insight > .insight-lead,
+#monthly-insight > .original-insight-gallery, #monthly-insight .original-insight-toolbar,
+#me > .insight-section-heading, #me > .insight-lead, #me > .me-moments {
+ box-sizing:border-box; width:100%; max-width:none; margin-inline:0;
+}
+#live-trace-intro .booth-invite { margin-inline:var(--page-inset); }
+#ending .ending-content { padding-inline:var(--page-inset); }
+
+#photo-booth[hidden] { display:none !important; }
+#photo-booth #photo-booth-title { font:500 var(--type-section)/1.12 var(--font-body); letter-spacing:-.045em; }
+#live-trace .live-preview-controls { align-items:center; }
+
+#monthly-overview .month-recommendations .insight-practices details > p { box-sizing:border-box; }
+
+#ending .ending-booth-cursor { position:absolute; z-index:5; left:50%; top:75%; transform:translate(-50%,-50%); width:80px; height:80px; padding:0; border:0; border-radius:50%; background:#f4f2f7; color:#17151b; font:12px/1.3 var(--font-secondary); cursor:pointer; }
+#ending .ending-booth-cursor:focus-visible { outline:2px solid #b38aff; outline-offset:5px; }
+@media(hover:hover) and (pointer:fine) { #ending .booth-cursor-active, #ending .booth-cursor-active .ending-booth-cursor { cursor:none; } }
+
+/* Korean copy uses proportional spacing rather than the English mono labels. */
+:root { --korean-tracking:-.025em; --font-korean:"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif; }
+body .about-korean,
+body #approach .approach-about-description,
+body .process-camera-heading > p:last-child,
+body .process-action > span,
+body .process-description,
+body .emotion-hint > span,
+body .emotion-detail-description,
+body :is(#live-trace,#photo-booth) .live-description,
+body :is(#live-trace,#photo-booth) .live-expression-guide > p,
+body :is(#live-trace,#photo-booth) .portrait-caption,
+body .daily-korean-description,
+body #bloom-calendar .bloom-calendar-caption > p[lang],
+body #bloom-calendar .calendar-click-hint,
+body .month-story-copy > p,
+body .month-chart-note,
+body .month-emotion-row > span,
+body .insight-intro-copy,
+body .insight-next-heading > p,
+body .insight-next-heading h3,
+body #monthly-overview .month-recommendations .insight-practices summary h4,
+body #monthly-overview .month-recommendations .insight-practices summary p,
+body #monthly-overview .month-recommendations .insight-practices details > p,
+body .me-moments figcaption h3,
+body .me-moments figcaption p,
+body #ending .ending-foot p {
+ font-family:var(--font-korean);
+ letter-spacing:var(--korean-tracking);
+ word-spacing:normal;
+ word-break:keep-all;
+}
+
+/* The midway experience gives the flower the main stage. */
+#live-trace .live-experience { grid-template-columns:minmax(220px,.65fr) 40px minmax(0,1.35fr); align-items:center; }
+#live-trace .live-camera-area { width:100%; max-width:380px; justify-self:center; }
+#live-trace .live-flower-area { width:100%; max-width:760px; justify-self:center; text-align:center; }
+#live-trace .live-camera-start { font-size:clamp(12px,1.2vw,16px); padding:18px 22px; }
+.flower-card-create { margin-top:24px; padding:16px 32px; background:var(--accent); color:#08070c; border:0; border-radius:999px; font:500 16px var(--font-korean); letter-spacing:var(--korean-tracking); cursor:pointer; }
+.flower-card-create:disabled { opacity:.4; cursor:default; }
+.flower-card-hint { color:#aaa; font:14px/1.6 var(--font-korean); letter-spacing:var(--korean-tracking); }
+.flower-card-result { width:min(420px,90vw); max-height:90svh; overflow:auto; padding:24px; border:1px solid #51445e; border-radius:20px; background:#100c18; color:#f4f1f7; }
+.flower-card-result::backdrop { background:#000c; }
+.flower-card-result h2 { margin:0 0 16px; font-size:28px; }
+.flower-card-result img { display:block; width:100%; max-height:55svh; object-fit:contain; }
+.flower-card-result div { display:flex; gap:16px; flex-wrap:wrap; }
+.flower-card-result a,.flower-card-result button { color:#f4f1f7; background:transparent; border:1px solid #88739c; border-radius:24px; padding:12px 18px; font:14px var(--font-korean); text-decoration:none; cursor:pointer; }
+@media(max-width:700px) { #live-trace .live-experience { grid-template-columns:1fr; } #live-trace .live-camera-area { max-width:220px; } }
+.visitor-consent [data-download] { display:inline-block; padding:12px 18px; border:1px solid #b38aff; color:#f4f1f7; border-radius:24px; text-decoration:none; font-size:14px; }
+.flower-card-create:focus-visible,.flower-card-result a:focus-visible,.flower-card-result button:focus-visible { outline:2px solid #b38aff; outline-offset:4px; }
+
+/* Live card workshop, distinct from the final photo booth. */
+#live-trace .live-experience { display:grid; grid-template-columns:minmax(0,500px) 220px; justify-content:center; gap:clamp(28px,6vw,96px); align-items:center; }
+#live-trace .live-flower-area { grid-column:1; grid-row:1; display:flex; flex-direction:column; align-items:center; }
+#live-trace .live-camera-area { grid-column:2; grid-row:1; max-width:220px; }
+#live-trace .live-relationship { display:none; }
+#live-trace .live-analysis { display:none; }
+#live-trace .live-bloom-card { width:100%; box-sizing:border-box; padding:28px; border:1px solid #4d435c; border-radius:20px; background:#08070c; text-align:left; }
+#live-trace .bloom-card-label { margin:0; font:12px monospace; letter-spacing:.08em; color:#c6bed0; }
+#live-trace .live-flower-stage { aspect-ratio:1; margin:24px 0; }
+#live-trace .live-expression-scale { width:80%; margin:0 auto; }
+#live-trace .bloom-card-caption { margin:28px 0 0; font:400 clamp(20px,2.2vw,30px)/1.2 var(--font-body); color:#f4f1f7; letter-spacing:-.03em; }
+#live-trace .flower-card-create { background:transparent; border:1px solid #bcb4c7; color:#f4f1f7; }
+#live-trace .live-camera-start,#live-trace .live-camera-stop { background:transparent; border:1px solid #918a9b; color:#f4f1f7; }
+#live-trace .live-camera-heading { flex-wrap:wrap; gap:8px; }
+#live-trace .live-camera-heading p { font-size:10px; }
+#live-trace .live-camera-placeholder { aspect-ratio:3 / 4; }
+@media(max-width:700px) {
+ #live-trace .live-experience { grid-template-columns:minmax(0,1fr); gap:24px; }
+ #live-trace .live-camera-area { grid-column:1; grid-row:1; width:150px; }
+ #live-trace .live-flower-area { grid-column:1; grid-row:2; max-width:420px; }
+ #live-trace .live-bloom-card { padding:22px; }
+}
+#live-trace .live-experience { grid-template-columns:minmax(0,380px) 200px; }
+#live-trace .live-camera-area { max-width:200px; }
+#live-trace .live-bloom-card { padding:22px; }
+#live-trace .live-flower-stage { margin:16px 0; }
+#live-trace .bloom-card-caption { margin-top:20px; font-size:24px; }
+@media(max-width:700px) { #live-trace .live-experience { grid-template-columns:minmax(0,1fr); } #live-trace .live-camera-area { max-width:150px; } }
+#my-bloom[hidden] { display:none; }
+#my-bloom { display:grid; grid-template-columns:minmax(240px,380px) minmax(0,480px); justify-content:center; align-items:center; gap:clamp(32px,7vw,100px); padding:100px var(--page-inset); background:#08070c; color:#f4f1f7; min-height:85svh; box-sizing:border-box; }
+#my-bloom figure { margin:0; padding:24px; border:1px solid #4d435c; border-radius:20px; }
+#my-bloom figure p,.bloom-result-eyebrow { font:12px monospace; letter-spacing:.08em; color:#bcb3c9; }
+#my-bloom img { width:100%; display:block; }
+#my-bloom h2 { font-size:clamp(26px,3vw,42px); letter-spacing:-.04em; outline:none; }
+#my-bloom h3 { font-size:24px; color:#b38aff; }
+#my-bloom .bloom-result-description,#my-bloom .bloom-result-note { font:16px/1.8 var(--font-korean); letter-spacing:var(--korean-tracking); word-break:keep-all; }
+#my-bloom .bloom-result-note { color:#aaa4b1; font-size:14px; }
+#my-bloom button,#my-bloom a { display:inline-block; margin:20px 12px 0 0; background:transparent; border:1px solid #918a9b; color:inherit; padding:12px 20px; border-radius:24px; font:14px var(--font-korean); text-decoration:none; cursor:pointer; }
+@media(max-width:700px) { #my-bloom { grid-template-columns:1fr; padding-block:64px; } #my-bloom figure { max-width:330px; justify-self:center; } }
+
+/* A pale editorial pause, with unblended light and dark chapter boundaries. */
+#about-transition { box-sizing:border-box; background:#f4f4f2; isolation:isolate; }
+#about-transition::before { display:none; }
+#about-transition .about-transition-copy { max-width:1180px; margin-inline:auto; }
+#about-transition h2 { font-family:var(--font-body,sans-serif); font-size:clamp(30px,5.8vw,84px); font-weight:400; line-height:1.22; letter-spacing:-.025em; }
+#about-transition .about-question-accent { color:inherit; }
+#about-transition h2 span:last-child .about-question-accent { color:#9747ff; }
+#about-transition p { margin-top:clamp(28px,3vw,40px); font-family:var(--font-body,sans-serif); font-size:clamp(14px,1.3vw,19px); color:#6c6c69; }
+#approach.from-about-transition,#system.from-about-transition { box-shadow:none; clip-path:none; }
+@media(max-width:700px) { #about-transition h2 span { white-space:normal; } }
+
+/* Live and captured cards share an opalescent finish. */
+#live-trace .live-experience[hidden] { display:none; }
+#live-trace .live-bloom-card,#live-trace #my-bloom figure {
+ position:relative; isolation:isolate; overflow:hidden;
+ border:1px solid transparent;
+ background:linear-gradient(145deg,#181624,#0d101a 52%,#1c1423) padding-box,
+ linear-gradient(130deg,#dec6f4,#a3d8e4 28%,#c7bbef 48%,#efc9d5 72%,#a3cbd5) border-box;
+ box-shadow:inset 0 1px 0 #ffffff25,0 18px 55px #0004;
+}
+#live-trace .live-bloom-card::before,#live-trace #my-bloom figure::before {
+ content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+ background:radial-gradient(ellipse at 12% 10%,#bc95ea30,transparent 55%),radial-gradient(ellipse at 95% 75%,#83d4e027,transparent 50%),linear-gradient(125deg,transparent 30%,#f2d4f012 46%,transparent 62%);
+}
+#live-trace .live-bloom-card .live-flower-stage img,#live-trace #my-bloom figure img { mix-blend-mode:screen; }
+#live-trace .bloom-card-label,#live-trace #my-bloom figure > p { color:#ded4eb; }
+#live-trace #my-bloom {
+ min-height:0; padding:0; margin-top:clamp(22px,3vh,32px); background:transparent;
+ grid-template-columns:minmax(0,380px) minmax(0,360px); gap:clamp(28px,5vw,72px);
+}
+#live-trace #my-bloom figure { box-sizing:border-box; width:100%; align-self:start; padding:22px; }
+#live-trace #my-bloom figure img { margin-block:24px; }
+#live-trace #my-bloom h2 { font-size:clamp(24px,2.5vw,34px); line-height:1.35; }
+#live-trace #my-bloom h3 { font-size:24px; margin:24px 0 16px; color:#c4b2e8; }
+#live-trace #my-bloom .bloom-result-description { font-size:16px; }
+#live-trace #my-bloom .bloom-result-note { font-size:13px; }
+#live-trace #my-bloom button,#live-trace #my-bloom a { font-size:13px; margin-top:16px; }
+@media(max-width:700px) { #live-trace #my-bloom { grid-template-columns:1fr; } }
+
+#live-trace #my-bloom.is-forging figure { align-self:start; }
+#live-trace #my-bloom.is-forging figure > p,
+#live-trace #my-bloom.is-forging figure > img,
+#live-trace #my-bloom.is-forging figure + div { opacity:0; }
+#live-trace #my-bloom .bloom-holo-scan {
+ position:absolute; top:0; left:0; right:0; height:85px; pointer-events:none; opacity:0;
+ background:linear-gradient(to bottom,transparent,#c3acff30 35%,#c1f1ffb0 72%,#fff 84%,#efb8ff80 90%,transparent);
+ filter:drop-shadow(0 0 14px #c4b2e8); mix-blend-mode:screen;
+}
+
+/* Soft pearl light replaces the mechanical scan line. */
+#live-trace #my-bloom .bloom-holo-scan {
+ inset:0; height:auto; border-radius:inherit; filter:none;
+ background:radial-gradient(ellipse at 35% 40%,#d1b7ee60,transparent 65%),radial-gradient(ellipse at 65% 55%,#c7e8ed50,transparent 60%),radial-gradient(ellipse at 50% 60%,#f0dbe738,transparent 55%);
+}
+#live-trace #my-bloom .bloom-holo-rim {
+ position:absolute; inset:0; border-radius:inherit; pointer-events:none; opacity:0;
+ box-shadow:inset 0 0 0 1px #e4d6f5,inset 0 0 18px #c4b2e82b;
+}
+
+/* Give the finished card and explanation one centered viewport below navigation. */
+#live-trace:has(#my-bloom:not([hidden])) { padding-block:0; }
+#live-trace:has(#my-bloom:not([hidden])) > .live-intro { display:none; }
+#live-trace #my-bloom {
+ margin-top:0; min-height:100svh; padding-block:110px 60px;
+ align-items:center; align-content:center;
+}
+#live-trace #my-bloom figure,
+#live-trace #my-bloom.is-forging figure { align-self:center; }
+@media (max-width:700px) {
+ #live-trace #my-bloom { padding-block:100px 48px; }
+}
+
+#live-trace #my-bloom figure img { margin-block:8px; }
+#live-trace #my-bloom figcaption { position:relative; padding-top:18px; border-top:1px solid #d8c4ed38; }
+#live-trace #my-bloom .bloom-card-stage { display:block; color:#c4b2e8; font:11px/1.5 monospace; letter-spacing:.08em; }
+#live-trace #my-bloom .bloom-card-message { display:block; margin-top:8px; font:500 17px/1.5 var(--font-korean); letter-spacing:-.025em; color:#f4eff9; }
+#live-trace #my-bloom .bloom-card-footer { display:flex; justify-content:space-between; margin-top:24px; font:10px/1.5 monospace; letter-spacing:.08em; color:#a8a3b4; }
+#live-trace #my-bloom.is-forging figcaption { opacity:0; }
+
+/* Question interlude: hold the previous dark surface until 2/3 is visible. */
+#about-transition { background:#000; color:#f4f2f7; transition:background-color 500ms ease; }
+#about-transition h2 { color:#f4f2f7; transition:color 500ms ease; }
+#about-transition h2 span:last-child .about-question-accent { color:#9747ff; transition:color 500ms ease; }
+#about-transition p { color:#aaa6b0; transition:opacity 700ms cubic-bezier(.23,1,.32,1),transform 700ms cubic-bezier(.23,1,.32,1),color 500ms ease; }
+#about-transition.is-light-surface { background:#f4f4f2; }
+#about-transition.is-light-surface h2 { color:#191919; }
+#about-transition.is-light-surface h2 span:last-child .about-question-accent { color:#9747ff; }
+#about-transition.is-light-surface p { color:#6c6c69; }
+@media(prefers-reduced-motion:reduce) {
+ #about-transition,#about-transition h2,#about-transition h2 span:last-child .about-question-accent,#about-transition p { transition-duration:150ms; }
+}
+
+/* A deliberate question reveal, paired with the light-surface threshold. */
+#about-transition h2 { font-weight:600; }
+#about-transition.is-reveal-ready h2 span {
+ opacity:0; transform:translateY(16px); clip-path:none;
+ transition:opacity 850ms cubic-bezier(.23,1,.32,1),transform 900ms cubic-bezier(.23,1,.32,1),clip-path 900ms cubic-bezier(.23,1,.32,1);
+ transition-delay:0ms;
+}
+#about-transition.is-reveal-ready.is-type-visible h2 span {
+ opacity:1; transform:translateY(0); clip-path:inset(0 0 0 0);
+ transition-delay:100ms;
+}
+#about-transition.is-reveal-ready.is-type-visible h2 span:nth-child(2) { transition-delay:220ms; }
+#about-transition.is-reveal-ready p { opacity:0; transform:translateY(12px); transition-delay:0ms; }
+#about-transition.is-reveal-ready.is-type-visible p { opacity:1; transform:translateY(0); transition-delay:360ms; }
+@media(prefers-reduced-motion:reduce) {
+ #about-transition.is-reveal-ready h2 span,#about-transition.is-reveal-ready p {
+  transform:none; clip-path:none; transition-duration:150ms; transition-delay:0ms;
+ }
+ #about-transition.is-reveal-ready.is-type-visible h2 span,#about-transition.is-reveal-ready.is-type-visible p { transition-delay:0ms; }
+}
+
+/* Only the purple phrase follows in a short character-by-character reveal. */
+#about-transition .question-letter { display:inline-block; white-space:pre; }
+@keyframes question-letter-in {
+ from { opacity:0; transform:translateY(12px); }
+ to { opacity:1; transform:translateY(0); }
+}
+#about-transition.is-reveal-ready .question-letter { opacity:0; }
+#about-transition.is-type-visible .question-letter {
+ animation:question-letter-in 380ms cubic-bezier(.23,1,.32,1) both;
+ animation-delay:calc(650ms + var(--letter-index) * 50ms);
+}
+@media(prefers-reduced-motion:reduce) {
+ #about-transition.is-type-visible .question-letter { animation:none; opacity:1; transform:none; }
+}
+
+/* Live mirror and bloom: equal-height surfaces for comparing expressions. */
+#live-trace .live-experience { --experience-height:clamp(380px,52vw,580px); grid-template-columns:minmax(0,1.08fr) minmax(0,1fr); gap:clamp(24px,4vw,64px); align-items:start; max-width:1100px; }
+#live-trace .live-camera-area { grid-column:1; grid-row:1; width:100%; max-width:none; position:relative; }
+#live-trace .live-flower-area { grid-column:2; grid-row:1; max-width:none; }
+#live-trace .live-camera-heading { position:absolute; top:22px; left:24px; right:24px; z-index:2; margin:0; pointer-events:none; }
+#live-trace .live-camera-heading p { font-size:11px; }
+#live-trace .live-camera-placeholder { height:var(--experience-height); aspect-ratio:auto; width:100%; box-sizing:border-box; outline:none; border:1px solid #403b49; border-radius:18px; background:#0c0b10; }
+#live-trace .live-bloom-card { height:var(--experience-height); border:1px solid #403b49; border-radius:18px; background:linear-gradient(145deg,#16121e,#0b0b10 70%); box-shadow:none; padding:24px; display:flex; flex-direction:column; }
+#live-trace .live-flower-stage { flex:1; min-height:0; width:100%; aspect-ratio:auto; margin:12px 0; display:flex; align-items:center; justify-content:center; }
+#live-trace .live-flower-stage img { width:100%; height:100%; object-fit:contain; }
+#live-trace .bloom-card-caption { display:none; }
+#live-trace .live-expression-scale { margin:0 auto 6px; }
+#live-trace .live-preview-controls { display:flex; justify-content:center; margin:24px 0 0; padding:0; }
+#live-trace .live-camera-start,#live-trace .live-camera-stop,#live-trace .flower-card-create { margin:0; padding:14px 28px; border:1px solid #746c80; border-radius:100px; background:transparent; font:400 15px/1.4 var(--font-body); }
+#live-trace .flower-card-create { margin-top:24px; }
+#live-trace .flower-card-create:disabled { visibility:hidden; }
+#live-trace .live-camera-stop:disabled { display:none; }
+#live-trace .live-camera-start[hidden] { display:none; }
+#live-trace .flower-card-hint { font-size:13px; color:#96909e; margin-top:16px; }
+@media(max-width:700px) {
+ #live-trace .live-experience { grid-template-columns:1fr; --experience-height:420px; gap:32px; }
+ #live-trace .live-camera-area,#live-trace .live-flower-area { grid-column:1; width:100%; max-width:460px; }
+ #live-trace .live-camera-area { grid-row:1; }
+ #live-trace .live-flower-area { grid-row:2; }
+}

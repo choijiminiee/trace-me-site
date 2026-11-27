@@ -1,0 +1,272 @@
+.insight-section { padding:100px var(--page-inset) 90px; background:#050505; color:#f3efe5; }
+.insight-section > * { max-width:1200px; margin-left:auto; margin-right:auto; }
+.insight-section-heading { display:flex; justify-content:space-between; gap:20px; border-top:1px solid #2b282e; padding-top:24px; font:10px/1.5 var(--font-secondary); letter-spacing:.08em; color:#a49baa; }
+.insight-section-heading span:first-child { color:var(--accent); }
+.insight-lead { display:flex; justify-content:space-between; align-items:end; gap:40px; margin-top:64px; margin-bottom:56px; }
+.insight-eyebrow { color:#a69aac; font:10px/1.6 var(--font-secondary); letter-spacing:.08em; }
+.insight-section h2 { margin:16px 0 22px; font:400 clamp(30px,3.6vw,52px)/1.12 "Helvetica Neue",Arial,sans-serif; letter-spacing:-.04em; }
+.insight-intro-copy { font:400 15px/1.85 "Helvetica Neue",Arial,sans-serif; color:#b9b3bc; word-break:keep-all; }
+.insight-side-note { color:#9d93a5; font:10px/2 var(--font-secondary); text-align:right; }
+.insight-side-note span { color:#77717b; }
+.insight-month-story { display:grid; grid-template-columns:1.3fr 1fr; align-items:center; border-top:1px solid #242126; border-bottom:1px solid #242126; min-height:370px; }
+.insight-month-story img { width:100%; max-height:390px; object-fit:contain; }
+.insight-section h3 { font:400 clamp(23px,2.6vw,36px)/1.5 "Helvetica Neue",Arial,sans-serif; letter-spacing:-.035em; }
+.insight-section em { color:#bf9be0; font-style:normal; }
+.insight-story-copy > p:not(.insight-eyebrow) { color:#b8b0bd; font:14px/1.9 "Helvetica Neue",Arial,sans-serif; }
+.insight-story-copy small,.insight-sample-note { color:#77717e; font:10px/1.7 var(--font-secondary); }
+.insight-next-heading,.me-growth-heading { margin-top:64px; margin-bottom:28px; }
+.insight-next-heading h3,.me-growth-heading h3 { margin:12px 0; }
+.insight-next-heading > p:last-child,.me-growth-heading > p:last-child { color:#a9a2ad; font-size:13px; line-height:1.8; }
+.insight-practices,.me-growth-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; align-items:start; }
+.insight-practices details,.me-growth-grid article { border:1px solid #302b36; border-radius:16px; padding:28px; background:linear-gradient(145deg,#16101e55,#050505 65%); }
+.insight-practices summary { list-style:none; cursor:pointer; position:relative; }
+.insight-practices summary::-webkit-details-marker { display:none; }
+.insight-practices summary > span:not(.practice-symbol) { display:block; color:#8d8397; font:9px var(--font-secondary); letter-spacing:.08em; margin:24px 0 12px; }
+.practice-symbol { color:#c3a0ec; font:36px/1 Georgia,serif; }
+.insight-practices h4,.me-growth-grid h4 { font:400 19px/1.5 "Helvetica Neue",Arial,sans-serif; margin:0 0 10px; color:#d9c5ed; }
+.insight-practices p,.me-growth-grid p:not(.insight-eyebrow) { color:#a9a2b0; font:13px/1.8 "Helvetica Neue",Arial,sans-serif; word-break:keep-all; }
+.insight-practices summary b { position:absolute; right:0; top:0; font:300 20px Arial; color:#93859f; }
+.insight-practices details[open] summary b { transform:rotate(45deg); }
+.insight-practices details > p { padding-top:18px; border-top:1px solid #302b36; }
+.insight-practices button { background:none; border:0; padding:8px 0; color:#c9a9e5; font:10px var(--font-secondary); cursor:pointer; }
+.insight-practices summary:focus-visible { outline:1px solid #b394d0; outline-offset:8px; }
+.me-moments { display:grid; grid-template-columns:1.4fr 1fr 1fr; grid-template-rows:220px 220px; gap:16px; }
+.me-moments figure { position:relative; margin:0; overflow:hidden; border-radius:12px; background:#18151b; }
+.me-moments .me-moment-large { grid-row:span 2; }
+.me-moments img { width:100%; height:100%; object-fit:cover; }
+.me-moments figcaption { position:absolute; inset:auto 0 0; padding:48px 24px 22px; background:linear-gradient(transparent,#000c); }
+.me-moments small { color:#d1bddf; font:9px var(--font-secondary); letter-spacing:.1em; }
+.me-moments h3 { font-size:20px; margin:6px 0 0; }
+.me-moments p { font-size:12px; color:#ccc4d1; }
+.me-growth-grid article { min-height:315px; }
+.me-growth-grid h4 { color:#e4dee8; font-size:17px; }
+.me-growth-grid svg { display:block; width:100%; margin:22px 0 14px; }
+.me-growth-grid strong { color:#c4a0e5; font-weight:400; }
+.me-keywords { display:flex; flex-wrap:wrap; gap:6px; margin-top:28px; }
+.me-keywords span { padding:7px 9px; color:#998ca4; border:1px solid #332c3a; border-radius:6px; font-size:11px; }
+.me-keywords.is-new { margin-top:12px; }
+.me-keywords.is-new span { color:#d2b8e8; background:#231a2b; }
+.me-keyword-arrow { margin:10px 0; }
+.me-pattern { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:42px 0 30px; color:#d0b0e8; font-size:18px; }
+.me-pattern small { display:block; margin-top:10px; font:8px var(--font-secondary); color:#8f8199; }
+.me-pattern b { color:#554a60; font-weight:300; }
+.me-growth-grid article > small { font-size:10px; color:#82768b; }
+.insight-sample-note { margin-top:28px; }
+@media(max-width:800px) { .insight-section { padding-top:70px; } .insight-lead { margin-top:40px; } .insight-side-note { display:none; } .insight-month-story { grid-template-columns:1fr; } .insight-story-copy { padding-top:28px; } .insight-month-story img { max-height:260px; } .insight-practices,.me-growth-grid { grid-template-columns:1fr; } .me-growth-grid article { min-height:0; } .me-moments { grid-template-columns:1fr 1fr; grid-template-rows:300px 200px 200px; } .me-moments .me-moment-large { grid-column:span 2; grid-row:auto; } .insight-section-heading { font-size:9px; } }
+
+/* A continuous editorial flow from the month's story into its suggestions. */
+#monthly-insight { padding-bottom:64px; }
+#monthly-insight .insight-lead { margin-top:36px; margin-bottom:18px; align-items:center; }
+#monthly-insight .insight-side-note { display:none; }
+#monthly-insight h2 { font-size:clamp(28px,3vw,42px); margin:12px 0 16px; }
+#monthly-insight .insight-month-story { position:relative; border:0; min-height:280px; grid-template-columns:1.35fr .85fr; gap:24px; margin-top:0; }
+#monthly-insight .insight-story-copy { padding:16px 0; }
+#monthly-insight .insight-month-story img { max-height:310px; }
+#monthly-insight .insight-story-copy h3 { margin:12px 0 20px; font-size:clamp(22px,2.4vw,32px); }
+:is(#monthly-insight, .month-recommendations) .insight-next-heading { margin-top:24px; margin-bottom:22px; }
+:is(#monthly-insight, .month-recommendations) .insight-next-heading h3 { font-size:clamp(21px,2.2vw,29px); }
+:is(#monthly-insight, .month-recommendations) .insight-practices { gap:0; border-top:1px solid #302b36; padding-top:22px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices details { padding:8px 26px 12px; border:0; border-left:1px solid #302b36; border-radius:0; background:none; }
+:is(#monthly-insight, .month-recommendations) .insight-practices details:first-child { padding-left:0; border-left:0; }
+:is(#monthly-insight, .month-recommendations) .practice-symbol { font-size:27px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary > span:not(.practice-symbol) { margin:18px 0 10px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices h4 { font-size:18px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary p { margin-bottom:0; }
+@media(max-width:800px) {
+ #monthly-insight .insight-month-story { grid-template-columns:1fr; gap:0; }
+ #monthly-insight .insight-month-story img { max-height:220px; }
+ :is(#monthly-insight, .month-recommendations) .insight-next-heading { margin-top:18px; }
+ :is(#monthly-insight, .month-recommendations) .insight-practices details,:is(#monthly-insight, .month-recommendations) .insight-practices details:first-child { padding:20px 0; border-left:0; border-bottom:1px solid #302b36; }
+ :is(#monthly-insight, .month-recommendations) .insight-practices { padding-top:0; }
+}
+
+:is(#monthly-insight, .month-recommendations) .practice-symbol { display:block; width:44px; height:44px; }
+:is(#monthly-insight, .month-recommendations) .practice-symbol img { display:block; width:100%; height:100%; object-fit:contain; }
+
+/* Readable bilingual guidance with an even, actionable card rhythm. */
+#monthly-insight .insight-section-heading { font-size:12px; color:#bdbdbd; letter-spacing:.04em; }
+#monthly-insight .insight-eyebrow { font:500 12px/1.6 "Helvetica Neue",Arial,sans-serif; color:#bdbdbd; letter-spacing:.06em; }
+#monthly-insight .insight-lead { margin-top:40px; margin-bottom:24px; }
+#monthly-insight .insight-intro-copy,
+#monthly-insight .insight-story-copy > p:not(.insight-eyebrow),
+:is(#monthly-insight, .month-recommendations) .insight-next-heading > p:last-child { font-size:15px; line-height:1.85; color:#c5c5c5; word-break:keep-all; }
+:is(#monthly-insight, .month-recommendations) .insight-next-heading { margin-top:40px; margin-bottom:28px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices { gap:18px; border:0; padding-top:0; align-items:stretch; }
+:is(#monthly-insight, .month-recommendations) .insight-practices details,
+:is(#monthly-insight, .month-recommendations) .insight-practices details:first-child { padding:24px; border:1px solid #ffffff20; border-radius:14px; background:#ffffff03; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary { min-height:192px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary > span:not(.practice-symbol) { margin:22px 0 12px; font:500 12px/1.5 "Helvetica Neue",Arial,sans-serif; letter-spacing:.045em; color:#c5c5c5; }
+:is(#monthly-insight, .month-recommendations) .insight-practices h4 { font-size:21px; line-height:1.45; color:#f5f5f5; margin:0 0 12px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices p { font-size:14px; line-height:1.85; color:#bdbdbd; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary b { color:#ddd; top:10px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices details > p { margin:18px 0 0; padding-top:20px; border-color:#ffffff20; }
+:is(#monthly-insight, .month-recommendations) .insight-practices details > p strong { display:block; margin-bottom:10px; font-weight:500; color:#f0f0f0; }
+:is(#monthly-insight, .month-recommendations) .insight-practices button { font:500 12px/1.6 "Helvetica Neue",Arial,sans-serif; color:var(--ivory); margin-top:16px; }
+@media(max-width:800px) {
+ :is(#monthly-insight, .month-recommendations) .insight-practices { gap:14px; }
+ :is(#monthly-insight, .month-recommendations) .insight-practices summary { min-height:0; }
+ :is(#monthly-insight, .month-recommendations) .insight-practices details,
+ :is(#monthly-insight, .month-recommendations) .insight-practices details:first-child { padding:22px; }
+}
+
+/* Reference-led insight dashboard, rendered as readable web content. */
+.insight-dashboard { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; margin-top:36px; margin-bottom:48px; }
+.insight-data-card { min-width:0; display:flex; flex-direction:column; padding:26px 22px; border:1px solid #ffffff30; border-radius:16px; background:radial-gradient(ellipse at 0 0,#5834aa35,transparent 40%),#080808; }
+#monthly-insight .insight-data-card .insight-eyebrow { font-size:11px; color:#c4b0d6; letter-spacing:.035em; margin:0 0 12px; }
+#monthly-insight .insight-data-card h3 { font-size:23px; font-weight:600; margin:0 0 10px; line-height:1.4; color:#f5f5f5; }
+.insight-data-card header > p:last-child { color:#bdbdbd; font-size:13px; line-height:1.7; margin:0; word-break:keep-all; }
+.growth-chart { width:100%; height:auto; margin:26px 0 22px; overflow:visible; }
+.growth-chart text { fill:#bdbdbd; font:11px Arial,sans-serif; }
+.growth-chart .chart-value { fill:#d3a9f3; font-size:12px; }
+.chart-grid { stroke:#ffffff24; stroke-dasharray:2 3; }
+.insight-result { margin-top:auto; border:1px solid #ffffff50; border-radius:10px; padding:14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.insight-result strong { color:#c99aea; font-size:27px; font-weight:500; white-space:nowrap; }
+.insight-result strong span { font-size:14px; }
+.insight-result p { color:#c5c5c5; font-size:12px; line-height:1.6; margin:0; }
+.keyword-comparison { display:grid; grid-template-columns:1fr auto 1fr; gap:10px; margin:34px 0; align-items:center; }
+.insight-data-card h4 { color:#ddd; font-size:14px; font-weight:500; margin:0 0 18px; }
+.keyword-comparison h4 span { display:block; color:#999; font-size:12px; margin-top:6px; }
+.insight-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.insight-tags span { padding:7px 9px; border:1px solid #695277; border-radius:8px; color:#bca6cc; font-size:12px; background:#211b29; }
+.insight-tags.current span { color:#ddbbf8; background:#30243d; }
+.keyword-direction { color:#aaa; font-size:24px; }
+.happiness-factors { display:flex; align-items:start; justify-content:space-between; gap:6px; margin:34px 0; text-align:center; }
+.happiness-factors > div { flex:1; }
+.happiness-factors > b { color:#777; font-size:23px; font-weight:300; padding-top:12px; }
+.factor-orb { display:grid; place-items:center; margin:0 auto 16px; width:46px; height:46px; border:1px solid #ddd7; border-radius:50%; color:#dbc0ff; font-size:30px; background:radial-gradient(circle at 30% 20%,#efebff99,#70469988 55%,#15111c); }
+.factor-orb.sun { color:#ffdc86; }
+.factor-orb.place { color:#ffc2df; }
+.happiness-factors h4 { margin:0 0 8px; }
+.happiness-factors p { color:#aaa; font-size:11px; line-height:1.6; margin:0; word-break:keep-all; }
+.happiness-score { border:0; border-top:1px solid #ffffff30; border-radius:0; padding:18px 0 0; }
+.happiness-score img { width:84px; height:84px; object-fit:contain; }
+.happiness-score strong { font-size:44px; line-height:1.3; }
+.happiness-score strong span { font-size:20px; color:#aaa; }
+@media(max-width:1000px) { .insight-dashboard { grid-template-columns:1fr; } .insight-data-card { padding:28px; } .growth-chart { max-height:260px; } .keyword-comparison { gap:24px; } .insight-result { margin-top:16px; } .happiness-factors { justify-content:center; } }
+
+/* A compact hierarchy: one main chart, two supporting findings. */
+#monthly-insight .insight-lead { margin:28px auto 24px; }
+#monthly-insight .insight-lead .insight-eyebrow { display:none; }
+#monthly-insight .insight-intro-copy { margin:12px 0 0; }
+#monthly-insight .insight-dashboard { grid-template-columns:1.15fr 1fr; gap:16px; margin-top:28px; margin-bottom:28px; }
+#monthly-insight .insight-data-card { padding:22px; }
+#monthly-insight .insight-data-card:first-child { grid-row:span 2; }
+#monthly-insight .insight-data-card header > p:last-child { display:none; }
+#monthly-insight .insight-data-card h3 { font-size:21px; margin-bottom:0; }
+#monthly-insight .insight-data-card .insight-eyebrow { margin-bottom:8px; }
+#monthly-insight .growth-chart { flex:1; min-height:240px; max-height:340px; margin:24px 0; }
+#monthly-insight .keyword-comparison { margin:20px 0; gap:12px; }
+#monthly-insight .keyword-comparison h4 { margin-bottom:10px; }
+#monthly-insight .keyword-comparison h4 span { display:inline; margin-left:6px; }
+#monthly-insight .insight-tags { gap:6px; }
+#monthly-insight .insight-tags span { padding:5px 8px; }
+#monthly-insight .keyword-result { border:0; padding:0; margin-top:0; }
+#monthly-insight .happiness-factors { margin:20px 0 16px; }
+#monthly-insight .factor-orb { width:34px; height:34px; font-size:23px; margin-bottom:8px; }
+#monthly-insight .happiness-score { padding-top:12px; }
+#monthly-insight .happiness-score img { width:60px; height:60px; }
+#monthly-insight .happiness-score strong { font-size:36px; }
+:is(#monthly-insight, .month-recommendations) .insight-next-heading { margin-top:28px; margin-bottom:20px; }
+:is(#monthly-insight, .month-recommendations) .insight-next-heading h3 { font-size:24px; margin:8px 0; }
+:is(#monthly-insight, .month-recommendations) .insight-next-heading > p:last-child { margin:0; }
+:is(#monthly-insight, .month-recommendations) .insight-practices details { padding:18px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary { min-height:0; padding-left:58px; }
+:is(#monthly-insight, .month-recommendations) .practice-symbol { position:absolute; top:0; left:0; width:40px; height:40px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary > span:not(.practice-symbol) { font-size:11px; margin:0 20px 7px 0; }
+:is(#monthly-insight, .month-recommendations) .insight-practices h4 { font-size:18px; margin-bottom:6px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary p { font-size:12px; margin:0; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary b { top:0; }
+@media(max-width:650px) {
+ #monthly-insight .insight-dashboard { grid-template-columns:1fr; }
+ #monthly-insight .insight-data-card:first-child { grid-row:auto; }
+ #monthly-insight .growth-chart { min-height:0; max-height:240px; }
+}
+
+/* Three equally sized, compact insights on desktop. */
+#monthly-insight .insight-dashboard { grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; align-items:stretch; }
+#monthly-insight .insight-data-card:first-child { grid-row:auto; }
+#monthly-insight .insight-data-card { padding:20px 16px; }
+#monthly-insight .growth-chart { flex:0 0 auto; min-height:0; height:auto; max-height:220px; margin:22px 0 18px; }
+#monthly-insight .insight-result { margin-top:auto; }
+#monthly-insight .keyword-comparison { gap:8px; }
+#monthly-insight .insight-data-card h3 { font-size:20px; }
+#monthly-insight .insight-data-card .insight-eyebrow { font-size:10px; }
+#monthly-insight .insight-result { padding:12px 10px; }
+#monthly-insight .insight-result p { font-size:11px; }
+#monthly-insight .keyword-result { padding:12px 0; }
+#monthly-insight .happiness-score { padding:12px 0 0; }
+@media(max-width:650px) {
+ #monthly-insight .insight-dashboard { grid-template-columns:1fr; }
+ #monthly-insight .insight-data-card { padding:20px; }
+}
+
+/* Restrained insight cards: clear typography, quiet surfaces, shared baselines. */
+#monthly-insight .insight-dashboard { gap:20px; margin:28px auto 32px; }
+#monthly-insight .insight-data-card { padding:24px 20px 20px; border:1px solid #ffffff1c; border-radius:12px; background:#0a0a0a; }
+#monthly-insight .insight-data-card header { min-height:62px; }
+#monthly-insight .insight-data-card .insight-eyebrow { color:#999; font-size:10px; font-weight:400; letter-spacing:.04em; margin:0 0 10px; }
+#monthly-insight .insight-data-card h3 { color:#eee; font-size:20px; font-weight:500; letter-spacing:-.025em; }
+#monthly-insight .growth-chart { margin:20px 0; }
+#monthly-insight .keyword-comparison { flex:1; margin:20px 0; }
+#monthly-insight .keyword-comparison h4 { font-size:12px; color:#ccc; }
+#monthly-insight .keyword-comparison h4 span { display:block; margin:6px 0 0; color:#888; font-size:11px; }
+#monthly-insight .insight-tags span { border:0; background:#ffffff07; color:#aaa; padding:6px 8px; border-radius:4px; font-size:11px; }
+#monthly-insight .insight-tags.current span { color:#d0b4e3; background:#b889d310; }
+#monthly-insight .keyword-direction { font-size:20px; color:#666; }
+#monthly-insight .happiness-factors { flex:1; align-items:center; margin:20px 0; }
+#monthly-insight .factor-orb { background:none; border:1px solid #ffffff25; color:#ccc; width:34px; height:34px; font-size:22px; }
+#monthly-insight .happiness-factors h4 { font-size:12px; }
+#monthly-insight .happiness-factors p { font-size:10px; color:#aaa; }
+#monthly-insight .insight-result { border:0; border-top:1px solid #ffffff20; border-radius:0; padding:16px 0 0; min-height:66px; box-sizing:border-box; }
+#monthly-insight .insight-result strong { font-size:28px; color:#cba8df; }
+#monthly-insight .insight-result p { color:#aaa; font-size:11px; line-height:1.65; }
+#monthly-insight .happiness-score img { width:48px; height:48px; }
+#monthly-insight .happiness-score strong { font-size:32px; }
+#monthly-insight .happiness-score strong span { font-size:16px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices details,
+:is(#monthly-insight, .month-recommendations) .insight-practices details:first-child { background:none; border:0; border-top:1px solid #ffffff25; border-radius:0; padding:20px 0; }
+:is(#monthly-insight, .month-recommendations) .insight-practices { gap:24px; }
+@media(min-width:651px) and (max-width:950px) {
+ #monthly-insight .insight-dashboard { gap:12px; }
+ #monthly-insight .insight-data-card { padding:18px 12px; }
+ #monthly-insight .insight-data-card h3 { font-size:18px; }
+ #monthly-insight .insight-data-card .insight-eyebrow { font-size:9px; letter-spacing:0; }
+ #monthly-insight .insight-result { align-items:start; flex-direction:column; gap:6px; min-height:94px; }
+ #monthly-insight .happiness-score { flex-direction:row; align-items:center; }
+}
+
+#monthly-insight .factor-orb { border:0; background:none; width:44px; height:44px; }
+#monthly-insight .factor-orb img { display:block; width:100%; height:100%; object-fit:contain; }
+
+/* Consistent reading scale; three columns only when each has enough room. */
+#monthly-insight,#me { padding-top:110px; padding-bottom:72px; }
+#monthly-insight .insight-lead,#me .insight-lead { margin-top:28px; margin-bottom:28px; }
+#monthly-insight h2,#me h2 { font-size:clamp(30px,3.2vw,46px); line-height:1.25; }
+#monthly-insight .insight-intro-copy,#me .insight-intro-copy { font-size:16px; line-height:1.85; color:#c5c5c5; }
+#monthly-insight .insight-data-card { padding:24px 20px; }
+#monthly-insight .insight-data-card .insight-eyebrow { font-size:11px; line-height:1.6; }
+#monthly-insight .insight-data-card h3 { font-size:22px; }
+#monthly-insight .insight-tags span { font-size:13px; }
+#monthly-insight .keyword-comparison h4,#monthly-insight .happiness-factors h4 { font-size:14px; }
+#monthly-insight .happiness-factors p,#monthly-insight .insight-result p { font-size:13px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary p { font-size:14px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary > span:not(.practice-symbol) { font-size:12px; }
+:is(#monthly-insight, .month-recommendations) .insight-practices summary { padding-left:54px; }
+#me .me-moments p { font-size:14px; }
+#me .me-moments small { font-size:11px; }
+#me .insight-side-note { display:none; }
+@media(min-width:751px) and (max-width:1100px) {
+ #monthly-insight .insight-dashboard { grid-template-columns:repeat(3,minmax(0,1fr)); overflow-x:auto; }
+ #monthly-insight .insight-data-card { padding:20px 14px; }
+ #monthly-insight .keyword-comparison { grid-template-columns:1fr; gap:12px; }
+ #monthly-insight .keyword-direction { display:none; }
+ #monthly-insight .happiness-factors { flex-wrap:wrap; }
+ #monthly-insight .happiness-factors > div { flex-basis:100%; display:grid; grid-template-columns:40px 1fr; text-align:left; column-gap:10px; margin-bottom:10px; }
+ #monthly-insight .happiness-factors .factor-orb { grid-row:span 2; margin:0; }
+ #monthly-insight .happiness-factors h4 { margin:0; }
+ #monthly-insight .happiness-factors > b { display:none; }
+}
+@media(max-width:750px) {
+ #monthly-insight .insight-dashboard,:is(#monthly-insight, .month-recommendations) .insight-practices { grid-template-columns:1fr; }
+ #monthly-insight .insight-result { flex-direction:row; min-height:0; align-items:center; }
+}

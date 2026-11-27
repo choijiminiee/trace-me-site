@@ -1,0 +1,146 @@
+.daily-slider { position:relative; min-width:0; }
+.daily-window { position:relative; padding:46px 0 24px; overflow:visible; touch-action:pan-y; user-select:none; }
+.daily-track { position:relative; height:min(56vh,460px); isolation:isolate; }
+.daily-card {
+  position:absolute; left:50%; top:50%;
+  height:100%; width:auto; aspect-ratio:558 / 766;
+  padding:0; border:0; border-radius:6.5%; background:#000; cursor:pointer;
+  transform:translate(-50%,-50%);
+  transform-origin:50% 85%;
+  will-change:transform;
+  transition:opacity 220ms ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.daily-card:focus-visible { outline:1px solid #b399d5; outline-offset:5px; }
+.daily-track .daily-card img { display:block; width:100%; height:100%; max-height:none; object-fit:contain; pointer-events:none; }
+.daily-window.is-dragging, .daily-window.is-dragging .daily-card { cursor:grabbing; }
+@media(max-width:700px) { .daily-track { height:min(48vh,370px); } }
+@media(prefers-reduced-motion:reduce) { .daily-card { transition:none; } }
+
+/* Daily Emotion only: sparse, quiet reference-panel shimmer behind the content. */
+#features { isolation:isolate; }
+#features .features-content { position:relative; z-index:1; }
+.daily-korean-description { max-width:430px; margin:28px 0 0; color:#928b9b; font-size:13px; line-height:1.95; font-weight:300; word-break:keep-all; }
+.daily-sparkles { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
+.daily-sparkles i { position:absolute; left:var(--x); top:var(--y); width:2px; height:2px; border-radius:50%; background:#c5abdf; opacity:.18; animation:daily-twinkle var(--duration) ease-in-out var(--delay) infinite alternate; }
+.daily-sparkles .sparkle-cross { width:1px; height:9px; border-radius:0; }
+.daily-sparkles .sparkle-cross::after { content:""; position:absolute; width:9px; height:1px; left:-4px; top:4px; background:inherit; }
+#features:has([data-archive-feature="0"][aria-selected="false"]) .daily-sparkles,
+#features:has([data-archive-feature="0"][aria-selected="false"]) .daily-korean-description { display:none; }
+@keyframes daily-twinkle { from { opacity:.08; } to { opacity:.34; } }
+@media(prefers-reduced-motion:reduce) { .daily-sparkles i { animation:none; opacity:.18; } }
+
+.daily-swipe-hint { margin:30px 0 0; color:#f3efe5; font-family:var(--font-secondary); font-size:13px; font-weight:500; line-height:1.6; letter-spacing:.025em; text-align:center; pointer-events:none; }
+.daily-swipe-hint small { display:block; margin-top:5px; color:#aaa; font-size:11px; font-weight:400; letter-spacing:0; }
+
+.daily-swipe-hint span { display:inline-block; margin:0 12px; }
+
+/* Original artwork remains intact; live values use resolution-independent type. */
+.daily-card.has-captured-moment { overflow:hidden; container-type:inline-size; }
+.daily-captured-moment { position:absolute; inset:0; pointer-events:none; text-align:left; }
+.captured-flower-window { position:absolute; left:5.5%; top:9%; width:89%; height:42%; background:#000; overflow:hidden; }
+.daily-track .daily-card .captured-flower { position:absolute; width:100%; height:100%; object-fit:contain; max-width:none; image-rendering:auto; }
+.captured-info { position:absolute; inset:51% 1px 1px; border-radius:0 0 6% 6%; background:#000; padding:0 5.5% 5%; display:grid; grid-template-columns:1fr 1.5fr; align-content:space-between; gap:1.5cqw 3cqw; font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; }
+.captured-heading { grid-column:1/-1; color:#eee; font-size:3cqw; line-height:1.2; }
+.captured-score-row { display:flex; align-items:baseline; gap:1cqw; }
+.captured-score { color:#bf83d7; font-size:13cqw; font-weight:700; line-height:1; letter-spacing:-.035em; }
+.captured-score-row small { color:#aaa; font-size:3.5cqw; white-space:nowrap; }
+.captured-mood { display:flex; flex-direction:column; justify-content:space-between; gap:1cqw; }
+.captured-day { text-align:center; border-radius:99px; padding:.7cqw; background:#13131b; color:#b295cb; font-size:3.2cqw; }
+.captured-day-copy { color:#eee; font-size:3cqw; line-height:1.4; word-break:keep-all; }
+.captured-day-bar { height:1cqw; background:#35313e; border-radius:99px; overflow:hidden; }
+.captured-day-bar i { display:block; height:100%; background:#bb82d5; }
+.captured-state-name { color:#bf83d7; font-size:7cqw; line-height:1.2; }
+.captured-spectrum-copy { color:#ddd; font-size:3cqw; line-height:1.45; word-break:keep-all; }
+.captured-spectrum { grid-column:1/-1; padding:2cqw 1cqw 0; }
+.captured-spectrum-line { display:block; position:relative; height:2px; background:#46404f; }
+.captured-spectrum-line i { display:block; height:100%; background:#ab81f9; }
+.captured-spectrum-line b { position:absolute; top:50%; width:3cqw; height:3cqw; border:1px solid #ab81f9; border-radius:50%; background:#c69ce8; transform:translate(-50%,-50%); }
+.captured-spectrum-labels { display:flex; justify-content:space-between; margin-top:3cqw; color:#ccc; font-size:2.8cqw; line-height:1; }
+.captured-spectrum-labels .is-current { color:#c69ce8; font-weight:700; }
+.daily-capture-notice { max-width:420px; margin:0 auto 22px; color:#f3efe5; font:13px/1.7 var(--font-secondary); text-align:center; word-break:keep-all; }
+
+.daily-capture-notice strong { display:block; color:#f3efe5; font-size:clamp(14px,1.2vw,18px); font-weight:500; letter-spacing:.025em; }
+.daily-capture-notice > span { display:block; margin-top:6px; color:#aaa; font-size:12px; }
+
+.daily-capture-photo { position:absolute; right:calc(50% + min(56vh,460px) * .3643 + var(--deck-spread,130px)); top:50%; transform:translateY(-50%); width:100px; margin:0; pointer-events:none; z-index:21; }
+#features .daily-capture-photo img { display:block; width:100%; height:auto; max-height:none; aspect-ratio:4/5; object-fit:cover; border:1px solid #555; box-sizing:border-box; }
+.daily-capture-photo figcaption { margin-top:8px; color:#aaa; font:9px/1.4 var(--font-secondary); letter-spacing:.05em; text-align:center; }
+@media(max-width:700px) { .daily-capture-photo { right:calc(50% + min(48vh,370px) * .3643 + 10px); width:54px; } }
+@media(max-width:480px) { .daily-track:has(.daily-capture-photo) { height:min(48vh,300px); margin-left:54px; } .daily-capture-photo { right:calc(50% + min(48vh,300px) * .3643 + 8px); width:46px; } .daily-capture-photo figcaption { font-size:8px; } }
+
+.daily-capture-photo::after { content:"→"; position:absolute; left:calc(100% + 12px); top:42%; color:var(--accent); font:300 28px/1 Arial,sans-serif; }
+@media(max-width:700px) { .daily-capture-photo::after { left:calc(100% + 2px); font-size:14px; } }
+
+/* Reserve real layout space for the source photo, arrow and expanded deck. */
+#features .daily-window { display:grid; grid-template-columns:minmax(80px,140px) minmax(0,1fr); column-gap:64px; max-width:960px; margin:auto; }
+#features .daily-capture-notice { grid-column:2; grid-row:1; }
+#features .daily-track { grid-column:2; grid-row:2; margin:0; height:min(56vh,460px); }
+#features .daily-capture-photo { grid-column:1; grid-row:2; position:relative; inset:auto; transform:none; width:100%; margin:0; align-self:center; }
+#features .daily-capture-photo::after { left:calc(100% + 16px); font-size:28px; }
+#features .daily-swipe-hint { grid-column:2; grid-row:3; margin-top:58px; }
+#features .daily-window:not(:has(.daily-capture-photo)) { grid-template-columns:minmax(0,1fr); }
+#features .daily-window:not(:has(.daily-capture-photo)) .daily-track,
+#features .daily-window:not(:has(.daily-capture-photo)) .daily-swipe-hint { grid-column:1; }
+@media(max-width:700px) {
+ #features .daily-window { grid-template-columns:64px minmax(0,1fr); column-gap:28px; }
+ #features .daily-track { height:min(42vh,270px,60vw); }
+ #features .daily-capture-photo::after { left:calc(100% + 5px); font-size:18px; }
+ #features .daily-capture-notice { grid-column:1/-1; }
+ #features .daily-swipe-hint { grid-column:1/-1; }
+}
+
+/* Quiet connector between the captured moment and its card. */
+#features .daily-capture-photo::after { content:""; width:24px; height:8px; top:calc(50% - 14px); left:calc(100% + 20px); background:center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4h22m-3-3 3 3-3 3' fill='none' stroke='%23888888' stroke-width='1'/%3E%3C/svg%3E"); }
+@media(max-width:700px) { #features .daily-capture-photo::after { width:16px; left:calc(100% + 6px); } }
+
+/* Readable live typography for all six cards. */
+.daily-card { container-type:inline-size; }
+.daily-readable-details { pointer-events:none; }
+.daily-card.has-captured-moment > .daily-readable-details { visibility:hidden; }
+.daily-card .captured-day { color:#e0c2f4; font-weight:500; font-size:3.5cqw; }
+.daily-card .captured-day-copy,
+.daily-card .captured-spectrum-copy { color:#f3efe5; font-size:3.3cqw; line-height:1.45; font-weight:400; }
+.daily-card .captured-spectrum-labels { color:#ddd; font-size:3cqw; }
+
+/* Original 558 × 766 card coordinates, shared by sample and captured cards. */
+.daily-card .captured-info { inset:51% 1px 1px; display:block; padding:0; }
+.daily-card .captured-heading { position:absolute; left:5.4%; top:2%; font:400 3.5cqw/1.2 "Helvetica Neue",Arial,sans-serif; color:#f5f5f5; }
+.daily-card .captured-heading:nth-of-type(4) { top:37.2%; }
+.daily-card .captured-score-row { position:absolute; left:5.4%; top:9.8%; display:flex; align-items:baseline; gap:1.2cqw; }
+.daily-card .captured-score { font:700 14.3cqw/1 "Helvetica Neue",Arial,sans-serif; padding:.12em .04em; margin:-.12em -.04em; letter-spacing:-.035em; background:linear-gradient(180deg,#a36bf2 5%,#e7a0bf 95%); background-clip:text; -webkit-background-clip:text; color:transparent; }
+.daily-card .captured-score-row small { color:#aaa; font:500 5.2cqw/1 "Helvetica Neue",Arial,sans-serif; }
+.daily-card .captured-mood { position:absolute; left:59%; top:7%; width:35%; display:flex; flex-direction:column; gap:1.4cqw; }
+.daily-card .captured-day { font:400 2.8cqw/1.3 "Helvetica Neue",Arial,sans-serif; padding:.6cqw 0; color:#c9afe1; background:#14141c; }
+.daily-card .captured-day-copy { font:400 2cqw/1.35 "Helvetica Neue",Arial,sans-serif; color:#eee; text-align:center; }
+.daily-card .captured-day-bar { height:1.2cqw; background:#353342; border-radius:99px; }
+.daily-card .captured-day-bar i { background:linear-gradient(90deg,#a36bf2,#efb7c4); border-radius:inherit; }
+.daily-card .captured-state-name { position:absolute; left:5.4%; top:47%; font:300 9cqw/1.2 "Helvetica Neue",Arial,sans-serif; background:linear-gradient(180deg,#a36bf2,#e7a0bf); background-clip:text; -webkit-background-clip:text; color:transparent; }
+.daily-card .captured-spectrum-copy { position:absolute; left:33%; top:52%; width:35%; font:400 2.1cqw/1.35 "Helvetica Neue",Arial,sans-serif; color:#eee; }
+.daily-card .captured-spectrum { position:absolute; left:9%; right:10%; top:77%; padding:0; }
+.daily-card .captured-spectrum-line { height:2px; background:#47424f; }
+.daily-card .captured-spectrum-line i { background:linear-gradient(90deg,#9e6be9,#e7a0bf); }
+.daily-card .captured-spectrum-line b { width:5.5cqw; height:5.5cqw; background:#171020; color:#d5aff8; border:1px solid #ab81f9; }
+.daily-card .captured-spectrum-line b::after { content:""; position:absolute; inset:0; background:url("public/flower-icon.png") center / contain no-repeat; }
+.daily-card .captured-spectrum-labels { margin-top:5.8cqw; font:400 2.5cqw/1 "Helvetica Neue",Arial,sans-serif; color:#eee; }
+.daily-card .captured-spectrum-labels .is-current { color:#c99be8; }
+.daily-card .captured-info::after { content:"자세히 보기"; position:absolute; right:6%; top:50%; width:19%; padding:.8cqw 0; border:1px solid #aaa; border-radius:99px; background:#141419; color:#aaa; text-align:center; font:400 2cqw/1.3 "Helvetica Neue",Arial,sans-serif; }
+
+/* Original spectrum stops and consistently left-aligned descriptive copy. */
+.daily-card .captured-spectrum-copy,
+.daily-card .captured-day-copy { text-align:left; }
+.daily-card .spectrum-stops { position:absolute; inset:0; pointer-events:none; }
+.daily-card .spectrum-stops em { position:absolute; top:50%; width:2cqw; height:2cqw; box-sizing:border-box; border:1px solid #9870bb; border-radius:50%; transform:translate(-50%,-50%); background:#15101d; }
+.daily-card .spectrum-stops small { position:absolute; top:50%; width:1cqw; height:1cqw; border-radius:50%; background:#9162b9; transform:translate(-50%,-50%); }
+.daily-card .captured-spectrum-line > b { z-index:1; }
+.daily-card .captured-spectrum-labels { position:relative; height:1em; display:block; }
+.daily-card .captured-spectrum-labels > span { position:absolute; transform:translateX(-50%); white-space:nowrap; }
+.daily-card .captured-spectrum-labels > span:nth-child(1) { left:0; }
+.daily-card .captured-spectrum-labels > span:nth-child(2) { left:20%; }
+.daily-card .captured-spectrum-labels > span:nth-child(3) { left:40%; }
+.daily-card .captured-spectrum-labels > span:nth-child(4) { left:60%; }
+.daily-card .captured-spectrum-labels > span:nth-child(5) { left:80%; }
+.daily-card .captured-spectrum-labels > span:nth-child(6) { left:100%; }
+
+.daily-card .captured-day { display:flex; align-items:center; justify-content:center; gap:.8cqw; }
+.daily-card .captured-day::before { content:""; flex:0 0 3.8cqw; width:3.8cqw; height:3.8cqw; background:url("public/flower-icon.png") center / contain no-repeat; }

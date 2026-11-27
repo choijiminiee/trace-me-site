@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#050505">
+    <meta name="description" content="TRACE ME 졸업전시 — Hero 레이아웃 시안">
+    <title>TRACE ME — Hero Study</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23050505' d='M0 0h32v32H0z'/%3E%3Ctext x='16' y='22' text-anchor='middle' fill='%23eee' font-family='Arial' font-size='18'%3ET%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css?v=hero-click-01">
+    <script src="script.js?v=hero-original-restored-01" defer></script>
+    <link rel="stylesheet" href="intro-loader.css">
+    <script src="intro-loader.js?v=exhibit-loop-01" defer></script>
+      <link rel="stylesheet" href="emotion-states.css?v=center-intro-02">
+    <script src="emotion-states.js" defer></script>
+      <link rel="stylesheet" href="live-trace-intro.css">
+    <script src="live-trace-intro.js?v=original-restored-02" defer></script>
+      <script src="visitor-trace.js" defer></script>
+  </head>
+  <body class="intro-loading">
+    <div class="intro-loader" role="status" aria-label="TRACE ME 로딩 중">
+      <div class="intro-loader-content">
+        <video class="intro-loader-flower" src="public/flower-videos/loading-flower04.mp4" autoplay muted playsinline preload="auto" aria-hidden="true"></video>
+        <p class="intro-loader-wordmark"><span class="intro-loader-trace">TRACE</span> <span class="intro-loader-me">ME<span class="intro-loader-period">.</span></span></p>
+      </div>
+    </div>
+    <!-- Hero: independent section module -->
+    <section id="hero" class="hero" aria-label="TRACE ME Hero 레이아웃 시안">
+      <div class="hero-red-rectangle" aria-hidden="true"></div>
+      <header class="navigation">
+        <h1 class="wordmark"><button class="scene-home" data-scroll-target="hero" type="button" aria-label="TRACE ME — Hero로 돌아가기">TRACE ME</button></h1>
+<nav aria-label="TRACE ME 섹션 메뉴"><button type="button" data-scroll-target="about">ABOUT</button><button type="button" data-scroll-target="system">SYSTEM</button><button type="button" data-scroll-target="live-trace">LIVE TRACE</button><button type="button" data-scroll-target="features">FEATURES</button><button type="button" data-scroll-target="ending">ENDING</button></nav>
+      </header>
+
+      <div class="hero-copy">
+        <h2 class="copy-title"><span>TRACE</span><span>YOURSELF<span class="hero-period">.</span></span></h2>
+        <p class="copy-description">Collect your moments.<br>Understand your emotions.</p>
+      </div>
+
+      <div class="hero-flower-stage">
+        <div class="hero-flower" role="slider" tabindex="0" aria-label="Flower lifecycle — bud, bloom, fade" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-describedby="bloom-hint">
+          <canvas class="flower-layer" width="960" height="960" aria-hidden="true"></canvas>
+        </div>
+        <p id="bloom-hint"><span class="bloom-hint-direction"><span aria-hidden="true">←</span> MOVE YOUR CURSOR <span aria-hidden="true">→</span></span><small>MOVE LEFT &amp; RIGHT TO BLOOM</small></p>
+      </div>
+
+    </section>
+    <section id="about" class="about-experience" aria-labelledby="about-title">
+      <div class="about-camera">
+        <div class="about-perspective"><div class="about-matrix"></div></div>
+        <div class="about-intro about-foreground">
+          <p class="about-eyebrow">ABOUT / WHY TRACE ME</p>
+          <h2 id="about-title"><span>WE KEEP</span><strong>EVERYTHING.</strong></h2>
+          <p class="about-korean">우리는 매일 수많은 순간을 사진으로 남깁니다.<br>하지만 그 기록이 나에 대해 무엇을 말하는지는<br>쉽게 알 수 없습니다.</p>
+        </div>
+        <div class="about-question about-foreground" aria-hidden="true">
+          <h3><span class="about-reveal"><strong>THOUSANDS<br>OF PHOTOS.</strong></span><span class="about-reveal"><span>BUT WHAT DO<br>THEY SAY<br>ABOUT YOU?</span></span></h3>
+        </div>
+        <div class="about-discovery about-foreground" aria-live="polite" aria-atomic="true"></div>
+        <div class="about-final about-foreground" aria-hidden="true" inert>
+          <p class="about-eyebrow">A DIFFERENT WAY TO SEE</p>
+          <h3>WHAT IF<br>YOUR PHOTOS<br><strong>COULD EXPLAIN YOU?</strong></h3>
+          <p>TRACE ME turns memories into emotional patterns.</p>
+          <button type="button" data-scroll-target="system">EXPLORE THE SYSTEM ↓</button>
+        </div>
+        <div class="about-guide"><span class="about-guide-text">SCROLL TO ENTER THE ARCHIVE ↓</span><span class="about-discovered">00 / 03 DISCOVERED</span><button class="about-continue" type="button" hidden>CONTINUE THE TRACE →</button></div>
+      </div>
+    </section>
+
+    <section id="about-transition" class="about-transition" aria-labelledby="about-transition-title">
+      <div class="about-transition-copy">
+        <h2 id="about-transition-title"><span>WHAT IF YOUR <em class="about-question-accent">PHOTOS</em></span><span>COULD <em class="about-question-accent">EXPLAIN YOU?</em></span></h2>
+        <p>What if a memory could become emotional data?</p>
+      </div>
+    </section>
+
+    <section id="approach" class="exhibit-approach" aria-labelledby="approach-about-title">
+      <div class="approach-about-intro">
+        <div class="approach-about-brand">
+          <h2 id="approach-about-title" class="approach-about-heading">ABOUT</h2>
+          <p class="approach-wordmark" aria-label="TRACE ME">TRACE ME<span aria-hidden="true">.</span></p>
+        </div>
+        <p class="approach-about-description">Trace Me는 사진 속 감정 신호를 분석하고,<br>순간들을 감정의 흐름과 패턴으로 변환해<br>사용자가 자신을 새롭게 이해하도록 돕는 기록 시스템입니다.</p>
+      </div>
+      <h3 class="approach-about-title"><span class="approach-line"><span class="approach-word">TRACE ME</span> TURNS</span><span class="approach-line"><span class="approach-word">MEMORIES</span> INTO</span><span class="approach-line"><span class="approach-word">EMOTIONAL</span> INSIGHT.</span></h3>
+    </section>
+
+
+    <section id="emotion-states" class="emotion-states" aria-labelledby="emotion-states-title">
+      <h2 id="emotion-states-title">SYSTEM / WHY FLOWER / EMOTION STATES</h2>
+      <div class="emotion-stage">
+        <div class="emotion-orbit">
+          <div class="emotion-center"><strong>TRACE ME</strong><span>EMOTION STATES</span><p class="emotion-states-intro"><b class="emotion-intro-lead">꽃의 여섯 단계로 감정의 흐름을 표현합니다.</b><br>꽃을 눌러 각 단계가 담은 감정을 살펴보세요.</p></div>
+          <div id="emotion-detail" class="emotion-detail" aria-live="polite" hidden></div>
+        </div>
+        <div class="emotion-story">
+          <p class="emotion-hint"><strong>CLICK A FLOWER ↗</strong><span>꽃을 눌러 감정을 살펴보세요</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="system" class="exhibit-system" aria-label="TRACE ME PROCESS">
+      <div class="process-camera-heading"><p>TRACE ME PROCESS</p><h2>6 STEPS TO<br>UNDERSTANDING YOURSELF.</h2><p>사진 속 순간을 수집하고,<br>감정을 분석해 패턴을 발견하고,<br>변화하는 나를 이해합니다.</p></div>
+      <div class="process-runway">
+        <div class="process-camera">
+          <ol class="process-world">
+            <li><span class="process-stem" aria-hidden="true"></span><span class="process-dot" aria-hidden="true"></span><div class="process-step-copy"><h3>01 / MOMENT</h3><div class="process-action"><strong>Capture</strong><span>순간을 수집하다</span></div><p class="process-description">사진에서 감정의 단서를 수집하고 상황을 기록합니다.</p></div></li>
+            <li><span class="process-stem" aria-hidden="true"></span><span class="process-dot" aria-hidden="true"></span><div class="process-step-copy"><h3>02 / BLOOM</h3><div class="process-action"><strong>Translate</strong><span>감정을 꽃으로 변환하다</span></div><p class="process-description">수집된 감정을 Trace Me만의 꽃 언어로 변환합니다.</p></div></li>
+            <li><span class="process-stem" aria-hidden="true"></span><span class="process-dot" aria-hidden="true"></span><div class="process-step-copy"><h3>03 / FLOW</h3><div class="process-action"><strong>Observe</strong><span>흐름을 관찰하다</span></div><p class="process-description">일, 주, 월 단위로 감정의 흐름과 리듬을 관찰합니다.</p></div></li>
+            <li><span class="process-stem" aria-hidden="true"></span><span class="process-dot" aria-hidden="true"></span><div class="process-step-copy"><h3>04 / PATTERN</h3><div class="process-action"><strong>Connect</strong><span>패턴을 발견하다</span></div><p class="process-description">사진 속 요소들의 관계를 분석해 반복되는 패턴을 발견합니다.</p></div></li>
+            <li><span class="process-stem" aria-hidden="true"></span><span class="process-dot" aria-hidden="true"></span><div class="process-step-copy"><h3>05 / INSIGHT</h3><div class="process-action"><strong>Understand</strong><span>나를 이해하다</span></div><p class="process-description">반복되는 패턴을 통해 나의 성향과 감정을 이해합니다.</p></div></li>
+            <li><span class="process-stem" aria-hidden="true"></span><span class="process-dot" aria-hidden="true"></span><div class="process-step-copy"><h3>06 / CHANGE</h3><div class="process-action"><strong>Trace</strong><span>변화를 발견하다</span></div><p class="process-description">시간에 따른 감정과 패턴의 변화를 확인합니다.</p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+    <section id="live-trace" class="live-trace" aria-labelledby="live-trace-title">
+      <header class="live-intro">
+        <h2 id="live-trace-title">Create your bloom.</h2>
+        <p class="live-description">표정을 바꾸며, 나만의 꽃 카드를 만들어보세요.</p>
+      </header>
+
+      <div class="live-experience">
+        <div class="live-camera-area">
+          <div class="live-camera-heading"><p class="live-label">LIVE MIRROR</p><p class="live-face-status" role="status" aria-live="polite">CAMERA OFF</p></div>
+          <div class="live-camera-placeholder">
+            <video class="live-camera-video" autoplay playsinline muted hidden aria-label="실시간 포트레이트 영상"></video>
+            <span class="portrait-guide" aria-hidden="true"></span>
+            <span class="portrait-countdown" role="status" aria-live="polite" hidden></span>
+
+          </div>
+          <div class="portrait-footer live-preview-controls">
+            <button class="live-camera-start" type="button">내 표정으로 피우기</button>
+            
+            <button type="button" class="live-camera-stop" disabled>카메라 끄기</button>
+          </div>
+        </div>
+
+        <div class="live-relationship" aria-hidden="true"></div>
+        <div class="live-flower-area">
+          
+          <div class="live-analysis" aria-label="Expression Change 0퍼센트">
+            <p>EXPRESSION CHANGE</p>
+            <span class="live-analysis-value">00<span>%</span></span>
+          </div>
+          <div class="live-bloom-card"><p class="bloom-card-label">TRACE ME / MY BLOOM</p><div class="live-flower-stage">
+            <img src="public/hero-sequence/frame-001.jpg" alt="오팔빛 TRACE ME 꽃"
+              width="972" height="952" loading="lazy" draggable="false">
+          </div>
+          <div class="live-expression-scale" aria-label="Expression Change 꽃 진행도">
+            <div class="live-scale-labels"><span>BUD</span><span class="live-scale-line" aria-hidden="true"></span><span>BLOOM</span></div>
+          </div>
+
+          <p class="bloom-card-caption">A moment in bloom.</p></div>
+          <button class="flower-card-create" type="button" disabled>내 꽃 받기</button>
+          <p class="flower-card-hint">표정을 바꾸면 꽃도 함께 변해요.</p>
+        </div>
+      </div>
+    </section>
+    <dialog id="visitor-trace-screen" class="visitor-trace-screen" aria-labelledby="visitor-wall-title">
+      <header class="visitor-wall-header"><h2 id="visitor-wall-title">VISITOR TRACE</h2><button type="button" class="visitor-trace-back" autofocus>← PHOTO BOOTH</button></header>
+      <p class="visitor-trace-status" role="status">Your captured moments. Saved on this device.</p>
+      <p class="visitor-trace-empty">Your first trace starts at the photo booth.</p>
+      <div class="visitor-trace-gallery"></div>
+    </dialog>
+    <!-- Features: independent section module -->
+    <section id="features" class="features-scene" aria-labelledby="features-title">
+      <div class="daily-sparkles" aria-hidden="true"><i style="--x:7%;--y:13%;--delay:-0s;--duration:6s"></i><i style="--x:24%;--y:7%;--delay:-1s;--duration:7s"></i><i style="--x:46%;--y:19%;--delay:-2s;--duration:8s"></i><i style="--x:64%;--y:9%;--delay:-3s;--duration:9s" class="sparkle-cross"></i><i style="--x:85%;--y:17%;--delay:-4s;--duration:6s"></i><i style="--x:94%;--y:36%;--delay:-5s;--duration:7s"></i><i style="--x:12%;--y:67%;--delay:-6s;--duration:8s"></i><i style="--x:33%;--y:85%;--delay:-0s;--duration:9s"></i><i style="--x:54%;--y:73%;--delay:-1s;--duration:6s"></i><i style="--x:76%;--y:91%;--delay:-2s;--duration:7s"></i><i style="--x:88%;--y:69%;--delay:-3s;--duration:8s" class="sparkle-cross"></i><i style="--x:43%;--y:43%;--delay:-4s;--duration:9s"></i><i style="--x:68%;--y:52%;--delay:-5s;--duration:6s"></i><i style="--x:18%;--y:40%;--delay:-6s;--duration:7s"></i><i style="--x:96%;--y:88%;--delay:-0s;--duration:8s"></i><i style="--x:57%;--y:94%;--delay:-1s;--duration:9s"></i><i style="--x:4%;--y:91%;--delay:-2s;--duration:6s" class="sparkle-cross"></i><i style="--x:81%;--y:39%;--delay:-3s;--duration:7s"></i></div>
+      <div class="features-content">
+        <div class="features-tabs" role="tablist" aria-label="App features"><button id="feature-tab-0" role="tab" aria-selected="true" aria-controls="feature-panel" tabindex="0" data-archive-feature="0">01 <span>DAILY EMOTION CARD</span></button><button id="feature-tab-1" role="tab" aria-selected="false" aria-controls="feature-panel" tabindex="-1" data-archive-feature="1">02 <span>BLOOM CALENDAR</span></button><button id="feature-tab-2" role="tab" aria-selected="false" aria-controls="feature-panel" tabindex="-1" data-archive-feature="2">03 <span>MONTHLY OVERVIEW</span></button><button id="feature-tab-3" role="tab" aria-selected="false" aria-controls="feature-panel" tabindex="-1" data-archive-feature="3">04 <span>INSIGHT / ME</span></button></div>
+        <p class="features-index">FEATURES / THE APP</p>
+
+
+        <div id="feature-panel" class="feature-panel" role="tabpanel" aria-labelledby="feature-tab-0">
+          <div class="feature-copy">
+            <p class="feature-number">01 / DAILY EMOTION</p>
+            <h3 id="features-title">Daily Emotion Card</h3><p class="feature-concept">Turn each moment into an emotional record.</p>
+            <p class="daily-korean-description" lang="ko">사진 속 감정 신호를 분석하여 하루의 감정을 꽃의 개화 단계로 변환합니다. 사용자는 자신의 감정 상태를 직관적으로 확인할 수 있으며, 이러한 기록은 이후 감정 캘린더와 인사이트 분석의 기반 데이터로 활용됩니다.</p>
+            
+            
+          </div>
+          <figure class="feature-image daily-slider" role="region" aria-roledescription="card stack" aria-label="Daily Emotion Cards">
+
+            <div class="missing-ui" hidden><span>APP SCREEN / ASSET PENDING</span><p>실제 앱 UI 이미지 준비 중</p></div>
+            <div class="daily-window" aria-label="감정 카드 덱 — 카드를 선택해 앞으로 가져오기">
+              <div class="daily-track">
+                <button class="daily-card" type="button" aria-label="Daily Emotion Card 01" aria-pressed="true"><img src="public/flower-cards/card01.png" alt="Daily Emotion Card 01" draggable="false"></button>
+                <button class="daily-card" type="button" aria-label="Daily Emotion Card 02" aria-pressed="false"><img src="public/flower-cards/card02.png" alt="Daily Emotion Card 02" draggable="false"></button>
+                <button class="daily-card" type="button" aria-label="Daily Emotion Card 03" aria-pressed="false"><img src="public/flower-cards/card03.png" alt="Daily Emotion Card 03" draggable="false"></button>
+                <button class="daily-card" type="button" aria-label="Daily Emotion Card 04" aria-pressed="false"><img src="public/flower-cards/card04.png" alt="Daily Emotion Card 04" draggable="false"></button>
+                <button class="daily-card" type="button" aria-label="Daily Emotion Card 05" aria-pressed="false"><img src="public/flower-cards/card05.png" alt="Daily Emotion Card 05" draggable="false"></button>
+                <button class="daily-card" type="button" aria-label="Daily Emotion Card 06" aria-pressed="false"><img src="public/flower-cards/card06.png" alt="Daily Emotion Card 06" draggable="false"></button>
+              </div>
+              <p class="daily-swipe-hint">CLICK A CARD TO SEE THE NEXT <span aria-hidden="true">→</span><small>Or swipe left and right</small></p>
+            </div>
+
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="bloom-calendar" aria-labelledby="bloom-calendar-title">
+      <header><p>02 / BLOOM CALENDAR</p><h2 id="bloom-calendar-title">Bloom Calendar</h2></header>
+            <div class="bloom-calendar-view">
+              <div class="bloom-calendar-caption"><p>EVERY DAY BLOOMS DIFFERENTLY.</p><p class="bloom-calendar-subtitle">Together, they reveal the story of your month.</p><p lang="ko">매일의 감정을 꽃의 6단계 개화 과정으로 기록하고, 이를 달력 위에 시각화하여 한 달 동안 반복된 감정 패턴과 분포를 직관적으로 확인할 수 있습니다.</p><small>MONTHLY CALENDAR</small></div>
+              <div class="bloom-calendar-art" role="group" aria-label="2026년 5월 꽃 기록 캘린더">
+                <img class="bloom-calendar-month" src="public/bloom-calendar/Group 1707485033.png" alt="2026년 5월" width="372" height="67">
+                <img class="bloom-calendar-grid" src="public/bloom-calendar/Group 1707485034.png" alt="날짜마다 기록된 여섯 가지 꽃 상태" width="959" height="996" loading="lazy">
+              </div>
+
+            </div>
+    </section>
+
+    <section id="monthly-overview" aria-labelledby="monthly-title">
+      <div class="monthly-inner">
+        <header class="monthly-heading"><p class="monthly-eyebrow">03 / MONTHLY OVERVIEW</p><span class="monthly-month">OCTOBER 2026</span></header>
+        <div class="month-story">
+          <div class="month-story-copy"><h2 id="monthly-title">October Overview</h2><p class="month-kicker">10월의 기록을 돌아보다</p><p class="month-lead">기쁨으로 채운 10월.</p><p class="month-body">하루하루 남긴 꽃을 모아,<br>한 달의 감정과 변화를 살펴보세요.</p></div>
+          <figure class="month-flower"><img src="public/insight-icons/monthly-flower.png" alt="10월을 대표하는 오팔빛 꽃" loading="lazy"><figcaption>FULL BLOOM <span>이달의 대표 꽃</span></figcaption></figure>
+        </div>
+        <dl class="month-facts"><div><dt>기록한 날 <span>DAYS RECORDED</span></dt><dd>27<small> / 31 DAYS</small></dd></div><div><dt>가장 많이 나타난 감정 <span>TOP EMOTION</span></dt><dd>42<small>% 행복</small></dd></div><div><dt>최장 연속 기록 <span>LONGEST STREAK</span></dt><dd>10<small> DAYS</small></dd></div></dl>
+        <div class="month-analysis">
+          <section class="month-flow" aria-labelledby="month-flow-heading"><header><h3 id="month-flow-heading">Emotion flow</h3></header><svg viewBox="-30 0 780 284" role="img" aria-labelledby="month-flow-title month-flow-desc"><title id="month-flow-title">10월 감정 흐름</title><desc id="month-flow-desc">초반부터 중순까지 개화와 만개가 이어지고 후반에는 낙화와 시듦으로 내려갔다가 다시 상승하는 그래프입니다.</desc><defs><linearGradient id="month-line"><stop stop-color="#e9ad78"/><stop offset=".5" stop-color="#d89fc5"/><stop offset="1" stop-color="#9775dd"/></linearGradient></defs><g class="month-grid"><line x1="58" x2="688" y1="228" y2="228"/><line x1="58" x2="688" y1="193" y2="193"/><line x1="58" x2="688" y1="158" y2="158"/><line x1="58" x2="688" y1="123" y2="123"/><line x1="58" x2="688" y1="88" y2="88"/><line x1="58" x2="688" y1="53" y2="53"/></g><g class="month-axis"><text x="40" y="232" text-anchor="end">시듦</text><text x="40" y="197" text-anchor="end">낙화</text><text x="40" y="162" text-anchor="end">봉오리</text><text x="40" y="127" text-anchor="end">발아</text><text x="40" y="92" text-anchor="end">개화</text><text x="40" y="57" text-anchor="end">만개</text><text x="58" y="262">10/1</text><text x="205" y="262">10/8</text><text x="352" y="262">10/15</text><text x="499" y="262">10/22</text><text x="688" y="262" text-anchor="end">10/31</text></g><polyline points="58,140.5 100,116.0 142,67.0 184,53.0 226,70.5 268,84.5 310,119.5 352,102.0 394,88.0 436,98.5 478,105.5 520,123.0 562,154.5 604,109.0 646,175.5 688,91.5" fill="none" stroke="url(#month-line)" stroke-width="2.5"/><g fill="#cda5df"><circle cx="58" cy="140.5" r="4"><title>10월 1일 · 감정 흐름</title></circle><circle cx="100" cy="116.0" r="4"><title>10월 3일 · 감정 흐름</title></circle><circle cx="142" cy="67.0" r="4"><title>10월 5일 · 감정 흐름</title></circle><circle cx="184" cy="53.0" r="4"><title>10월 7일 · 감정 흐름</title></circle><circle cx="226" cy="70.5" r="4"><title>10월 9일 · 감정 흐름</title></circle><circle cx="268" cy="84.5" r="4"><title>10월 11일 · 감정 흐름</title></circle><circle cx="310" cy="119.5" r="4"><title>10월 13일 · 감정 흐름</title></circle><circle cx="352" cy="102.0" r="4"><title>10월 15일 · 감정 흐름</title></circle><circle cx="394" cy="88.0" r="4"><title>10월 17일 · 감정 흐름</title></circle><circle cx="436" cy="98.5" r="4"><title>10월 19일 · 감정 흐름</title></circle><circle cx="478" cy="105.5" r="4"><title>10월 21일 · 감정 흐름</title></circle><circle cx="520" cy="123.0" r="4"><title>10월 23일 · 감정 흐름</title></circle><circle cx="562" cy="154.5" r="4"><title>10월 25일 · 감정 흐름</title></circle><circle cx="604" cy="109.0" r="4"><title>10월 27일 · 감정 흐름</title></circle><circle cx="646" cy="175.5" r="4"><title>10월 29일 · 감정 흐름</title></circle><circle cx="688" cy="91.5" r="4"><title>10월 31일 · 감정 흐름</title></circle></g></svg><p class="month-chart-note">중순까지 활짝 피어났던 감정은<br>월말로 갈수록 잠시 쉬어가는 흐름을 보였어요.</p></section>
+          <section class="month-distribution" aria-labelledby="month-distribution-heading"><header><h3 id="month-distribution-heading">This month’s balance</h3><span>감정 분포</span></header><div class="month-distribution-list"><div class="month-emotion-row" style="--emotion-color:#b18aeb;--emotion-width:42%"><span>행복</span><div class="month-emotion-track"><i></i></div><strong>42<small>%</small></strong></div><div class="month-emotion-row" style="--emotion-color:#c99edc;--emotion-width:28%"><span>설렘</span><div class="month-emotion-track"><i></i></div><strong>28<small>%</small></strong></div><div class="month-emotion-row" style="--emotion-color:#dfb3ca;--emotion-width:17%"><span>평온</span><div class="month-emotion-track"><i></i></div><strong>17<small>%</small></strong></div><div class="month-emotion-row" style="--emotion-color:#a294b3;--emotion-width:8%"><span>슬픔</span><div class="month-emotion-track"><i></i></div><strong>8<small>%</small></strong></div><div class="month-emotion-row" style="--emotion-color:#807789;--emotion-width:5%"><span>우울</span><div class="month-emotion-track"><i></i></div><strong>5<small>%</small></strong></div></div><p class="month-chart-note">행복과 설렘이 한 달의 70%를 채웠어요.</p></section>
+        </div>
+
+      </div>
+      <div class="month-recommendations insight-section" aria-label="11월을 위한 제안">
+      
+      <div class="month-handoff" aria-label="10월 오버뷰를 바탕으로 한 11월 행동 제안">
+        <div class="month-handoff-source"><img src="public/insight-icons/monthly-flower.png" alt="" width="64" height="64"><div><span>OCTOBER</span><p>10월의 오버뷰</p></div></div>
+        <div class="month-handoff-line" aria-hidden="true"></div>
+        <div class="month-handoff-destination"><span>NEXT MONTH</span><p>11월을 위한 제안</p></div>
+      </div>
+      <div class="insight-next-heading"><h3>균형을 위한 <em>‘회복’</em>에 집중해보세요.</h3><p>일상의 균형을 위한 세 가지 습관.</p></div>
+      <div class="insight-practices">
+        <details><summary><span class="practice-symbol" aria-hidden="true"><img src="public/insight-icons/rest.png" alt="" width="44" height="44"></span><span>01 / REST</span><h4>충분한 휴식</h4><p>잠들기 전 30분, 쉬어갈 시간</p></summary><p><strong>오늘 밤 이렇게 해보세요</strong>잠들기 30분 전 휴대폰을 내려놓고 조명을 낮춰 보세요. 편안했던 순간 하나를 떠올리며 하루를 마무리해요.</p></details>
+        <details><summary><span class="practice-symbol" aria-hidden="true"><img src="public/insight-icons/mindfulness.png" alt="" width="44" height="44"></span><span>02 / MINDFULNESS</span><h4>마음 챙김 루틴</h4><p>하루 5분, 내 마음에 집중하기</p></summary><p><strong>잠깐 쉬어가는 5분</strong>편안히 앉아 천천히 호흡해 보세요. 지금 느끼는 감정을 한 단어로 떠올려요. 잘하려 애쓰지 않아도 괜찮아요.</p></details>
+        <details><summary><span class="practice-symbol" aria-hidden="true"><img src="public/insight-icons/record.png" alt="" width="44" height="44"></span><span>03 / RECORD</span><h4>감정 기록하기</h4><p>하루 한 번, 사진과 마음 남기기</p></summary><p><strong>오늘 기억하고 싶은 순간</strong>사진 한 장을 고르고, 왜 남기고 싶은 순간인지 한 줄 적어 보세요. 특별한 일이 없는 날도 좋은 기록이 돼요.</p></details>
+      </div>
+      </div>
+    </section>
+
+    <section id="monthly-insight" class="insight-section" aria-labelledby="insight-title">
+      <header class="insight-section-heading"><span>04 / INSIGHT</span><span>OCTOBER 2026</span></header>
+      <div class="insight-lead insight-growth-lead">
+        <div class="insight-growth-title"><h2 id="insight-title">See how you’ve changed.</h2><p class="insight-growth-summary">달라진 감정, 달라진 관심사.<br>기록 속에서 나의 변화를 발견해요.</p></div>
+      </div>
+<div class="original-insight-gallery"><div class="insight-scroll-stage"><div class="original-insight-toolbar"><span>마우스를 올려 기록을 더 가까이 살펴보세요</span><span>긍정 감정 · 키워드 · 행복 패턴</span></div><div class="original-insight-track" role="group" aria-label="감정 인사이트 카드"><button type="button" class="original-insight-slide" aria-pressed="false"><img class="original-card-art" src="public/insight-originals/1.png" alt="긍정 감정 변화" draggable="false"><span class="insight-art-caption">Emotional growth over time</span></button><button type="button" class="original-insight-slide" aria-pressed="false"><img class="original-card-art" src="public/insight-originals/2.png" alt="키워드 변화" draggable="false"><span class="insight-art-caption">How your story has changed</span></button><button type="button" class="original-insight-slide" aria-pressed="false"><img class="original-card-art" src="public/insight-originals/3.png" alt="나만의 행복 패턴" draggable="false"><span class="insight-art-caption">What makes you feel most alive?</span></button></div></div></div>
+    </section>
+    <section id="me" class="insight-section me-section" aria-labelledby="me-title">
+      <header class="insight-section-heading"><span>05 / ME</span><span>MOMENTS THAT DEFINE ME</span></header>
+      <div class="insight-lead"><div><p class="insight-eyebrow">YOUR EVERYDAY, CONNECTED.</p><h2 id="me-title">Moments that define me.</h2><p class="insight-intro-copy">함께한 사람과 좋아하는 장소, 자주 즐긴 활동까지.<br>사진에 쌓인 나의 관계와 취향을 한눈에 살펴보세요.</p></div><p class="insight-side-note">YOUR EVERYDAY PATTERNS<br><span>사람 · 장소 · 일상</span></p></div>
+      <div class="me-moments">
+        <figure class="me-moment-large"><img src="public/bloom-calendar/friends.png" alt="친구들과 함께한 저녁" loading="lazy"><figcaption><small>PEOPLE</small><h3>친구들과의 시간</h3><p>친구들과 함께한 식사와 모임.</p></figcaption></figure>
+        <figure><img src="public/bloom-calendar/bakery.png" alt="따뜻한 베이커리의 일상" loading="lazy"><figcaption><small>TASTE</small><h3>음식 취향</h3></figcaption></figure>
+        <figure><img src="public/bloom-calendar/dog.png" alt="강아지와 함께 산책하는 일상" loading="lazy"><figcaption><small>ROUTINE</small><h3>산책</h3></figcaption></figure>
+        <figure><img src="public/bloom-calendar/reading.png" alt="집에서 조용히 책 읽는 시간" loading="lazy"><figcaption><small>REST</small><h3>독서</h3></figcaption></figure>
+        <figure><img src="public/bloom-calendar/rain.png" alt="비 오는 창밖의 풍경" loading="lazy"><figcaption><small>REFLECTION</small><h3>일상의 풍경</h3></figcaption></figure>
+      </div>
+    </section>
+
+    <section id="ending" class="exhibit-ending" aria-labelledby="ending-title">
+      <div class="ending-meta"><span>TRACE ME / 2026</span><span>FROM MEMORIES TO SELF-UNDERSTANDING</span></div>
+      <h2 id="ending-title" aria-label="TRACE ME"><span class="ending-word ending-word-trace" aria-hidden="true">TRACE</span><span class="ending-word ending-word-me" aria-hidden="true">ME<span class="ending-period">.</span></span></h2>
+      <div class="ending-foot"><p>당신의 순간을 기록하고,<br>그 안의 나를 발견하세요.</p><a href="#visitor-trace-screen" class="ending-visitor-link" aria-haspopup="dialog">VISITOR TRACE <span aria-hidden="true">↗</span></a></div>
+    </section>
+    <section id="live-trace-intro" class="live-trace-intro" aria-labelledby="booth-invite">
+      <div class="booth-marquee" aria-label="LIVE TRACE PHOTO BOOTH">
+        <div class="booth-marquee-track" aria-hidden="true"><span><b>LIVE TRACE</b> <em>PHOTO BOOTH</em> <small>EMOTIONAL INSIGHT</small> · </span><span><b>LIVE TRACE</b> <em>PHOTO BOOTH</em> <small>EMOTIONAL INSIGHT</small> · </span></div>
+      </div>
+      <h2 id="booth-invite" class="booth-invite">READY TO<br>LEAVE A TRACE?</h2>
+      <p class="booth-click-hint">CLICK TO LEAVE YOUR TRACE</p>
+      <button type="button" class="booth-enter" aria-label="PHOTO BOOTH — 카메라 화면으로 이동"><span>PHOTO<br>BOOTH</span></button>
+    </section>
+    <!-- LiveTrace: independent section module -->
+    <section id="photo-booth" hidden class="live-trace" aria-labelledby="photo-booth-title">
+      <header class="live-intro">
+        <h2 id="photo-booth-title">Capture your trace.</h2>
+        <p class="live-description">Your expression, translated live.</p>
+      </header>
+
+      <div class="live-expression-guide" aria-label="Expression tips before capturing">
+        <div><h3>Watch yourself bloom.</h3></div>
+        <p>표정을 바꾸며 꽃의 변화를 만나보세요.</p>
+      </div>
+      <div class="live-experience">
+        <div class="live-camera-area">
+          <div class="live-camera-heading"><p class="live-label">LIVE PORTRAIT</p><p class="live-face-status" role="status" aria-live="polite">CAMERA OFF</p></div>
+          <div class="live-camera-placeholder">
+            <video class="live-camera-video" autoplay playsinline muted hidden aria-label="실시간 포트레이트 영상"></video>
+            <span class="portrait-guide" aria-hidden="true"></span>
+            <span class="portrait-countdown" role="status" aria-live="polite" hidden></span>
+            <button class="live-camera-start" type="button">START CAMERA</button>
+          </div>
+          <div class="portrait-footer">
+            
+            <p class="portrait-caption">마음에 드는 순간, 촬영 버튼을 눌러보세요.</p>
+            <div class="portrait-controls"><button class="portrait-capture" type="button" disabled title="사진 촬영" aria-label="CAPTURE MOMENT">CAPTURE MOMENT</button><div class="portrait-timers" role="group" aria-label="촬영 타이머 — 다시 누르면 해제"><button type="button" data-capture-delay="3" aria-pressed="false">3s</button><button type="button" data-capture-delay="5" aria-pressed="false">5s</button></div><button type="button" class="live-camera-stop" disabled>CAMERA OFF</button></div>
+          </div>
+        </div>
+
+        <div class="live-relationship" aria-hidden="true"></div>
+        <div class="live-flower-area">
+          
+          <div class="live-analysis" aria-label="Expression Change 0퍼센트">
+            <p>EXPRESSION CHANGE</p>
+            <span class="live-analysis-value">00<span>%</span></span>
+          </div>
+          <div class="live-flower-stage">
+            <img src="public/hero-sequence/frame-001.jpg" alt="오팔빛 TRACE ME 꽃"
+              width="972" height="952" loading="lazy" draggable="false">
+          </div>
+          <div class="live-expression-scale" aria-label="Expression Change 꽃 진행도">
+            <div class="live-scale-labels"><span>BUD</span><span class="live-scale-line" aria-hidden="true"></span><span>BLOOM</span></div>
+          </div>
+          <aside class="visitor-trace">
+            <button type="button" class="visitor-trace-open" aria-haspopup="dialog" aria-controls="visitor-trace-screen">VISITOR TRACE ↗</button>
+            
+          </aside>
+        </div>
+      </div>
+    </section>
+    <link rel="stylesheet" href="live-trace.css">
+    <script src="live-camera.js" defer></script>
+    <script src="expression-change.js" defer></script>
+    <script src="live-flower.js" defer></script>
+    <script src="face-tracking.js" defer></script>
+    <script src="flower-card.js" defer></script>
+    <script src="capture-moment.js" defer></script>
+    <link rel="stylesheet" href="features.css">
+    <link rel="stylesheet" href="insight.css">
+    <link rel="stylesheet" href="daily-slider.css">
+    <script src="daily-slider.js" defer></script>
+    <link rel="stylesheet" href="process.css">
+    <link rel="stylesheet" href="page-scroll.css">
+    <link rel="stylesheet" href="archive-story.css">
+    <script src="archive-story.js" defer></script>
+    <script src="bloom-calendar.js" defer></script>
+    <script src="page-scroll.js" defer></script>
+    <script src="public/vendor/gsap/gsap.min.js" defer></script>
+    <script src="public/vendor/gsap/ScrollTrigger.min.js" defer></script>
+    <script src="process-camera.js" defer></script>
+    <link rel="stylesheet" href="about-experience.css">
+    <script src="about-experience.js?v=click-stories-03" defer></script>
+  <link rel="stylesheet" href="editorial-layout.css">
+  <link rel="stylesheet" href="brand-palette.css?v=booth-original-restored-04">
+  <link rel="stylesheet" href="typography.css">
+<script src="editorial-motion.js" defer></script>
+<script src="insight-gallery.js?v=me-photo-focus-02" defer></script>
+<script src="monthly-chart-motion.js" defer></script>
+<script src="recommendation-story.js" defer></script>
+    <script src="ending-reveal.js" defer></script>
+<button type="button" id="site-fullscreen" aria-label="전체 화면으로 보기" title="전체 화면으로 보기">⛶</button>
+<script src="site-fullscreen.js" defer></script>
+</body>
+</html>

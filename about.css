@@ -1,0 +1,38 @@
+/* Scene navigation only. Existing artwork and live feature styles stay untouched. */
+.scene-home, .scene-about { font: inherit; letter-spacing: inherit; color: inherit; padding: 0; border: 0; background: none; cursor: pointer; }
+.scene-home:focus-visible, .scene-about:focus-visible { outline: 1px solid #9d94aa; outline-offset: 7px; }
+body.about-open { overflow: hidden; }
+body.about-open .navigation { position: fixed; top: 5.6vh; z-index: 31; }
+.about-scene { position: fixed; inset: 0; z-index: 30; overflow-y: auto; background: #050505; color: #dad8dc; opacity: 0; transition: opacity 240ms ease; }
+.about-scene[hidden] { display: none; }
+.about-scene.is-visible { opacity: 1; }
+.about-content { min-height: 100svh; max-width: 1440px; margin: 0 auto; padding: clamp(120px, 19vh, 200px) var(--page-inset) 40px; display: grid; grid-template-columns: 1fr 1.2fr; column-gap: 8%; align-content: start; }
+.about-index { margin: 0 0 22px; color: #99929f; font-size: 10px; letter-spacing: .2em; }
+.about-intro h2 { margin: 0; outline: none; font-size: clamp(28px, 3.3vw, 48px); line-height: 1.16; font-weight: 300; letter-spacing: -.035em; }
+/* Concept and project description occupy distinct positions around the trace. */
+.about-copy { display: contents; }
+.about-copy p { margin: 0; font-weight: 300; }
+.about-question { grid-column: 2; grid-row: 1; align-self: center; color: #dedbdf; font-size: clamp(16px, 1.45vw, 21px); line-height: 1.65; max-width: 440px; }
+.about-description { grid-column: 2; grid-row: 2; width: min(480px, 100%); margin-top: 34px; color: #bdb9c1; font-size: 13px; line-height: 1.95; word-break: keep-all; overflow-wrap: break-word; }
+.about-description p + p { margin-top: 18px; }
+.about-accent { grid-column: 1; grid-row: 2; align-self: end; padding-left: 12%; color: #a79ab6; font-size: 11px; line-height: 1.9; letter-spacing: .025em; }
+.about-intro, .about-copy p, .about-next { opacity: 0; transform: translateY(7px); transition: opacity 300ms ease, transform 300ms ease; }
+.is-visible .about-intro, .is-visible .about-copy p, .is-visible .about-next { opacity: 1; transform: none; }
+.is-visible .about-intro { transition-delay: 100ms; }
+.is-visible .about-copy p:nth-child(1) { transition-delay: 150ms; }
+.is-visible .about-copy p:nth-child(2) { transition-delay: 190ms; }
+.is-visible .about-copy p:nth-child(3) { transition-delay: 230ms; }
+.about-path { grid-column: 1 / -1; position: relative; height: clamp(140px, 22vh, 210px); margin: 35px 24px 26px; }
+.about-path svg { width: 100%; height: 100%; overflow: visible; }
+.about-path path { fill: none; stroke: #514956; stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.is-visible .about-path path { animation: about-draw 260ms ease forwards; animation-delay: calc(240ms + var(--step) * 180ms); }
+.about-path span { position: absolute; left: var(--x); top: var(--y); transform: translateX(-50%); padding-top: 19px; color: #aaa4b0; font-size: 9px; letter-spacing: .14em; opacity: 0; }
+.about-path span::before { content: ''; position: absolute; top: -2px; left: calc(50% - 2px); width: 4px; height: 4px; background: #ada0bb; border-radius: 50%; }
+.is-visible .about-path span { animation: about-word 220ms ease forwards; animation-delay: calc(200ms + var(--step) * 180ms); }
+.about-next { grid-column: 1 / -1; text-align: right; margin-top: 12px; }
+.about-next button { color: #817889; border: 0; background: none; padding: 0; font: inherit; font-size: 10px; letter-spacing: .13em; }
+.is-visible .about-next { transition-delay: 230ms; }
+@keyframes about-draw { to { stroke-dashoffset: 0; } }
+@keyframes about-word { to { opacity: 1; } }
+@media(max-width:700px) { .about-content { grid-template-columns: 1fr; padding-top: 115px; } .about-question { grid-column: 1; grid-row: auto; margin-top: 32px; } .about-description { grid-column: 1; grid-row: auto; margin-top: 24px; } .about-accent { grid-column: 1; grid-row: auto; padding-left: 15%; margin: 32px 0; } .about-path { margin: 10px 16px 24px; height: 130px; } .about-path span { font-size: 7px; letter-spacing: .04em; } }
+@media(prefers-reduced-motion:reduce) { .about-scene, .about-intro, .about-copy p, .about-next { transition: none; } .is-visible .about-path path { animation: none; stroke-dashoffset: 0; } .is-visible .about-path span { animation: none; opacity: 1; } }

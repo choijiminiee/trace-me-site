@@ -1,0 +1,13 @@
+body.intro-loading { overflow:hidden; }
+.intro-loader { position:fixed; inset:0; z-index:1000; display:grid; place-items:center; background:#000; opacity:1; }
+.intro-loader-content { position:relative; width:100%; text-align:center; isolation:isolate; }
+.intro-loader-wordmark { position:relative; z-index:1; margin:0; color:#deddda; font-family:inherit; font-size:clamp(44px,7vw,100px); font-weight:700; line-height:1; letter-spacing:-.04em; }
+.intro-loader-flower { position:absolute; width:min(46vw,330px); height:min(46vw,330px); object-fit:contain; left:50%; top:50%; z-index:2; transform:translate(-50%, -50%); transform-origin:center; background:transparent; mix-blend-mode:screen; pointer-events:none; }
+
+.intro-loader-trace { display:inline-block; }
+
+.intro-loader[hidden] { display:none; }
+
+.intro-loader.is-scroll-chapter { position:relative; height:100svh; z-index:1; overflow:hidden; }
+
+.intro-loader-period { color:#b38aff; }

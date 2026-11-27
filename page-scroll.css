@@ -1,0 +1,29 @@
+html, body { scroll-behavior: auto; }
+.navigation { position: fixed; top: 5.6vh; z-index: 50; transition: transform 240ms ease, opacity 240ms ease; }
+.navigation button { font: inherit; font-weight: 500; letter-spacing: inherit; color: inherit; padding: 0; border: 0; background: none; cursor: pointer; }
+.navigation button:focus-visible { outline: 1px solid #9d94aa; outline-offset: 7px; }
+.navigation nav { flex-wrap: wrap; }
+.chapter-placeholder { min-height: 100svh; padding: clamp(120px,17vh,180px) var(--page-inset) 40px; background: #050505; }
+.chapter-placeholder h2 { margin: 0; color: #99929f; font-size: 11px; font-weight: 400; letter-spacing: .18em; }
+
+.navigation.is-scroll-hidden { transform: translateY(calc(-100% - 8vh)); opacity: 0; pointer-events: none; }
+.navigation.is-scroll-hidden:has(:focus-visible) { transform: translateY(0); opacity: 1; pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) { .navigation { transition: none; } }
+
+/* Keep a small glimpse of neighboring chapters in the vertical document flow. */
+:root { --chapter-peek: 6svh; }
+#hero { height:calc(100svh - var(--chapter-peek)); }
+:is(#live-trace, #photo-booth), #features .features-content, #ending {
+  min-height:calc(100svh - var(--chapter-peek));
+}
+#approach, #system, #features .features-content, #ending {
+  padding-top:clamp(64px,10svh,110px);
+  padding-bottom:clamp(40px,6svh,70px);
+}
+#hero, #about, #approach, #system, :is(#live-trace, #photo-booth), #features, #ending {
+  scroll-margin-top:var(--chapter-peek);
+}
+@media(max-width:700px) {
+  :root { --chapter-peek:4svh; }
+  #approach, #system, #features .features-content, #ending { padding-top:64px; }
+}

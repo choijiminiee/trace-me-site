@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><title>저장 카드 미리보기</title><style>body{margin:0;background:#17151b;min-height:100vh;display:grid;place-content:center;gap:14px;color:#d1c5df;font:13px sans-serif;text-align:center}canvas{height:min(82vh,750px);width:auto;box-shadow:0 12px 60px #0008}p{margin:0}</style><p>저장 카드 미리보기 · 샘플 사진</p><canvas></canvas><script>
+(async()=>{const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d');const portrait=new Image(),flower=new Image();portrait.src='public/bloom-calendar/selfie.png';flower.src='public/hero-sequence/frame-240.jpg';await Promise.all([portrait.decode(),flower.decode()]);const flowerFrame=240,timestamp=Date.now();
+    canvas.width = 1200; canvas.height = 1500;
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.fillStyle = '#08070c'; ctx.fillRect(0,0,1200,1500);
+    // A clean photo mount preserves the portrait as a framed print.
+    const photoWidth = 1000, photoHeight = 790;
+    ctx.fillStyle='#eeebf2'; ctx.fillRect(68,48,1064,854);
+    const photoScale = Math.max(photoWidth / portrait.width, photoHeight / portrait.height);
+    const cropW = photoWidth / photoScale, cropH = photoHeight / photoScale;
+    ctx.drawImage(portrait,(portrait.width-cropW)/2,(portrait.height-cropH)/2,cropW,cropH,100,80,photoWidth,photoHeight);
+    // Screen compositing removes the sequence's black surround without a hard box.
+    ctx.save();
+    ctx.globalCompositeOperation='screen';
+    const flowerSize=780;
+    ctx.drawImage(flower,(1200-flowerSize)/2,620,flowerSize,flowerSize);
+    ctx.restore();
+    const stage=[25,60,115,195,300].filter(boundary=>flowerFrame>=boundary).length;
+    const stages=['BUD · 봉오리','SPROUT · 발아','BLOOM · 개화','FULL BLOOM · 만개','FALL · 낙화','FADE · 시듦'];
+    ctx.textAlign='center';
+    ctx.fillStyle='#ded1f0'; ctx.font='28px sans-serif';
+    ctx.fillText(stages[stage],600,1395);
+    ctx.fillStyle='#a69fad'; ctx.font='22px monospace';
+    ctx.fillText(new Date(timestamp).toLocaleDateString('sv-SE'),600,1440);
+    ctx.textAlign='left';
+})();</script>

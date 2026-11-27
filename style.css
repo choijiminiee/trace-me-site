@@ -1,0 +1,183 @@
+:root {
+  --accent: #B38AFF;
+  --ivory: #F4F2F7;
+  --plum: #090910;
+  --lilac: #D5B8F0;
+  --font-secondary: Menlo, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  color-scheme: dark;
+  --background: #050505;
+  --page-inset: 5.2vw;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--background); }
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  background: var(--background);
+}
+
+.navigation {
+  position: absolute;
+  top: 5.6%;
+  left: var(--page-inset);
+  right: var(--page-inset);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.wordmark {
+  margin: 0;
+  color: #e0e0dc;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: .24em;
+  white-space: nowrap;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 45%;
+  max-width: 560px;
+  gap: 24px;
+  color: #adada9;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: .18em;
+}
+
+/* 면의 명도 차이만으로 자리와 비율을 표시합니다. 테두리는 없습니다. */
+.placeholder {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.placeholder-label {
+  color: #9b9b97;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .22em;
+}
+
+.placeholder-note {
+  color: #858581;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: .03em;
+}
+
+.hero { overflow: visible; background:#000000; }
+.hero-copy {
+  position: absolute;
+  left: var(--page-inset);
+  top: 36%;
+  width: 38%;
+  z-index: 1;
+  text-align: left;
+}
+.copy-title {
+  margin: 0;
+  color: #deddda;
+  font-size: clamp(44px, 5.9vw, 96px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -.035em;
+}
+.copy-title span { display:block; white-space:nowrap; }
+.copy-description {
+  margin: 28px 0 0;
+  color: var(--ivory);
+  font-size: clamp(14px, 1.5vw, 21px);
+  font-weight: 300;
+  line-height: 1.5;
+}
+.hero-flower-stage { position:absolute; inset:0; overflow-x:clip; overflow-y:visible; pointer-events:none; }
+.hero-flower {
+  position:absolute;
+  left:74.35%; top:56%;
+  width:min(82vw, 110svh);
+  aspect-ratio:972 / 952;
+  padding:0; border:0; background:none;
+  transform:translate(-50%, -50%) scale(.85);
+  cursor:pointer; touch-action:manipulation; pointer-events:auto;
+  user-select:none; -webkit-user-select:none;
+}
+.hero-flower:focus-visible { outline:1px solid #777; outline-offset:-20px; }
+.hero-flower[aria-disabled="true"] { cursor:default; }
+.flower-layer {
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  display:block; pointer-events:none; user-select:none; -webkit-user-drag:none;
+}
+.hero-flower .flower-layer[hidden] { display:none; }
+.hero-flower-video { background:#000000; object-position:center center; }
+#bloom-hint {
+  position:absolute; left:74.35%; top:88%; transform:translateX(-50%);
+  margin:0; color:#f5f5f3; font-size:clamp(12px,1.1vw,17px); font-weight:600; letter-spacing:.12em;
+  white-space:nowrap; pointer-events:none; transition:opacity 200ms ease;
+}
+.hero-flower-stage.is-blooming #bloom-hint { opacity:0; }
+@media (max-width:700px) {
+  :root {
+  --accent: #B38AFF;
+  --ivory: #F4F2F7;
+  --plum: #090910;
+  --lilac: #D5B8F0; --page-inset:6vw; }
+  .navigation { top:4%; align-items:flex-start; flex-direction:column; gap:28px; }
+  nav { width:100%; max-width:none; gap:10px; font-size:12px; letter-spacing:.1em; }
+  .hero-copy { top:24%; width:88%; }
+  .copy-title { font-size:clamp(42px, 9.7vw, 65px); }
+  .copy-description { font-size:14px; margin-top:20px; }
+  .hero-flower-stage { inset:49% 0 0; }
+  .hero-flower { top:48%; left:62%; width:min(110vw, 70svh); }
+  #bloom-hint { top:84%; left:62%; }
+}
+@media (prefers-reduced-motion:reduce) { #bloom-hint { transition:none; } }
+
+#bloom-hint { text-align:center; pointer-events:auto; cursor:ew-resize; padding:14px 20px; }
+#bloom-hint .bloom-hint-direction { display:flex; align-items:center; justify-content:center; gap:16px; }
+#bloom-hint .bloom-hint-direction > span { color:var(--accent); font-size:26px; font-weight:400; }
+#bloom-hint small { display:block; margin-top:8px; font-size:10px; font-weight:400; letter-spacing:.12em; color:#b5b5b2; }
+
+.hero-trace-cursor { position:fixed; z-index:60; width:56px; height:56px; border-radius:50%; display:grid; place-items:center; background:var(--accent); color:#000; font-family:"SFMono-Regular", Consolas, "Liberation Mono", monospace; font-size:11px; font-weight:400; letter-spacing:.02em; pointer-events:none; transform:translate(-50%, -50%); opacity:0; transition:opacity 120ms ease; }
+.hero-trace-cursor.is-visible { opacity:1; }
+@media (hover:hover) and (pointer:fine) {
+  #hero, #hero .hero-flower, #hero #bloom-hint { cursor:none; }
+  #hero .navigation button { cursor:pointer; }
+}
+@media (prefers-reduced-motion:reduce) { .hero-trace-cursor { transition:none; } }
+
+.hero-red-rectangle { position:absolute; left:0; top:0; height:100%; width:30%; background:var(--accent); pointer-events:none; z-index:0; clip-path:polygon(0 0, 100% 0, 100% 17%, var(--red-middle, 100%) 17%, var(--red-middle, 100%) 95%, 100% 95%, 100% 100%, 0 100%); }
+
+/* Shared secondary typography; display headings keep their existing families. */
+body .navigation nav, body .navigation nav button,
+body main p, body section p, body section small,
+body .about-guide, body .about-photo span,
+body .features-tabs button, body .feature-details,
+body .system-states button, body .system-metadata,
+body .process-progress, body .process-next button,
+body .live-scale-labels, body .live-status,
+body .live-camera-start, body .portrait-capture,
+body .trace-jump-label, body .exhibit-ending > span {
+  font-family:var(--font-secondary);
+}
+
+body .navigation nav button { font-weight:400; letter-spacing:.04em; }
+body .copy-description, body .about-korean,
+body .feature-description, body .feature-concept, body .features-summary,
+body .process-step-description, body .process-description,
+body .live-description, body .about-transition p {
+  font-weight:400;
+  letter-spacing:0;
+}

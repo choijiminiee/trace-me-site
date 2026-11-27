@@ -1,0 +1,23 @@
+.live-trace-intro { position:relative; overflow:hidden; min-height:100svh; background:#f3efe5; color:#000; padding:32px 0 90px; }
+.booth-marquee { overflow:hidden; border-bottom:1px solid #000; padding:22px 0; }
+.booth-marquee-track { display:flex; width:max-content; animation:booth-marquee 32s linear infinite; }
+.booth-marquee-track span { flex:none; white-space:nowrap; padding-right:40px; font-size:clamp(26px,4.2vw,64px); font-weight:800; letter-spacing:-.015em; }
+.booth-marquee-track b { font-weight:800; }
+.booth-marquee-track em { font-weight:300; font-style:normal; }
+.booth-marquee-track small { display:inline-block; vertical-align:middle; margin:0 24px; font:400 clamp(10px,1.1vw,16px) var(--font-secondary); letter-spacing:.06em; }
+.booth-invite { margin:clamp(80px,12vh,160px) var(--page-inset) 80px; font-size:clamp(32px,10vw,154px); font-weight:900; line-height:.93; letter-spacing:-.035em; }
+.booth-enter { position:relative; z-index:2; display:grid; place-items:center; width:56px; height:56px; border-radius:50%; border:1px solid var(--accent); background:var(--accent); color:#000; font:9px/1.25 var(--font-secondary); margin:0 auto; padding:0; cursor:pointer; }
+.booth-enter:focus-visible { outline:2px solid #000; outline-offset:6px; }
+.live-trace-intro.booth-following, .booth-following .booth-enter { cursor:none; }
+.booth-following .booth-enter { position:fixed; left:0; top:0; margin:0; }
+.booth-wipe { position:fixed; z-index:10000; background:var(--accent); border-radius:50%; width:56px; height:56px; pointer-events:none; }
+@keyframes booth-marquee { to { transform:translateX(-50%); } }
+@media(prefers-reduced-motion:reduce) { .booth-marquee-track { animation:none; } }
+
+.booth-transition-message { position:fixed; inset:0; z-index:10001; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px; text-align:center; color:#000; background:var(--accent); }
+.booth-transition-message .booth-confirm { border:0; background:none; color:#000; font-family:inherit; padding:20px; cursor:pointer; margin:0; font-size:clamp(28px,4vw,60px); font-weight:500; line-height:1.05; letter-spacing:-.035em; }
+.booth-transition-message p { position:absolute; bottom:clamp(32px,7svh,80px); left:24px; right:24px; max-width:760px; margin:0 auto; font:400 clamp(10px,1.1vw,14px)/1.8 var(--font-secondary); letter-spacing:.035em; }
+
+.booth-confirm:focus-visible { outline:1px solid #000; outline-offset:8px; }
+
+.booth-click-hint { margin:-48px var(--page-inset) 40px; color:#625f65; font:400 clamp(11px,1vw,15px)/1.6 var(--font-secondary); letter-spacing:.1em; }
