@@ -95,12 +95,12 @@
   const archiveImages = [
   {
     "file": "ChatGPT 이미지 2026년 10월 10일 오후 09_56_47-1.png",
-    "src": "/public/무제 폴더/ChatGPT 이미지 2026년 10월 10일 오후 09_56_47-1.png",
+    "src": "public/무제 폴더/ChatGPT 이미지 2026년 10월 10일 오후 09_56_47-1.png",
     "alt": "카페 앞의 순간"
   },
   {
     "file": "selfie.png",
-    "src": "/public/bloom-calendar/selfie.jpg",
+    "src": "public/bloom-calendar/selfie.jpg",
     "alt": "스트라이프 티셔츠를 입고 강변에서 찍은 셀카"
   },
   {
@@ -109,17 +109,17 @@
   },
   {
     "file": "mirror.png",
-    "src": "/public/bloom-calendar/mirror.jpg",
+    "src": "public/bloom-calendar/mirror.jpg",
     "alt": "검정 카디건과 데님 코디의 거울 셀카"
   },
   {
     "file": "friends-dinner.jpg",
-    "src": "/public/candid-moments/friends-dinner.jpg",
+    "src": "public/candid-moments/friends-dinner.jpg",
     "alt": "친구들과 식사하며 웃는 순간"
   },
   {
     "file": "dog.png",
-    "src": "/public/bloom-calendar/dog.jpg",
+    "src": "public/bloom-calendar/dog.jpg",
     "alt": "올리브 재킷을 입고 강아지와 산책"
   },
   {
@@ -128,7 +128,7 @@
   },
   {
     "file": "friends-four-cut.jpg",
-    "src": "/public/candid-moments/friends-four-cut.jpg",
+    "src": "public/candid-moments/friends-four-cut.jpg",
     "alt": "친구 셋이 함께 찍은 인생네컷"
   },
   {
@@ -137,17 +137,17 @@
   },
   {
     "file": "gallery.png",
-    "src": "/public/bloom-calendar/gallery.jpg",
+    "src": "public/bloom-calendar/gallery.jpg",
     "alt": "분홍 셔츠와 아이보리 팬츠로 전시 관람"
   },
   {
     "file": "friends-picnic.jpg",
-    "src": "/public/candid-moments/friends-picnic.jpg",
+    "src": "public/candid-moments/friends-picnic.jpg",
     "alt": "친구들과 피크닉 셀카"
   },
   {
     "file": "reading.png",
-    "src": "/public/bloom-calendar/reading.jpg",
+    "src": "public/bloom-calendar/reading.jpg",
     "alt": "집에서 책을 읽는 오후"
   },
   {
@@ -156,7 +156,7 @@
   },
   {
     "file": "tea.png",
-    "src": "/public/bloom-calendar/tea.jpg",
+    "src": "public/bloom-calendar/tea.jpg",
     "alt": "Overhead close photo of chamomile tea and open journal at quiet wooden desk, morning solitude"
   },
   {
@@ -165,17 +165,17 @@
   },
   {
     "file": "rain.png",
-    "src": "/public/bloom-calendar/rain.jpg",
+    "src": "public/bloom-calendar/rain.jpg",
     "alt": "Rain droplets on apartment window, soft gray city out of focus, quiet reflective afternoon"
   },
   {
     "file": "friends-seaside.jpg",
-    "src": "/public/candid-moments/friends-seaside.jpg",
+    "src": "public/candid-moments/friends-seaside.jpg",
     "alt": "친구들과 바닷가 여행"
   },
   {
     "file": "bed.png",
-    "src": "/public/bloom-calendar/bed.jpg",
+    "src": "public/bloom-calendar/bed.jpg",
     "alt": "Unmade linen bed and paperback book, muted blue morning light, peaceful restful day"
   },
   {
@@ -184,7 +184,7 @@
   },
   {
     "file": "soup.png",
-    "src": "/public/bloom-calendar/soup.jpg",
+    "src": "public/bloom-calendar/soup.jpg",
     "alt": "Single bowl of homemade vegetable soup on small kitchen table, gentle low evening light"
   },
   {
@@ -193,7 +193,7 @@
   },
   {
     "file": "sea.png",
-    "src": "/public/bloom-calendar/sea.jpg",
+    "src": "public/bloom-calendar/sea.jpg",
     "alt": "Empty blue gray coast at dusk, distant horizon and ripples, contemplative atmosphere"
   },
   {
@@ -202,7 +202,7 @@
   },
   {
     "file": "lamp.png",
-    "src": "/public/bloom-calendar/lamp.jpg",
+    "src": "public/bloom-calendar/lamp.jpg",
     "alt": "Warm bedside lamp and book in otherwise dark bedroom, quiet nighttime rest"
   },
   {
@@ -211,17 +211,17 @@
   },
   {
     "file": "shoes.png",
-    "src": "/public/bloom-calendar/shoes.jpg",
+    "src": "public/bloom-calendar/shoes.jpg",
     "alt": "Top-down personal snapshot of white sneakers and fallen leaves after solitary walk"
   },
   {
     "file": "friends-walk-long-hair.png",
-    "src": "/public/candid-moments/friends-walk-long-hair.png",
+    "src": "public/candid-moments/friends-walk-long-hair.png",
     "alt": "친구들과 산책하다 웃는 순간"
   },
   {
     "file": "breakfast.png",
-    "src": "/public/bloom-calendar/breakfast.jpg",
+    "src": "public/bloom-calendar/breakfast.jpg",
     "alt": "Top-down sunny breakfast toast strawberries and latte on small round table, joyful morning"
   },
   {
@@ -230,7 +230,7 @@
   },
   {
     "file": "flowers.png",
-    "src": "/public/bloom-calendar/flowers.jpg",
+    "src": "public/bloom-calendar/flowers.jpg",
     "alt": "Fresh yellow daisies in neighborhood flower shop, spontaneous bright street snapshot"
   },
   {
@@ -239,7 +239,7 @@
   },
   {
     "file": "picnic.png",
-    "src": "/public/bloom-calendar/picnic.jpg",
+    "src": "public/bloom-calendar/picnic.jpg",
     "alt": "Top-down picnic blanket with sandwiches fruit sparkling drinks and friends hands, happy afternoon"
   },
   {
@@ -248,7 +248,7 @@
   },
   {
     "file": "dogdetail.png",
-    "src": "/public/bloom-calendar/dogdetail.jpg",
+    "src": "public/bloom-calendar/dogdetail.jpg",
     "alt": "Small curly beige dog sniffing grass, low ground-level candid park photograph"
   },
   {
@@ -257,7 +257,7 @@
   },
   {
     "file": "bakery.png",
-    "src": "/public/bloom-calendar/bakery.jpg",
+    "src": "public/bloom-calendar/bakery.jpg",
     "alt": "Close handheld photograph of fresh croissant in paper bag near bakery window, cheerful morning"
   },
   {
@@ -266,42 +266,42 @@
   },
   {
     "file": "sunset.png",
-    "src": "/public/bloom-calendar/sunset.jpg",
+    "src": "public/bloom-calendar/sunset.jpg",
     "alt": "Peach pink sunset above river, unposed travel smartphone landscape"
   },
   {
     "file": "friends-night-v2.jpg",
-    "src": "/public/candid-moments/friends-night-v2.jpg",
+    "src": "public/candid-moments/friends-night-v2.jpg",
     "alt": "편의점 앞에서 친구들과 나눈 대화"
   },
   {
     "file": "plants.png",
-    "src": "/public/bloom-calendar/plants.jpg",
+    "src": "public/bloom-calendar/plants.jpg",
     "alt": "Window herbs and a half full glass of water, pale early daylight, tranquil home detail"
   },
   {
     "file": "rest.png",
-    "src": "/public/bloom-calendar/rest.jpg",
+    "src": "public/bloom-calendar/rest.jpg",
     "alt": "Same woman identity reference, oversized gray sweatshirt and comfortable pants sitting sideways on sofa looking outside, relaxed unsmiling restful expression, wide candid photograph"
   },
   {
     "file": "balcony.png",
-    "src": "/public/bloom-calendar/balcony.jpg",
+    "src": "public/bloom-calendar/balcony.jpg",
     "alt": "Same woman identity reference, sage linen shirt and beige trousers watering balcony plants, profile side view, quiet morning"
   },
   {
     "file": "home.png",
-    "src": "/public/bloom-calendar/home.jpg",
+    "src": "public/bloom-calendar/home.jpg",
     "alt": "Same woman identity reference, soft navy pajamas reading in bed, nighttime warm bedside light, distant candid photograph, restful neutral expression"
   },
   {
     "file": "rainwalk.png",
-    "src": "/public/bloom-calendar/rainwalk.jpg",
+    "src": "public/bloom-calendar/rainwalk.jpg",
     "alt": "Same woman identity reference, tan trench coat and black trousers under clear umbrella, rear view crossing quiet rainy street, subdued atmosphere"
   },
   {
     "file": "walk.png",
-    "src": "/public/bloom-calendar/walk.jpg",
+    "src": "public/bloom-calendar/walk.jpg",
     "alt": "강아지와 조용한 산책"
   }
 ];
@@ -320,7 +320,7 @@
     photo.className = 'about-photo';
     photo.setAttribute('aria-pressed','false');
     const image = document.createElement('img');
-    image.src = item.src || '/public/'+['무제 폴더', item.file].map(encodeURIComponent).join('/');
+    image.src = item.src || 'public/'+['무제 폴더', item.file].map(encodeURIComponent).join('/');
     image.alt = item.alt;
     image.loading = 'lazy';
     image.decoding = 'async';
@@ -357,7 +357,7 @@
     return [photo, {src:img.getAttribute('src'), alt:img.alt}];
   }));
   const thirdStoryImage = new Image();
-  thirdStoryImage.src = '/public/bloom-calendar/home.jpg';
+  thirdStoryImage.src = 'public/bloom-calendar/home.jpg';
   guide.textContent = '';
   section.querySelector('.about-guide').hidden = true;
   section.classList.add('scroll-stories');
